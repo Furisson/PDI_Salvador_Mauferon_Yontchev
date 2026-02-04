@@ -1,0 +1,47 @@
+
+
+<!-- 
+
+Code de base afin d'ajouter une couche
+modifier les éléments suivants:
+
+- id: id du layer (les id doivent être différents)
+- name: nom du layer apparaissant dans la liste des couches
+- visible : true/false, visibilité par défaut lorsque l'on charge l'application
+- url: entrer le nom du chemin d'acces vers le fichier javascipt du customlayer + nom du customlayer
+- legendurl : si il y a une légende, si il y a un fichier SVG, mettre "apps/pnmgl/img/icone.svg" en remplacant icone par le nom du fichier
+- metadata : lien vers les éventuelles métadonnées
+- balise template : pour changer la template par défaut, changer le nom du fichier .mst 
+
+-->
+
+<!-- Pour un custom layer -->
+
+<layer id="id_du_layer"
+    name="Nom_du_layer"
+    visible="false"
+    type="customlayer"
+    opacity="1"
+    url="apps/pnmgl/customlayers/chemin_dacces/ficher.js"
+    infoformat="application/vnd.ogc.gm"
+    queryable="true"
+    attribution="OFB"
+    legendurl=""
+    metadata="">
+    <template url="apps/pnmgl/templates/defaut.mst"></template>
+</layer>   
+
+
+
+<!-- Pour un flux wms -->
+
+<layer id="nom_de_lid dans le geoserver" 
+    name="nom du layer"  
+    visible="false" 
+    tiled="false"
+    url="http://localhost:8080/geoserver/wms"
+    attribution="OFB" 
+    queryable="true" 
+    infoformat = "application/vnd.ogc.gml">
+    <template url="apps/pnmgl/templates/survol.mst"></template>
+</layer> 

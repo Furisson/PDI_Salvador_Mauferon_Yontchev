@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "us_med_pnmgl_Cale-de-mise-a-leau_pt_4326",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "Port": "Leucate", "NB_Payante": 1, "Nb_Gratuit": 0, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.046911048851273, 42.872688136874444 ] } },
+{ "type": "Feature", "properties": { "Port": "Le Barcar�s", "NB_Payante": 1, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.038498043334216, 42.797038158185806 ] } },
+{ "type": "Feature", "properties": { "Port": "Canet-en-Roussillon", "NB_Payante": 0, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.037008232785748, 42.702435188358045 ] } },
+{ "type": "Feature", "properties": { "Port": "Saint-Cyprien", "NB_Payante": 1, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.038498043334217, 42.619564476599471 ] } },
+{ "type": "Feature", "properties": { "Port": "Argel�s-sur-Mer", "NB_Payante": 0, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.052651243544669, 42.542373667556944 ] } },
+{ "type": "Feature", "properties": { "Port": "Banyuls-sur-mer", "NB_Payante": 1, "Nb_Gratuit": 0, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.133493577588462, 42.481320796317313 ] } }
+]
+}

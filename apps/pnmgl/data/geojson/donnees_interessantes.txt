@@ -1,0 +1,58 @@
+Eoliennes\Zones propices\us_med_pnmgl_eoliennes_EF-macro-zone-synthese-med-S_pol_4326.geojson
++surfacique
+champ :  surface (km²)
+
+///
+
+entièreté de: Localisation des structures de loisir\
++Ponctuels
+
+///
+
+Port et transport maritime\
+us_med_pnmgl_Cale-de-mise-a-leau_pt_4326.geojson
+US_MED_PNMGL_chantier_naval_AAMP_pt_2154.geojson
+us_med_pnmgl_Port-commerce_pt_4326.geojson
++ponctuels
+
+us_med_PNMGL_route_transport_commerce_ofb_ln_4326.geojson
++polyligne
+champ : longueur (km)
+
+///
+
+Zones de mouillage\ZMEL réserve\
+us_med_pnmgl_ZMEL_RNMCB_ln_4326.geojson
++polyligne
+champ : longueur (km)
+
+///
+
+Trait de côte\01_jet_de_rive\
++polyligne
+champ : longueur (m)
+SAUF : eco_med_pnmgl_jetderive12052023_ofb_ln_2154 qui est en km
+
+Notes : ensemble de couches intéressantes pour un curseur temporel
+
+///
+
+Nettoyage\us_med_pnmgl_nettoyage_plages-2021_pol_2154.geojson
++surfacique
+champ : surf (m²)
+
+///
+
+Trait de côte\03_evolution_jet_rive\
++polyligne 
+champ : SHAPE_Leng (m)
+
+Notes : Suivi de la variation de la ligne de côte. Linéaires représentent les déplacements de la côte. 
+Opérations intéressantes : min,max, moyenne
+ensemble de couches intéressantes pour un curseur temporel
+
+/// 
+
+Récifs\us_med_pnmgl_recif_art_fond_aamp_ixsurvey_pol_2154.geojson
++surfacique
+champ: SHAPE_Area (m²)

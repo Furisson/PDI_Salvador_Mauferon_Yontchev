@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+
+    <!-- Définition des paramètres généraux de l'application  -->
+    <application id='stats' title="Mviewer Parc Naturel Marin du Golfe du Lion" mouseposition="false" logo="apps/pnmgl/img/logo_pnmgl.png" help="mviewer_help.html" measuretools="true" mapprint="true" exportpng="true" style="css/themes/pnmgl.css" togglealllayersfromtheme="true"/>
+    <mapoptions maxzoom="19" projection="EPSG:3857" center="374538.481483,5269369.993240" zoom="10" projextent="-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244" />
+
+    <!-- Fonds de cartes au choix -->
+    <baselayers style="gallery">
+        <baselayer  
+            type="WMTS" 
+            id="ortho" 
+            label="Photo aérienne IGN" 
+            title="GéoPortail" 
+            maxscale="1000" 
+            thumbgallery="img/basemap/ortho.jpg"
+            url="https://data.geopf.fr/wmts" 
+            layers="ORTHOIMAGERY.ORTHOPHOTOS" 
+            format="image/jpeg" 
+            visible="false" 
+            fromcapacity="false"
+            attribution="&lt;a href='https://geoservices.ign.fr/services-geoplateforme-diffusion' target='_blank'>&lt;img src='img/basemap/geoservices.png'>&lt;/a>" 
+            style="normal" 
+            matrixset="PM" 
+            maxzoom="22"/>
+        
+        <baselayer  
+            type="WMS" 
+            id="osm" 
+            label="OpenStreetMap" 
+            title="Plan OSM Géobretagne" 
+            thumbgallery="img/basemap/osm.png"
+            url="https://tile.geobretagne.fr/osm/service" 
+            layers="osm:grey" 
+            format="image/png" 
+            visible="true"
+            attribution="GéoBretagne. Données : OFB, les contributeurs d'&lt;a href='https://www.openstreetmap.org/' target='_blank'>OpenStreetMap &lt;/a>,  &lt;a href='https://www.openstreetmap.org/copyright' target='_blank'>ODbL &lt;/a>" />
+            
+    </baselayers>
+
+    <!-- ajout de la fonctionnalité de recherche -->
+    <extensions>
+    <extension type="component" id="layerfilter" path="demo/addons"/>
+    </extensions>
+
+    <!-- Appel de la fonctionnalité de statistiques -->
+    <extensions>
+    <extension type="component" id="stats" path="apps/pnmgl"/>
+    </extensions>
+
+    <!-- Regroupement en thèmes  -->
+    <themes>
+
+        <theme name="Usages"  collapsed="true" id="environnement" icon="fas fa-ship">
+
+            <!-- Regroupement en groupes -->
+            <group name="Ports et transport maritime" id="ptm">
+
+                <!-- Définition des layers, voir la doc utilisateur ou le fichier pnmgl/aide_user/format_ajout_couche.xml  -->
+                <layer id="us_med_PNMGL_cale_de_mise_a_leau_ofb_pt_4326"
+                    name="Cale de mise à l'eau"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/us_med_PNMGL_cale_de_mise_a_leau_ofb_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/1.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+                <layer id="us_med_PNMGL_chantier_naval_AAMP_pt_2154"
+                    name="Chantier naval"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/us_med_PNMGL_chantier_naval_AAMP_pt_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/2.svg">
+                    <template url="apps/pnmgl/templates/chantier_naval.mst"></template>
+                </layer>
+
+
+                <layer id="us_med_PNMGL_port_de_commerce_ofb_pt_4326"
+                    name="Port de commerce"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/us_med_PNMGL_port_de_commerce_ofb_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/3.svg">
+                    <template url="apps/pnmgl/templates/port_commerce.mst"></template>
+                </layer>
+            
+                <layer id="us_med_PNMGL_route_transport_commerce_ofb_ln_4326"
+                    name="Routes de transport de commerce"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/us_med_PNMGL_route_transport_commerce_ofb_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_rouge.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+
+            <group name="Zones de mouillage" id="mouillage">
+                <layer id="us_med_pnmgl_ZMEL_RNMCB_ln_4326"
+                    name="Zones de mouillage ZMEL"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/ZMEL Reserve/us_med_pnmgl_ZMEL_RNMCB_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_ZMEL_Dispositifs_amarrages_2022_pt_4326"
+                    name="Dispositifs d'amarrage Zones de mouillage"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/ZMEL Parc/us_med_pnmgl_ZMEL_Dispositifs_amarrages_2022_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/defaut.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_ZMEL_Perimetre_pol_4326"
+                    name="Périmètres des Zones de mouillage"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/ZMEL Parc/us_med_pnmgl_ZMEL_Perimetre_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_ZMEL_Ligne_de_mouillage_ln_4326"
+                    name="Ligne de mouillage ZMEL Paulilles"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/ZMEL Paulilles/us_med_pnmgl_ZMEL_Ligne_de_mouillage_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu_marine.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_ZMO_Collioure_Banyuls_pol_4326"
+                    name="ZMO Collioure et Banyuls"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/ZMO Collioure et Banyuls/us_med_pnmgl_ZMO_Collioure_Banyuls_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf1.svg">
+                    <template url="apps/pnmgl/templates/ZMO.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_ZMEL_Plage_sanatorium_mouillage_reglemente_pol_4326"
+                    name="Zone interdite au mouillage - Elmes, Plage sanatorium mouillage reglemente"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Zones de mouillage/Zone interdite au mouillage - Elmes/us_med_pnmgl_ZMEL_Plage_sanatorium_mouillage_reglemente_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_rouge.svg">
+                    <template url="apps/pnmgl/templates/zones_interdites.mst"></template>
+                </layer> 
+            </group>
+
+            <group name="RESOBLO" id="resoblo">
+                <layer id="us_med_pnmgl_resoblo_zmouillage_pol_4326"
+                    name="Resoblo"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/RESOBLO/us_med_pnmgl_resoblo_zmouillage_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="Le projet RESOBLO étudie les usages, ici les mouillages avec ancre - OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>           
+            </group>
+
+            <group name="Suivis de fréquentation par survol" id="survol">
+                <layer id="pnmgl:us_med_PNMGL_resoblo_act_aat_2023_ofb_pt_wgs84" 
+                    name="Campagne de survol 2023"  
+                    visible="false" 
+                    tiled="false"
+                    url="http://localhost:8080/geoserver/wms"
+                    attribution="Différentes dates de survol au cours de 2023-OFB" queryable="true" searchable="false" infoformat = "application/vnd.ogc.gml"  aliases="nom" 
+                    attributefilter = "true" attributefilterenabled = "true" attributefield="date_camp" attributevalues = "09/09/2023,08/09/2023,03/09/2023,31/08/2023,25/08/2023,22/08/2023,13/08/2023,28/07/2023">
+                    <template url="apps/pnmgl/templates/survol.mst"></template>
+
+                </layer>  
+            </group>
+
+
+            <group name="Structures de loisir" id="sdl">
+
+                <layer id="us_med_pnmgl_StructuresLoisir2023_pt_4326"
+                    name="Structures de loisir (tous les types)"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresLoisir2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/6.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+                <layer id="us_med_pnmgl_StructuresBateliers2023_pt_4326"
+                    name="Structure bateliers"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresBateliers2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/4.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+
+                <layer id="us_med_pnmgl_StructuresLocationsBateaux2023_pt_4326"
+                    name="Structures de location de bateaux"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresLocationsBateaux2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/5.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+
+
+
+                <layer id="us_med_pnmgl_StructuresMotonautisme2023_pt_4326"
+                    name="Structures de Motonautisme"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresMotonautisme2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/7.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+
+                <layer id="us_med_pnmgl_StructuresPlongee2023_pt_4326"
+                    name="Structures de Plongée"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresPlongee2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/8.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+                <layer id="us_med_pnmgl_StructuresSportRame2023_pt_4326"
+                    name="Structures de sport de rame"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresSportRame2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/9.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+                <layer id="us_med_pnmgl_StructuresSportVent2023_pt_4326"
+                    name="Structures de Sport de Vent"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Localisation des structures de loisir/us_med_pnmgl_StructuresSportVent2023_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/10.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+            </group>
+
+
+
+
+            <group name="Jetski" id="jetski">
+                <layer id="us_med_pnmgl_parcours_jetski_2023_ofb_ln_4326"
+                    name="Parcours Jetski"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Jetski/us_med_pnmgl_parcours_jetski_2023_ofb_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu_fonce.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+                <layer id="us_med_pnmgl_zones_initiation_jetski_2023_ofb_pol_4326"
+                    name="Zones d'initiation Jetski"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Jetski/us_med_pnmgl_zones_initiation_jetski_2023_ofb_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_gris.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer> 
+            </group>
+
+
+            <group name="Énergies Marines Renouvelables" id="emr">
+
+                <layer id="us_med_pnmgl_eoliennes_EF-macro-zone-synthese-med-S_pol_4326"
+                    name="Zones propices Eoliennes"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Eoliennes/Zones propices/us_med_pnmgl_eoliennes_EF-macro-zone-synthese-med-S_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+                <layer id="us_med_pnmgl_omon_emr_afb_pol_4326"
+                    name="Omon emr pnmgl"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/EMR/PNMGL/us_med_pnmgl_omon_emr_afb_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="us_med_pnmgl_omon_emr_raccordt_afb_pol_4326"
+                    name="Omon emr raccordt pnmgl"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/EMR/PNMGL/us_med_pnmgl_omon_emr_raccordt_afb_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+
+            <group name="Épaves" id="epaves">
+                <layer id="us_med_pnmgl_epaves_aamp_pt_2154"
+                    name="Épaves"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Epaves/us_med_pnmgl_epaves_aamp_pt_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/epave2.png">
+                    <template url="apps/pnmgl/templates/epave.mst"></template>
+                </layer>           
+            </group>
+
+            <group name="Kayak" id="kayak">
+                <layer id="us_med_pnmgl_kayak_aamp_ln_2154"
+                    name="Kayak"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Kayak/us_med_pnmgl_kayak_aamp_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/tiret.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>           
+            </group>
+
+            <group name="Récifs" id="recifs">
+                <layer id="us_med_pnmgl_recif_art_aamp_ixsurvey_pt_2154"
+                    name="Récifs artificiels"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Recifs/us_med_pnmgl_recif_art_aamp_ixsurvey_pt_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/11.svg"
+                    metadata="https://data.ofb.fr/catalogue/srv/fre/catalog.search#/metadata/6ef8b6d7-65b6-42c1-83f7-a0ba44149239">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="us_med_pnmgl_recif_art_fond_aamp_ixsurvey_pol_2154"
+                    name="Récifs artificiels fond"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Recifs/us_med_pnmgl_recif_art_fond_aamp_ixsurvey_pol_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_orange.svg"
+                    metadata="https://data.ofb.fr/catalogue/srv/fre/catalog.search#/metadata/6ef8b6d7-65b6-42c1-83f7-a0ba44149239">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>      
+                <layer id="us_med_recifs_artificiels_pneus_pt_4326"
+                    name="Récifs artificiels pneus"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Recifs/us_med_recifs_artificiels_pneus_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    legendurl="apps/pnmgl/img/12.svg"
+                    attribution="OFB">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>          
+            </group>
+
+
+
+            <group name="Plan de balisage des plages" id="balisage">
+                <layer id="us_med_pnmgl_Plan_balisage_plages_pol_4326"
+                    name="Plan de balisage des plages"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Plan de balisage des plages/us_med_pnmgl_Plan_balisage_plages_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>           
+            </group>
+
+            <group name="Nettoyage" id="net">
+                <layer id="us_med_pnmgl_nettoyage_plages-2021_pol_2154"
+                        name="Nettoyage des plages"
+                        visible="false"
+                        type="customlayer"
+                        opacity="1"
+                        url="apps/pnmgl/customlayers/Usages/Nettoyage/us_med_pnmgl_nettoyage_plages-2021_pol_2154.js"
+                        infoformat="application/vnd.ogc.gm"
+                        queryable="true"
+                        attribution="OFB"
+                        legendurl="apps/pnmgl/img/surf_jaune.svg">
+                </layer>
+            </group>
+
+            <group name="Etude prospective tdc 2050" id="prospective">
+                <layer id="us_med_pnmgl_DSAS_pt_2154"
+                    name="Etude prospective tdc 2050"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Etude prospective tdc 2050/us_med_pnmgl_DSAS_pt_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/13.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>    
+            </group>
+
+            <group name="Recupnet" id="recupnet">
+                <layer id="us_med_pnmgl_recupnet_ofb_pt_4326"
+                    name="Recupnet"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Recupnet/us_med_pnmgl_recupnet_ofb_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="Recupnet vise à retirer les filets et autres déchets. Cette couche montre les entités retirées ou non - OFB"
+                    legendurl="apps/pnmgl/img/14.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>    
+            </group>
+
+            <group name="Sites de plongée" id="plongee">
+                <layer id="us_med_PNMGL_sites_plongee_2021_ofb_pt_4326"
+                    name="Sites de plongée"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/sites de plongee/us_med_PNMGL_sites_plongee_2021_ofb_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/15.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>    
+            </group>
+
+            <group name="Macrozones" id="macrozones">
+                <layer id="us_med_macrozone_eof_pol_4326"
+                    name="Macrozone"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Usages/Macrozone/us_med_macrozone_eof_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_point.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+
+            </theme>
+
+        <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
+            <group name="Evolution jet de rive" id="ejdr">
+                
+                <layer id="eco_med_pnmgl_evolution_jetderive_20172018_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2017 et 2018"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20172018_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20182019_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2018 et 2019"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20182019_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20192020_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2019 et 2020"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20192020_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20202021_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2020 et 2021"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20202021_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20212022_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2021 et 2022"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20212022_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20222023_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2022 et 2023"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20222023_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20232023_ofb_ln_2154"
+                    name="Evolution jet de rive en 2023"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20232023_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20232024_ofb_ln_2154"
+                    name="Evolution jet de rive entre 2023 et 2024"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20232024_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_evolution_jetderive_20242024_ofb_ln_2154"
+                    name="Evolution jet de rive en 2024"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/03_evolution_jet_rive/eco_med_pnmgl_evolution_jetderive_20242024_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Jet de rive" id="jdr">
+                <layer id="eco_med_pnmgl_jetderive30092024_ofb_ln_2154"
+                    name="Jet de rive au 30/09/2024"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive30092024_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive19032024_ofb_ln_2154"
+                    name="Jet de rive au 19/03/2024"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive19032024_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive0709202309102023_ofb_ln_2154"
+                    name="Jet de rive au 07/09/2023 09/10/2023"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive0709202309102023_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive12052023_ofb_ln_2154"
+                    name="Jet de rive au 12/05/2023"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive12052023_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive0903202204042022_ofb_ln_2154"
+                    name="Jet de rive au 09/03/2022 04/04/2022"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive0903202204042022_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive181020211011202115122021_ofb_ln_2154"
+                    name="Jet de rive aux 18/10/2021 10/11/2021 15/12/2021"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive181020211011202115122021_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive11032020_ofb_ln_2154"
+                    name="Jet de rive au 11/03/2020"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive11032020_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive04092019_ofb_ln_2154"
+                    name="Jet de rive au 04/09/2019"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive04092019_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive2509201802102018_ofb_ln_2154"
+                    name="Jet de rive aux 25/09/2018 02/10/2018"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive2509201802102018_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_pnmgl_jetderive190920172009201721092017_ofb_ln_2154"
+                    name="Jet de rive aux 19/09/2017 20/09/2017 21/09/2017"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Eco/Trait de cote/01_jet_de_rive/eco_med_pnmgl_jetderive190920172009201721092017_ofb_ln_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    metadata="https://data.ofb.fr/catalogue/Donnees-geographiques-OFB/api/records/11cbc2da-de1d-468f-b6d4-7499e66ad9a9?language=all"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+
+            </group>
+
+            <group name="Habitats" id="habitats">
+                
+                <layer id="eco_med_n2000_dhff_mcv_observations_aamp_pt_3857" 
+                name="Données d'observation des habitats marins (point)"  
+                visible="false" 
+                tiled="false"
+                    url="https://wxs.ofb.fr/geoserver/habitat/ows"
+                    attribution="OFB" 
+                    queryable="true" 
+                    infoformat = "application/vnd.ogc.gml"
+                    metadata="https://data.ofb.fr/catalogue/Donnees-geographiques-OFB/api/records/a159fd26-162f-426f-a300-c94e2891c881?language=all">  
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_n2000_dhff_mcv_observations_aamp_ln_3857" 
+                    name="Données d'observation des habitats marins (transect)"  
+                    visible="false" 
+                    tiled="false"
+                    url="https://wxs.ofb.fr/geoserver/habitat/ows"
+                    attribution="OFB" 
+                    queryable="true" 
+                    infoformat = "application/vnd.ogc.gml"
+                    metadata="https://data.ofb.fr/catalogue/Donnees-geographiques-OFB/api/records/a159fd26-162f-426f-a300-c94e2891c881?language=all">  
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="eco_med_n2000_dhff_mcv_habitats_aamp_pol_3857" 
+                    name="Habitats marins du Parc naturel marin golfe du Lion - zone"  
+                    visible="false" 
+                    tiled="false"
+                    url="https://wxs.ofb.fr/geoserver/habitat/ows"
+                    metadata="https://data.ofb.fr/catalogue/Donnees-geographiques-OFB/api/records/a159fd26-162f-426f-a300-c94e2891c881?language=all"
+                    attribution="OFB" 
+                    queryable="true" 
+                    infoformat = "application/vnd.ogc.gml">  
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+        </theme>
+
+        <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
+        
+            <group name="Carte des vocations du Parc" id="vocation" >
+                <layer id="ges_med_pnmgl_vocation_aamp_pol_4326"
+                    name="Carte des vocations du Parc"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Carte des vocations du Parc/ges_med_pnmgl_vocation_aamp_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_vocation.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Délimitation communes" id="commune">
+                <layer id="ges_med_pnmgl_REF_MET_Communes_littorales_pol_2154"
+                    name="Délimitation communes"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Delimitation communes/ges_med_pnmgl_REF_MET_Communes_littorales_pol_2154.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_comm.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Limites du Parc" id="limites_parc">
+                <layer id="ges_med_pnmgl_Limite_parc_ln_4326"
+                    name="Limite du Parc linéaire"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Limite du Parc/ges_med_pnmgl_Limite_parc_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu_marine.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="ges_med_pnmgl_Limite_parc_pol_4326"
+                    name="Limite du Parc polygonale"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Limite du Parc/ges_med_pnmgl_Limite_parc_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surface_contour_pnmgl.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Limite Mer territoriale" id="limit_mer_territoriale">
+                <layer id="ges_med_pnmgl_Mer_territoriale_ln_4326"
+                    name="Limite Mer territoriale"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Limite Mer territoriale/ges_med_pnmgl_Mer_territoriale_ln_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/trait_bleu.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Limite Réserve naturelle du Mas Larrieu et du PNR" id="limit_pnmgl_maslarrieu">
+                <layer id="ges_med_pnmgl_Delimitation_Mas_Larrieu_et_PNR_2022_pol_4326"
+                    name="Limite Réserve naturelle du Mas Larrieu et du PNR"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Limite Reserve naturelle du Mas Larrieu et PNR/ges_med_pnmgl_Delimitation_Mas_Larrieu_et_PNR_2022_pol_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_violet.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            <group name="Limite Réserve naturelle marine cerbere Banyuls" id="limit_pnmgl_cerberebanyuls">
+                <layer id="ges_med_pnmgl_Limite_RNMCB_pt_4326"
+                    name="Limite Réserve naturelle marine cerbere Banyuls"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/Limite Reserve naturelle marine cerbere Banyuls/ges_med_pnmgl_Limite_RNMCB_pt_4326.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/7.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            
+            <group name="ZEE Méditerranée" id="zee_mediterranee">
+                <layer id="ges_med_pnmgl_Decret_delimitation_ZEE_pol_3857"
+                    name="ZEE Méditerranée (polygone)"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/ZEE Mediterranee/ges_med_pnmgl_Decret_delimitation_ZEE_pol_3857.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/surf_pourpre.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+                <layer id="ges_med_pnmgl_Decret_delimitation_ZEE_pt_3857"
+                    name="ZEE Méditerranée (points)"
+                    visible="false"
+                    type="customlayer"
+                    opacity="1"
+                    url="apps/pnmgl/customlayers/Gouvernance/ZEE Mediterranee/ges_med_pnmgl_Decret_delimitation_ZEE_pt_3857.js"
+                    infoformat="application/vnd.ogc.gm"
+                    queryable="true"
+                    attribution="OFB"
+                    legendurl="apps/pnmgl/img/3.svg">
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
+                </layer>
+            </group>
+            
+        </theme>
+
+
+    </themes>
+
+</config>
+
+<!--searchable="false" queryable="true" fields="axe" aliases="axe"-->

@@ -1,0 +1,92 @@
+{{#features}}
+<br>
+  <li id="{{feature_ol_uid}}" class="item" style="width:238px;">  {{! on itère sur chaque attribut présent dans la couche }}
+
+      <ul>
+
+        {{#fields_kv}}
+
+        <strong><li>{{key}}</strong> : {{value}}</li>
+
+        {{/fields_kv}}
+
+      </ul>
+
+  </li>
+
+{{/features}}
+
+ <style>
+
+	ul{
+		list-style-type: none;
+		line-height:1.6;
+	}
+
+     .title-feature {
+
+         color: #BA88A4;
+
+         font-family:"Trebuchet MS";
+
+         font-size:20px;
+
+         margin-bottom:3%;
+
+         line-height:1;
+
+     }
+
+     .text-feature{
+
+         font-family:"Trebuchet MS";
+
+         color:#555;
+
+         font-size:13px;
+
+         margin-top:2%;
+
+         margin-bottom:2%;
+
+     }
+
+     .but-link, .but-link:focus, .but-link:hover{
+
+         display:inline-block;
+
+         padding:0.5em 1em;
+
+         margin:0 0.3em 0.3em 0;
+
+         border-radius:0.3em;
+
+         box-sizing: border-box;
+
+         text-decoration:none;
+
+         font-family:'Trebuchet MS';
+
+         font-weight:300;
+
+         color:#FFFFFF;
+
+         background-color:#BA88A4;
+
+         text-align:center;
+
+         transition: all 0.2s;
+
+     }
+
+     .but-link:hover{
+
+         background-color:#b0006b;
+
+     }
+
+	.item{
+		font-size:13px;	
+
+	}
+ </style>

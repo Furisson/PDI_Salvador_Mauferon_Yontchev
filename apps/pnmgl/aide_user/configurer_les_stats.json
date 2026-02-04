@@ -1,0 +1,19 @@
+
+// Dans le fichier apps/pnmgl/stats/config.json
+
+// Dans la liste "stats" : [ ], coller le code ci-dessous à la suite des autres (ATTENTION, bien séparer par des virgules 
+// les nouvelles stats, ne pas mettre de virgule après la dernière)
+
+// id_layer correspond à l'id donné au layer dans le fichier XML de configuration de l'application 
+
+{
+    "type": "stat",
+    "layerId": "id_du_layer",
+    "field": "",
+    "template":"<div class='statContainer Default'><span class='statValue' style='color: #ea6a65;'>{x}</span><span class='statLabel'> text_quon_veut_ecrire</span></div>",
+    "operator": "COUNT",
+    "__operator": "SUM,MAX,MEAN,COUNT"
+}
+
+
+// différents styles d'affichage sont déjà codés, pour plus de détails voir le fichier readme.md du module stats : apps/pnmgl/stats/readme.md

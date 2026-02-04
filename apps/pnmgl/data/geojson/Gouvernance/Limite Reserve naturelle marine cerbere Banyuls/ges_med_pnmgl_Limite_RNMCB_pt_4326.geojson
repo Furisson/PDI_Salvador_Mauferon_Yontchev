@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "ges_med_pnmgl_Limite_RNMCB_pt_4326",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "y": 42.48805556, "x": 3.16833333, "nom": "bouee_nord" }, "geometry": { "type": "Point", "coordinates": [ 3.16833333, 42.48805556 ] } },
+{ "type": "Feature", "properties": { "y": 42.45972222, "x": 3.18472222, "nom": "bouee_sud" }, "geometry": { "type": "Point", "coordinates": [ 3.18472222, 42.45972222 ] } }
+]
+}

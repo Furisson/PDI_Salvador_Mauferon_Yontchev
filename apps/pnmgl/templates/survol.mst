@@ -1,0 +1,52 @@
+{{#features}}
+	<li id="{{feature_ol_uid}}" class="inventaire item" style="width:100%;">
+		<h3 class="title-feature">Campagne de survol du {{date_camp}}</h3>
+		<p class="source"> Auteur : {{auteur_num}}</p>
+		<p class="source"> Organisation : {{org_num}}</p>
+		<p class="source"> Numéro de campagne: {{n_camp}}</p>
+		<p class="source"> Méthode : {{method_num}}</p>		
+
+		<p class="text-feature"> Heure de début : {{d_heur_cam}} </p>
+		<p class="text-feature"> Heure de fin : {{f_heur_cam}} </p>
+		<p class="text-feature"> Météo : {{meteo}} </p>
+		<p class="text-feature"> Température : {{temp}} degrés Celsius </p>
+		<p class="text-feature"> Force du vent : {{force_vent}} </p>
+		<p class="text-feature"> Direction du vent : {{dir_vent}} </p>
+		<p class="text-feature"> Etat de la mer : {{etat_mer}} </p>
+
+		<p class="informations"> <strong>Code id : {{code_id}}</strong> </p>
+		<p class="informations"> <strong>Code de l'activité : {{code_act}}</strong> </p>
+		<p class="informations"> <strong>Etat : {{etat}}</strong> </p>
+		<p class="informations"> <strong>Nom de l'activité : {{nom_acti}}</strong> </p>
+		
+
+		
+	</li>
+{{/features}}
+
+<style>
+	.inventaire .title-feature {
+		color: #BA88A4;
+		font-family:"roboto_bold";
+		font-size:16px;
+		margin-bottom:1%;
+		line-height:1;
+	}
+	.inventaire .text-feature{
+		font-family:"roboto_regular";
+		color:#555;
+		font-size:13px;
+		margin-top:5px;
+	}
+	.inventaire .text-feature span{
+		font-family:"roboto_bold";
+	}
+
+
+    .inventaire p, .inventaire h3 {
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+
+</style>

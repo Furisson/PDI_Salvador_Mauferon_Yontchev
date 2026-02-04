@@ -1,0 +1,36 @@
+{{#features}}
+	<li id="{{feature_ol_uid}}" class="inventaire item" style="width:100%;">
+		<h3 class="title-feature"><strong>Nom : {{NOM}}</strong></h3>
+        <p class="text-feature"><strong>Source : {{Source}}</strong></p>
+		<p class="text-feature">num : {{Num}}</p>
+		<p class="text-feature">Import T : {{Import_T}}</p>		
+		<p class="text-feature">Export T : {{Export_T}}</p>		
+	</li>
+{{/features}}
+
+<style>
+	.inventaire .title-feature {
+		color: #BA88A4;
+		font-family:"roboto_bold";
+		font-size:16px;
+		margin-bottom:1%;
+		line-height:1;
+	}
+	.inventaire .text-feature{
+		font-family:"roboto_regular";
+		color:#555;
+		font-size:13px;
+		margin-top:5px;
+	}
+	.inventaire .text-feature span{
+		font-family:"roboto_bold";
+	}
+
+
+    .inventaire p, .inventaire h3 {
+        padding-left:15px;
+        padding-right:15px;
+    }
+
+
+</style>

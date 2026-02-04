@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "us_med_pnmgl_Port-commerce_pt_4326",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "NOM": "Port-Vendres 13", "Import_T": 231390, "Export_T": 40300, "Source": "CCI Port-Vendres", "NUM": "Stage Usage PNMGL GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.109589903044186, 42.517464405917408 ] } }
+]
+}

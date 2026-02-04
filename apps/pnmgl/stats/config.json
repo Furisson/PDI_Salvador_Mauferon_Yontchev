@@ -1,0 +1,288 @@
+{
+  "js": ["js/stats.js", "js/jquery.easyDrag.min.js"],
+  "css": "css/stats.css",
+  "html": "stats.html",
+  "target": "page-content-wrapper",
+  "options": {
+    "mviewer": {
+      "stats": {
+        "title": "Statistiques calculées à partir de l'emprise",
+        "open": false,
+        "style": {
+          "border": "",
+          "background": "white",
+          "text": "#5f5f5f",
+          "colorButton": "#333333"
+        },
+        "stats": [
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_eoliennes_EF-macro-zone-synthese-med-S_pol_4326",
+            "field": "surface",
+            "template": "<div class='statContainer Icon-start'><div class='statsIcon'><img src='apps/pnmgl/stats/img/eolienne.png'></div><div class='statsText'><span class='statValue' style='color: #2a9aa9;'>{x} Km²</span> </br><span class='statLabel'>Propices à l'implentation d'éoliennes</span> </div></div>",
+            "operator": "SUM",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "us_med_PNMGL_chantier_naval_AAMP_pt_2154",
+            "field": "",
+            "template": "<div class='statContainer Icon-end'><div class='statsIcon'><img src='apps/pnmgl/stats/img/commerce.png'></div><div class='statsText'><span class='statValue' style='color: #ea6a65;'>{x}</span> </br><span class='statLabel'>Chantier(s) naval(s)</span> </div></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_PNMGL_cale_de_mise_a_leau_ofb_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #ea6a65;'>{x}</span><span class='statLabel'> cale(s) de mise à l'eau</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresBateliers2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de bateliers</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresLocationsBateaux2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de location de bateaux</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresLoisir2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de loisir</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresMotonautisme2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de motonautisme</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresPlongee2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de plongée</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresSportRame2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de sport de rame</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_StructuresSportVent2023_pt_4326",
+            "field": "",
+            "template":"<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Structure(s) de sport de vent</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20172018_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2017 et 2018 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20172018_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2017 et 2018</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20182019_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2018 et 2019 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20182019_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2018 et 2019</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20192020_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2019 et 2020 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20192020_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2019 et 2020</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20202021_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2020 et 2021 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20202021_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2020 et 2021</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20212022_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2021 et 2022 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20212022_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2021 et 2022</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20222023_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2022 et 2023 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20222023_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive entre 2022 et 2023</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20232023_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive en 2023 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20232023_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive en 2023</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20232024_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre 2023 et 2024 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20232024_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive en 2024</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20242024_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution maximale du jet de rive entre en 2024 </span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MAX",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "eco_med_pnmgl_evolution_jetderive_20242024_ofb_ln_2154",
+            "field": "SHAPE_Leng",
+            "template": "<div class='statContainer Default'><span class='statLabel'> Évolution moyenne du jet de rive en 2024</span><span class='statValue' style='color: #2a9aa9;'>{x} m</span></div>",
+            "operator": "MEAN",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_recif_art_aamp_ixsurvey_pt_2154",
+            "field": "",
+            "template": "<div class='statContainer Icon-start'><div class='statsIcon'><img src='apps/pnmgl/stats/img/recif.png'></div><div class='statsText'><span class='statValue' style='color: #ff5a37;'>{x}</span> </br><span class='statLabel'>Récif(s) artificiel(s)</span> </div></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_recif_art_fond_aamp_ixsurvey_pol_2154",
+            "field": "shape_area",
+            "template": "<div class='statContainer Icon-start'><div class='statsIcon'><img src='apps/pnmgl/stats/img/recif.png'></div><div class='statsText'><span class='statValue' style='color: #ff5a37;'>{x} m²</span> </br><span class='statLabel'> de récifs artificiels</span> </div></div>",
+            "operator": "SUM",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          },
+          {
+            "type": "stat",
+            "layerId": "us_med_pnmgl_ZMEL_Dispositifs_amarrages_2022_pt_4326",
+            "field": "",
+            "template": "<div class='statContainer Default'><span class='statValue' style='color: #2a9aa9;'>{x}</span><span class='statLabel'> Dispositif(s) d'amarrage</span></div>",
+            "operator": "COUNT",
+            "__operator": "SUM,MAX,MEAN,COUNT"
+          }
+          
+        ]
+      }
+    }
+  }
+}

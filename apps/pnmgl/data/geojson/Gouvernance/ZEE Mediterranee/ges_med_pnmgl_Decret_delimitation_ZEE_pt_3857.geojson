@@ -1,0 +1,31 @@
+{
+"type": "FeatureCollection",
+"name": "ges_med_pnmgl_Decret_delimitation_ZEE_pt_3857",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:ESRI::54004" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 0, "Comment": "Point situé à la latituide de la frontière terrestre avec l'Espagne, sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 383828.586419903091155, 5197596.255988168530166 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 1, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 396092.813093631179072, 5197587.930994760245085 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 2, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 596486.938167291111313, 4850554.212161281146109 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 3, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 698824.752019145642407, 4850527.578642099164426 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 4, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 654929.670833759591915, 5022349.752507317811251 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 5, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 760662.729154808912426, 5107526.293484882451594 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 6, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 779236.435552915208973, 5107581.003000480122864 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 7, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 927662.423277280060574, 5070414.610885334201157 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 8, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 964768.92020837101154, 5028498.397324739024043 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 9, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales à l'ouest de la Corse" }, "geometry": { "type": "Point", "coordinates": [ 981042.023796749534085, 5022278.516835181042552 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 10, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 1047016.158317733323202, 5317317.615497278980911 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 11, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 1001875.417139462311752, 5358968.415805956348777 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 12, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 890555.926346188760363, 5282826.040158945135772 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 13, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 872002.677880643168464, 5282826.040158945135772 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 14, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales." }, "geometry": { "type": "Point", "coordinates": [ 844172.805182324722409, 5368326.959484902210534 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 15, "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 838586.21440939954482, 5364580.130095725879073 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 30, "Comment": "Point de la délimitation maritime entre la France et Monaco" }, "geometry": { "type": "Point", "coordinates": [ 863373.354359368328005, 5277569.863506895489991 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 40, "Comment": "Point de la délimitation maritime entre la France et Monaco" }, "geometry": { "type": "Point", "coordinates": [ 859701.874147986294702, 5274541.619045930914581 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 0, "Comment": "Point situé à la latitude de la frontière terrestre avec l'Espagne, à la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 383827.54127041134052, 5197587.610519525595009 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 16, "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 834931.224461687030271, 5361466.492321387864649 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 17, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1093713.997043912997469, 5157288.103119609877467 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 19, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1072115.952845221851021, 5048237.793550103902817 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 18, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 1141024.780631054192781, 5070402.360833786427975 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "Numéro": 17, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1093713.997043912997469, 5157290.87617486808449 ] } }
+]
+}

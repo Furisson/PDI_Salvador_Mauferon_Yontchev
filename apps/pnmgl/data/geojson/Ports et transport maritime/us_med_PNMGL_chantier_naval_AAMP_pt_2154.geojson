@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "US_MED_PNMGL_chantier_naval_AAMP_pt_2154",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:IGNF::LAMB93" } },
+"features": [
+{ "type": "Feature", "properties": { "Id": 0, "nom": "Chantier naval de Saint-Cyprien", "sources": "PNMGL", "num": "AAMP sur la base du scan littoral" }, "geometry": { "type": "Point", "coordinates": [ 703047.852877379045822, 6168504.233403756283224 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "nom": "Chantier naval du Canet", "sources": "PNMGL", "num": "AAMP sur la base du scan littoral" }, "geometry": { "type": "Point", "coordinates": [ 702904.970348187023774, 6178448.723719901405275 ] } },
+{ "type": "Feature", "properties": { "Id": 0, "nom": "Chantier naval du Roussillon", "sources": "PNMGL", "num": "AAMP sur la base du scan littoral" }, "geometry": { "type": "Point", "coordinates": [ 703305.071711267111823, 6196181.29655290953815 ] } }
+]
+}

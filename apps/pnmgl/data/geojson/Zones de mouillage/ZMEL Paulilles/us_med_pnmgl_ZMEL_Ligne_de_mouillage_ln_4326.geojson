@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "us_med_pnmgl_ZMEL_Ligne_de_mouillage_ln_4326",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 1, "Nom": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.124833315333954, 42.506149646467819 ], [ 3.125316766484219, 42.505383298441835 ], [ 3.12683333327092, 42.502983333269526 ], [ 3.127466840271541, 42.501899761440207 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 2, "Nom": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.126833333317738, 42.502983333339778 ], [ 3.125200231840862, 42.501854952537052 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 3, "Nom": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.124994369916903, 42.502029155923843 ], [ 3.1267024651756, 42.503190465235427 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 4, "Nom": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.125446885323278, 42.505172515765906 ], [ 3.122917844620542, 42.504890148610627 ] ] ] } },
+{ "type": "Feature", "properties": { "id": 5, "Nom": null }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.125316669099411, 42.505383334399362 ], [ 3.122848034583565, 42.505108304976183 ] ] ] } },
+{ "type": "Feature", "properties": { "id": null, "Nom": "mouillage" }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 3.125626437242503, 42.502148088964269 ], [ 3.125788612419207, 42.501941419834544 ], [ 3.126181694771221, 42.5022478897654 ], [ 3.126030832666838, 42.502427184621027 ] ] ] } }
+]
+}
