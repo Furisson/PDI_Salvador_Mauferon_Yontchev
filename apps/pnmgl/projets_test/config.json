@@ -1,0 +1,10 @@
+{
+  "target": "menu",
+  "html": "projets_test.html",
+  "js": ["projets_test.js"],
+  "css": ["projets_test.css"],
+  "options": {
+    "position": 999,
+    "title": "Projets"
+  }
+}

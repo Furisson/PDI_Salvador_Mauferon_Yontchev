@@ -1,0 +1,50 @@
+/* Intégration visuelle dans le menu (comme layerfilter) */
+#mv-project-section {
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+/* Barre de recherche identique : champ + croix inside */
+#projectfilter-form {
+  position: relative;
+}
+
+#projectfilter-field {
+  padding-right: 28px; /* place pour la croix */
+}
+
+#projectfilter-clear {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+  cursor: pointer;
+  display: none; /* visible quand on tape */
+}
+
+#projectfilter-clear:hover {
+  color: #333;
+}
+
+/* Liste (même rendu que list-group ailleurs) */
+#project-list {
+  margin-top: 8px;
+}
+
+#project-list .list-group-item {
+  border-left: 0;
+  border-right: 0;
+  border-radius: 0;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+/* Titres de thématiques */
+.project-theme-title {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+  font-size: 12px;
+}

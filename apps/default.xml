@@ -49,6 +49,12 @@
     <extension type="component" id="stats" path="apps/pnmgl"/>
     </extensions>
 
+    <!-- Appel de la fonctionnalité de recherche de projets -->
+    <extensions>
+    <extension type="component" id="projets_test" path="apps/pnmgl"/>
+    </extensions>
+
+
     <!-- Regroupement en thèmes  -->
     <themes>
 
