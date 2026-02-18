@@ -1,50 +1,110 @@
-/* Intégration visuelle dans le menu (comme layerfilter) */
+@import url(https://fonts.bunny.net/css?family=angkor:400|im-fell-english:400|roboto-flex:400);
+/* Style pour la section de projets */
+
 #mv-project-section {
-  padding: 10px;
-  border-top: 1px solid #ddd;
-  margin-top: 10px;
+    padding: 0;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+    font-family: 'Roboto Flex', sans-serif, 'Arial', sans-serif;
 }
 
-/* Barre de recherche identique : champ + croix inside */
-#projectfilter-form {
-  position: relative;
+
+#projectfilter-form 
+{
+    padding: 10px;
+    position: relative;
 }
 
-#projectfilter-field {
-  padding-right: 28px; /* place pour la croix */
+#projectfilter-field 
+{
+    padding-right: 28px;
 }
 
-#projectfilter-clear {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #777;
-  cursor: pointer;
-  display: none; /* visible quand on tape */
+#projectfilter-clear 
+{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #474646;
+    cursor: pointer;
+    display: none;
 }
 
 #projectfilter-clear:hover {
-  color: #333;
+  color: #474646;
 }
 
-/* Liste (même rendu que list-group ailleurs) */
-#project-list {
-  margin-top: 8px;
+/* Thématique */
+
+.mv-theme-row 
+{
+    width: 100%;
+    margin: 0;
+    padding: 8px 10px;
+    height: 40px;  
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    color: #474646;
 }
 
-#project-list .list-group-item {
-  border-left: 0;
-  border-right: 0;
-  border-radius: 0;
-  font-size: 12px;
-  cursor: pointer;
+
+.mv-theme-row:hover 
+{
+    background-color: #468798;
+    color: #fff;
 }
 
-/* Titres de thématiques */
-.project-theme-title {
-  margin-top: 10px;
-  font-weight: bold;
-  color: #333;
-  font-size: 12px;
+
+#themes-list 
+{
+    padding: 0;
+}
+
+/* Icône dans la ligne des thématiques */
+
+.mv-theme-row:hover .mv-theme-icon 
+{
+      color: #fff;
+}
+
+.mv-theme-icon 
+{
+    width: 16px;
+    text-align: center;
+    color: #474646;
+}
+
+.mv-theme-name 
+{
+    flex: 1;
+    font-weight: bold;
+}
+
+
+/* Projets contenus dans les thématiques */
+
+.mv-projects 
+{
+    padding-left: 10px;
+    padding-bottom: 6px;
+    display: none; 
+}
+
+.mv-project-item 
+{
+    padding: 6px 6px;
+    margin-left: 40px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.mv-project-item:hover 
+{
+    background-color: #468798;
+    color: #fff;
 }

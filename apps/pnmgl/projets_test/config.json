@@ -4,7 +4,6 @@
   "js": ["projets_test.js"],
   "css": ["projets_test.css"],
   "options": {
-    "position": 999,
-    "title": "Projets"
+    "position": 999
   }
 }
