@@ -1,72 +1,24 @@
 const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets_test/projects_tests.json";
 
 /**
- * Return une classe glyphicon CSS basé sur le nom de la thématique.
- * @param {string} nom_theme - Le nom du thème a classer
- * @returns {string} - La classe CSS de l'icône à utiliser pour ce thème
- * @example
- * Classe_icone_thematique("Hydrology") // returns "glyphicon glyphicon-tint"
- * Classe_icone_thematique("Urban") // returns "glyphicon glyphicon-home"
- * Classe_icone_thematique("Other") // returns "glyphicon glyphicon-folder-open"
+ * Retourne une classe CSS (glyphicon) en fonction du nom de la thématique.
+ * Sert uniquement si aucune icône n'est fournie dans le JSON.
  */
-
-function Classe_icone_thematique(nom_theme) 
+function classeIconeParDefaut(nomThematique) 
 {
-    const nom = (nom_theme || "").toLowerCase();
+    const nom = (nomThematique || "").toLowerCase();
     if (nom.includes("hydro")) return "glyphicon glyphicon-tint";
     if (nom.includes("urban")) return "glyphicon glyphicon-home";
+    
     return "glyphicon glyphicon-folder-open";
 }
 
 /**
- * Charge les données des projets depuis une URL, et les organise en thèmes avec leurs projets associés.
- * @async
- * @function Charger_theme
- * @returns {Promise<Array<Object>>} une promesse qui résout à un tableau de thèmes, où chaque thème est un objet contenant :
- *   - {string} nom - Le nom du thème, par défaut :  "Sans thématique" si non fourni
- *   - {string|null} icone - L'URL de l'icone du theme ou null si non fourni
- *   - {Array<Object>} projets - Un tableau d'objets de projets, chaque objet contient :
- *     - {string} titre - Le titre du projet, par défaut à "Sans titre" si non fourni
- *     - {string} description - Sa description, par défaut à une chaîne vide si non fournie
- *     - {string} pdf - L'URL du PDF du projet, par défaut à une chaîne vide si non fourni
- * @throws {Error} Si le chargement des données échoue ou si la réponse n'est pas au format attendu
+ * Échappe les caractères spéciaux HTML pour éviter les problèmes d'affichage et de sécurité.
  */
-
-async function Charger_theme() {
-    const resp = await fetch(URL_DONNEES_PROJETS, { cache: "no-store" });
-    if (!resp.ok) throw new Error("Impossible de charger " + URL_DONNEES_PROJETS);
-
-    const json = await resp.json();
-    const themes = json.themes || [];
-
-    return themes.map((t) => 
-        ({
-            nom: t.nom || "Sans thématique",
-            icone: t.icone || null,
-            projets: (t.projets || []).map((p) => 
-                ({
-                titre: p.titre || "Sans titre",
-                description: p.description || "",
-                pdf: p.pdf || ""
-            }))
-        }));
-}
-
-/**
- * Échappe les caractères spéciaux HTML dans une chaîne pour éviter les problèmes d'affichage et de sécurité.
- * Cette fonction remplace ces caractères par leurs entités HTML correspondantes.
- * 
- * @param {*} str - La chaîne à échapper. Elle sera convertie en chaîne de caractères si ce n'est pas déjà une chaîne.
- * @returns {string} - La chaîne échappée, à insérer dans le HTML.
- * 
- * @example
- * escapeHtml('<div class="test">Hello & goodbye</div>')
- * // Returns: '&lt;div class=&quot;test&quot;&gt;Hello &amp; goodbye&lt;/div&gt;'
- */
-
-function escapeHtml(str) 
+function echapperHtml(texte) 
 {
-    return String(str)
+    return String(texte)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
@@ -75,25 +27,50 @@ function escapeHtml(str)
 }
 
 /**
- * Ouvre le panneau latéral droit et affiche les informations d'un projet sélectionné.
- *
- * @param {Object} projet - L'objet projet à afficher dans le panneau.
- * @param {string} projet.titre - Le titre du projet.
- * @param {string} [projet.description] - La description du projet (optionnelle).
- * @param {string} [projet.pdf] - L'URL du rapport PDF du projet (optionnelle).
+ * Charge les données JSON et retourne une structure normalisée :
+ * [
+ *   { nom, icone, projets: [{ titre, description, pdf }, ...] },
+ *   ...
+ * ]
+ */
+async function chargerThematiques() 
+{
+    const reponse = await fetch(URL_DONNEES_PROJETS, { cache: "no-store" });
+    if (!reponse.ok) 
+    {
+        throw new Error("Impossible de charger " + URL_DONNEES_PROJETS);
+    }
+
+    const donnees = await reponse.json();
+
+    const thematiques = donnees.thematiques || [];
+
+    return thematiques.map((t) => (
+    {
+        nom: t.nom || "Sans thématique",
+        icone: t.icone || null,
+        projets: (t.projets || []).map((p) => (
+        {
+            titre: p.titre || "Sans titre",
+            description: p.description || "",
+            pdf: p.pdf || ""
+        }))
+    }));
+}
+
+/**
+ * Ouvre le panneau latéral droit et affiche les informations d'un projet.
  */
 
-// NOTE : MODIFIER ICI POUR MODIFIER HTML AFFICHÉ LORSQU'ON CLIQUE SUR UN PROJET (ex: ajouter des liens, images, etc.)
-
-function Ouvrir_le_panneau_projet(projet) 
+function ouvrirPanneauProjet(projet) 
 {
     const panneau = document.getElementById("right-panel");
-    const content = panneau ? panneau.querySelector(".popup-content") : null;
-    if (!panneau || !content) return;
+    const contenu = panneau ? panneau.querySelector(".popup-content") : null;
+    if (!panneau || !contenu) return;
 
-    content.innerHTML = `
-        <h4>${escapeHtml(projet.titre)}</h4>
-        <p>${escapeHtml(projet.description || "")}</p>
+    contenu.innerHTML = `
+        <h4>${echapperHtml(projet.titre)}</h4>
+        <p>${echapperHtml(projet.description || "")}</p>
         ${
         projet.pdf
             ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary">Ouvrir le rapport PDF</a>`
@@ -105,172 +82,155 @@ function Ouvrir_le_panneau_projet(projet)
 }
 
 /**
- * Affiche les thèmes et leurs projets associés.
- * Permet d'afficher ou de masquer les projets d'un thème en cliquant sur la ligne du thème.
- * Si un nom de thème est fourni dans `expandedThemeName`, ce thème sera développé par défaut.
- *
- * @param {Array<Object>} themes - Tableau des objets thèmes à afficher. Chaque thème doit avoir les propriétés :
- *   - {string} nom : Le nom du thème.
- *   - {string} [icone] : (Optionnel) Classe CSS de l'icône du thème.
- *   - {Array<Object>} projets : Liste des projets associés au thème, chaque projet doit avoir :
- *       - {string} titre : Le titre du projet.
- * @param {string|null} [expandedThemeName=null] - Nom du thème à développer par défaut (optionnel).
+ * Affiche les thématiques et leurs projets (dépliables au clic).
  */
 
-function renderThemes(themes, expandedThemeName = null) 
+function afficherThematiques(thematiques) 
 {
-    const container = document.getElementById("themes-list");
-    if (!container) return;
+    const conteneur = document.getElementById("themes-list");
+    if (!conteneur) return;
 
-    container.innerHTML = "";
+    conteneur.innerHTML = "";
 
-    themes.forEach((t, idx) => {
-        const id_theme = `mv-theme-${idx}`;
+    thematiques.forEach((t, index) => 
+    {
+        const idBlocProjets = `bloc-projets-${index}`;
 
+        // Ligne thématique
         const ligne = document.createElement("div");
         ligne.className = "mv-theme-row";
-        ligne.setAttribute("data-theme-id", id_theme);
+        ligne.setAttribute("data-thematique-id", idBlocProjets);
 
+        // Icône
         const icone = document.createElement("span");
-        icone.className = "mv-theme-icon " + (t.icone ? t.icone : themeIconClass(t.nom));
+        icone.className = "mv-theme-icon " + (t.icone ? t.icone : classeIconeParDefaut(t.nom));
         ligne.appendChild(icone);
 
-        const nom_span = document.createElement("span");
-        nom_span.className = "mv-theme-name";
-        nom_span.textContent = t.nom;
-        ligne.appendChild(nom_span);
+        // Nom
+        const nomSpan = document.createElement("span");
+        nomSpan.className = "mv-theme-name";
+        nomSpan.textContent = t.nom;
+        ligne.appendChild(nomSpan);
 
-        const projet_wrap = document.createElement("div");
-        projet_wrap.className = "mv-projects";
-        projet_wrap.id = id_theme;
-        t.projects.forEach((p) => 
-            {
+        // Conteneur projets (repliable)
+        const blocProjets = document.createElement("div");
+        blocProjets.className = "mv-projects";
+        blocProjets.id = idBlocProjets;
+
+        (t.projets || []).forEach((p) => 
+        {
             const item = document.createElement("div");
             item.className = "mv-project-item";
             item.textContent = p.titre;
+
             item.addEventListener("click", (e) => 
-                {
-                    e.stopPropagation(); 
-                    openProjectPanel(p);
-                });
-            projet_wrap.appendChild(item);
-        });
-
-        ligne.addEventListener("click", () => {
-        const ouvert = projet_wrap.style.display === "block";
-        projet_wrap.style.display = ouvert ? "none" : "block";
-        });
-
-        if (expandedThemeName && t.nom === expandedThemeName) 
             {
-                projet_wrap.style.display = "block";
-                chev.className = "mv-theme-chevron glyphicon glyphicon-chevron-up";
-            }
+                e.stopPropagation(); // évite de replier la thématique
+                ouvrirPanneauProjet(p);
+            });
 
-        container.appendChild(ligne);
-        container.appendChild(projet_wrap);
+            blocProjets.appendChild(item);
+        });
+
+        // Toggle au clic sur la thématique
+        ligne.addEventListener("click", () => 
+        {
+            const estOuvert = blocProjets.style.display === "block";
+            blocProjets.style.display = estOuvert ? "none" : "block";
+        });
+
+        conteneur.appendChild(ligne);
+        conteneur.appendChild(blocProjets);
     });
 }
 
 /**
- * Filtre les thèmes et projets selon une query, retourne les thèmes filtrés et 
- * un booléen indique s'il faut tout déplier (car seuls les thèmes matchants restent)
- *
- * @param {Array<Object>} all_theme - Tableau des objets thèmes à afficher. Chaque thème doit avoir les propriétés :
- *   - {string} nom : Le nom du thème.
- *   - {string} [icone] : (Optionnel) Classe CSS de l'icône du thème.
- *   - {Array<Object>} projets : Liste des projets associés au thème, chaque projet doit avoir :
- *       - {string} titre : Le titre du projet.
- * @param {string|null} [query] - requête de recherche pour filtrer les projets (optionnel)
- * @returns {Object} - Un objet contenant :
- *   - {Array<Object>} themes : Les thèmes filtrés, avec uniquement les projets qui matchent la query
- *   - {boolean} expandAllMatches : Indique s'il faut tout déplier (car seuls les thèmes matchants restent)
+ * Filtre les projets sur leur titre.
+ * Retourne uniquement les thématiques qui ont au moins un projet matchant.
  */
 
-function Filtrer_Themes(all_theme, query) 
+function filtrerThematiques(thematiques, requete) 
 {
-    const q = (query || "").toLowerCase().trim();
-    if (!q) return { themes: all_theme, expandAllMatches: false };
+    const q = (requete || "").toLowerCase().trim();
+    if (!q) return { thematiques, toutDeplier: false };
 
-    const filtered = all_theme
+    const thematiquesFiltrees = thematiques
         .map((t) => 
-            {
-                const projet = t.projets.filter((p) => (p.titre || "").toLowerCase().includes(q));
-                return { ...t, projets: projet };
-            })
+        {
+            const projetsFiltres = (t.projets || []).filter((p) =>
+                (p.titre || "").toLowerCase().includes(q)
+            );
+            return { ...t, projets: projetsFiltres };
+        })
         .filter((t) => t.projets.length > 0);
 
-    return { themes: filtered, expandAllMatches: true };
+    return { thematiques: thematiquesFiltrees, toutDeplier: true };
 }
 
-function initSearch(all_themes) 
+/**
+ * Branche la barre de recherche pour filtrer les projets.
+ */
+
+function initialiserRecherche(thematiques) 
 {
-    const input = document.getElementById("projectfilter-field");
-    const clear = document.getElementById("projectfilter-clear");
-    if (!input) return;
+    const champ = document.getElementById("projectfilter-field");
+    const boutonEffacer = document.getElementById("projectfilter-clear");
+    if (!champ) return;
 
-    function apply() 
+    function appliquer() 
     {
-        const q = input.value;
-        if (clear) clear.style.display = q.trim() ? "block" : "none";
+        const texte = champ.value;
+        if (boutonEffacer) boutonEffacer.style.display = texte.trim() ? "block" : "none";
 
-        const res = Filtrer_Themes(all_themes, q);
+        const resultat = filtrerThematiques(thematiques, texte);
+        afficherThematiques(resultat.thematiques);
 
-        renderThemes(res.themes);
-
-        // si filtré, on déplie tout (car seuls les thèmes matchants restent)
-        if (res.expandAllMatches) 
-            {
-                document.querySelectorAll("#themes-list + .mv-projects, .mv-projects").forEach((el) => 
-                    {
-                    });
-                document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => 
-                    {
-                        el.style.display = "block";
-                    });
-                document.querySelectorAll("#mv-project-section .mv-theme-chevron").forEach((ch) => 
-                    {
-                        ch.className = "mv-theme-chevron glyphicon glyphicon-chevron-up";
-                    });
+        // Si filtré : on déplie tout pour montrer les résultats
+        if (resultat.toutDeplier) {
+        document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => {
+            el.style.display = "block";
+        });
         }
     }
 
-    input.addEventListener("input", apply);
+    champ.addEventListener("input", appliquer);
 
-    if (clear) 
+    if (boutonEffacer) 
     {
-        clear.addEventListener("click", () => 
-            {
-                input.value = "";
-                apply();
-                input.focus();
-            });
+        boutonEffacer.addEventListener("click", () => {
+        champ.value = "";
+        appliquer();
+        champ.focus();
+        });
     }
 }
 
-// init (attendre injection HTML composant)
+/**
+ * Init : attend que le composant soit injecté dans le DOM, puis charge et affiche les données.
+ */
 
-(function initWhenReady() {
-    const ok =
+(function initialiserQuandPret() 
+{
+    const pret =
         document.getElementById("projectfilter-field") &&
         document.getElementById("themes-list");
 
-    if (!ok) return setTimeout(initWhenReady, 200);
+    if (!pret) return setTimeout(initialiserQuandPret, 200);
 
-    loadThemes()
-        .then((themes) => 
+    chargerThematiques()
+        .then((thematiques) => 
+        {
+            afficherThematiques(thematiques);
+            initialiserRecherche(thematiques);
+        })
+        .catch((erreur) => 
+        {
+            console.error(erreur);
+            const conteneur = document.getElementById("themes-list");
+            if (conteneur) 
             {
-                renderThemes(themes);
-                initSearch(themes);
-            })
-        .catch((e) => 
-            {
-                console.error(e);
-                const container = document.getElementById("themes-list");
-                if (container) 
-                {
-                    container.innerHTML =
-                    `<div style="color:#a00;">Erreur chargement projets : ${escapeHtml(e.message)}</div>`;
-                }
-            });
+                conteneur.innerHTML =
+                `<div style="color:#a00;">Erreur chargement projets : ${echapperHtml(erreur.message)}</div>`;
+            }
+        });
 })();

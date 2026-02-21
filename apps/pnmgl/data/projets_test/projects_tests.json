@@ -1,20 +1,23 @@
 {
-  "themes": [
+  "thematiques": [
     {
-      "name": "Hydrologie",
-      "projects": [
+      "nom": "Hydrologie",
+      "icone": "glyphicon glyphicon-tint",
+      "projets": [
         {
-          "title": "Analyse bassin versant",
+          "titre": "Analyse bassin versant",
           "description": "Étude hydrologique du bassin.",
           "pdf": "docs/bassin.pdf"
         }
       ]
     },
+
     {
-      "name": "Urbanisme",
-      "projects": [
+      "nom": "Urbanisme",
+      "icone": "glyphicon glyphicon-home",
+      "projets": [
         {
-          "title": "Expansion urbaine",
+          "titre": "Expansion urbaine",
           "description": "Analyse de l’expansion.",
           "pdf": "docs/urbanisme.pdf"
         }
