@@ -69,14 +69,23 @@ function ouvrirPanneauProjet(projet)
     if (!panneau || !contenu) return;
 
     contenu.innerHTML = `
-        <h4>${echapperHtml(projet.titre)}</h4>
-        <p>${echapperHtml(projet.description || "")}</p>
-        ${
-        projet.pdf
-            ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary">Ouvrir le rapport PDF</a>`
-            : ""
-        }
-    `;
+        <div class="panneau-projet">
+            <div class="panneau-projet__interieur">
+
+                <div class="panneau-projet__entete">
+                    <h3 class="panneau-projet__titre">${echapperHtml(projet.titre)}</h3>
+                </div>
+
+                <div class="panneau-projet__corps">
+                    ${projet.description ? `<p class="panneau-projet__description">${echapperHtml(projet.description)}</p>` : ""}
+
+                    <div class="panneau-projet__actions">
+                    ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
+                    </div>
+                </div>
+
+            </div>
+        </div> `;
 
     panneau.classList.add("active");
 }
