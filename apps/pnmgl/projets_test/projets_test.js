@@ -126,11 +126,12 @@ function afficherThematiques(thematiques)
         blocProjets.className = "mv-projects";
         blocProjets.id = idBlocProjets;
 
-        (t.projets || []).forEach((p) => 
+        (t.projets || []).forEach((p,indexProjet) => 
         {
-            const item = document.createElement("div");
+            const item = document.createElement("li");
             item.className = "mv-project-item";
             item.textContent = p.titre;
+            item.indexProjet = indexProjet;
 
             item.addEventListener("click", (e) => 
             {
@@ -141,12 +142,53 @@ function afficherThematiques(thematiques)
             blocProjets.appendChild(item);
         });
 
-        // Toggle au clic sur la thématique
         ligne.addEventListener("click", () => 
+            {
+                const etaitOuvert = blocProjets.classList.contains("ouvert");
+
+                // ferme les autres (accordéon)
+                document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
+                {
+                    if (autre !== blocProjets) 
+                    {
+                        appliquerDelaisFermeture(autre);
+                        autre.classList.remove("ouvert");
+                    }
+                });
+
+        if (etaitOuvert) 
         {
-            const estOuvert = blocProjets.style.display === "block";
-            blocProjets.style.display = estOuvert ? "none" : "block";
+            // fermeture : délais inversés
+            appliquerDelaisFermeture(blocProjets);
+            blocProjets.classList.remove("ouvert");
+        } 
+        else 
+        {
+            // ouverture : délais normaux
+            appliquerDelaisOuverture(blocProjets);
+            blocProjets.classList.add("ouvert");
+        }
         });
+
+        function appliquerDelaisOuverture(conteneur) 
+        {
+            const items = conteneur.querySelectorAll(".mv-project-item");
+            items.forEach((it, i) => 
+            {
+                it.style.transitionDelay = (i * 60) + "ms";
+            });
+        }
+
+        function appliquerDelaisFermeture(conteneur) 
+        {
+            const items = [...conteneur.querySelectorAll(".mv-project-item")];
+            const n = items.length;
+            items.forEach((it, i) => 
+            {
+                // inversé : dernier disparaît en premier
+                it.style.transitionDelay = ((n - 1 - i) * 60) + "ms";
+            });
+        }
 
         conteneur.appendChild(ligne);
         conteneur.appendChild(blocProjets);
@@ -155,7 +197,7 @@ function afficherThematiques(thematiques)
 
 /**
  * Filtre les projets sur leur titre.
- * Retourne uniquement les thématiques qui ont au moins un projet matchant.
+ * Retourne uniquement les thématiques qui ont au moins un projet matchant la requete.
  */
 
 function filtrerThematiques(thematiques, requete) 
@@ -163,8 +205,7 @@ function filtrerThematiques(thematiques, requete)
     const q = (requete || "").toLowerCase().trim();
     if (!q) return { thematiques, toutDeplier: false };
 
-    const thematiquesFiltrees = thematiques
-        .map((t) => 
+    const thematiquesFiltrees = thematiques.map((t) => 
         {
             const projetsFiltres = (t.projets || []).filter((p) =>
                 (p.titre || "").toLowerCase().includes(q)
@@ -197,7 +238,7 @@ function initialiserRecherche(thematiques)
         // Si filtré : on déplie tout pour montrer les résultats
         if (resultat.toutDeplier) {
         document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => {
-            el.style.display = "block";
+            el.classList.add("ouvert");
         });
         }
     }

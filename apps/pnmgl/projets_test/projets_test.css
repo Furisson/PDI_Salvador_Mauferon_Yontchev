@@ -1,11 +1,14 @@
-@import url(https://fonts.bunny.net/css?family=angkor:400|im-fell-english:400|roboto-flex:400);
+@font-face {
+  font-family: 'roboto_bold';
+  src: url("../font/Roboto/Roboto-Bold.ttf"); }
+
+
 /* Style pour la section de projets */
 
 #mv-project-section {
     padding: 0;
     border-top: 1px solid #ddd;
     margin-top: 10px;
-    font-family: 'Roboto Flex', sans-serif, 'Arial', sans-serif;
 }
 
 
@@ -26,13 +29,13 @@
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    color: #474646;
+    color: #999999;
     cursor: pointer;
     display: none;
 }
 
 #projectfilter-clear:hover {
-  color: #474646;
+  color: #999999;
 }
 
 /* Thématique */
@@ -49,7 +52,7 @@
     gap: 8px;
     cursor: pointer;
     user-select: none;
-    color: #474646;
+    color: #999999;
 }
 
 
@@ -65,7 +68,7 @@
     padding: 0;
 }
 
-/* Icône dans la ligne des thématiques */
+/* Ligne des thématiques */
 
 .mv-theme-row:hover .mv-theme-icon 
 {
@@ -74,16 +77,14 @@
 
 .mv-theme-icon 
 {
-    width: 16px;
+    font-size: 1.33333em;
     text-align: center;
-    color: #999999;
 }
 
 .mv-theme-name 
 {
     flex: 1;
     font-weight: bold;
-    color: #999999;
 }
 
 
@@ -93,19 +94,48 @@
 {
     padding-left: 10px;
     padding-bottom: 6px;
-    display: none; 
+    max-height: 0;
+    will-change: max-height;
+    overflow: hidden;
+    transition: max-height 0.45s ease;  /* Animation de déploiement pour un effet vertical ne pas jouer sur l'opacité*/
+}
+
+.mv-projects.ouvert 
+{
+    max-height: 900px;
+}
+
+.mv-projects:not(.ouvert) .mv-project-item 
+{
+    pointer-events: none;
 }
 
 .mv-project-item 
 {
-    padding: 6px 6px;
+    padding: 0 6px;              /* vertical à 0 quand fermé */
     margin-left: 40px;
     cursor: pointer;
     font-size: 12px;
-    color : #999999
+    color: #999999;
+
+    max-height: 0;
+    will-change: max-height, padding;
+    overflow: hidden;
+    transition: max-height 0.25s ease, padding 0.25s ease;
 }
 
-.mv-project-item:hover 
+.mv-projects.ouvert .mv-project-item 
+{
+    max-height: 40px;           
+    padding: 10px 10px;
+    display: flex;
+    justify-content: flex-start;   
+    align-items: center;       
+    text-align: left;        
+    
+}
+
+.mv-projects.ouvert .mv-project-item:hover 
 {
     background-color: #468798;
     color: #fff;
