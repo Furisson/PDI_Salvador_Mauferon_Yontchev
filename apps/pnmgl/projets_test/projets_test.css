@@ -126,12 +126,14 @@
 
 .mv-projects.ouvert .mv-project-item 
 {
-    max-height: 40px;           
+    max-height: 80px;           
     padding: 10px 10px;
     display: flex;
     justify-content: flex-start;   
     align-items: center;       
-    text-align: left;        
+    text-align: left;  
+    text-indent: 0px;
+    line-height: 18px;      
     
 }
 
