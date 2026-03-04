@@ -1033,6 +1033,7 @@
           }
         }
 
+
         // If no config param nor fragment then use the default config file
         if (!configFile) {
           configFile = "apps/default.xml";
@@ -1042,6 +1043,18 @@
         API.config = configFile;
 
         var theme = API.theme ? API.theme : null;
+
+        $.ajax({
+          url: "http://localhost:5000/reload_config",
+          type: "GET",
+          dataType: "xml",
+          success: function(xml) {
+              console.log("Config reçue");
+          },
+          error: function(xhr, status, error) {
+              console.error("Erreur chargement config :", error);
+          }
+        });
 
         $.ajax({
           url: configFile + "?_dc=" + new Date().getTime(),
@@ -1056,7 +1069,7 @@
             $(document).on("configurationCompleted", function (e, eData) {
               // load env var
               configuration.getEnvData(
-                configFile.replace(".xml", ".json"),
+                configFile,
                 defaultEnvFile
               );
               // load config on env var available
