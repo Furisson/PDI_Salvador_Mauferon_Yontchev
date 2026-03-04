@@ -6,10 +6,6 @@ from requests.auth import HTTPBasicAuth
 import zipfile
 import json
 import fiona
-from fiona.crs import from_epsg
-import shapely
-from shapely.geometry import shape, mapping
-from pyproj import Transformer
 import shutil
 
 # --- Configuration ---
@@ -105,6 +101,10 @@ def generate_config_xml():
     <extension type="component" id="stats" path="apps/pnmgl"/>
     </extensions>
         <themes>
+        <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
+        </theme>
+        <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
+        </theme>
     """
 
     themes = {}
@@ -148,7 +148,7 @@ def generate_config_xml():
         xml_content += "</theme>\n"
 
 
-    xml_content += """    </themes>
+    xml_content += """</themes>
     </config>
     """
 
