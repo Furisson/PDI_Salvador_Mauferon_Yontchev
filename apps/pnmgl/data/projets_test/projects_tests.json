@@ -6,17 +6,21 @@
       "projets": [
         {
           "titre": "Pratique de nettoyage des plages",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
+          "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
+          "image" : "apps/pnmgl/projets_test/img/Littoral-plage-sable.jpg",
+          "desc_img":"plage", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948a7f2a6b22135?view=book&page=1"
         },
         {
           "titre": "Perception du grand public du nettoyage des plages",
-          "description": "Suivi de la qualité.",
+          "description": "",
+          "image" : "apps/pnmgl/projets_test/img/Littoral-plage-sable.jpg",
+          "desc_img":"plage", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948921d59b87809?view=book&page=1"
         },
         {
           "titre": "Images satellites et suivis environnementaux",
-          "description": "Stratégies de prévention.",
+          "description": "",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948c5451f2b5c80?view=book&page=1"
         }
       ]
@@ -28,22 +32,22 @@
       "projets": [
         {
           "titre": "La pêche de loisir",
-          "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. ",
+          "description": "",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029483d8b7b5329e2?view=book&page=1"
         },
         {
           "titre": "Etat des lieux de la pêche artisanale",
-          "description": "Suivi de la qualité.",
+          "description": "",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/00350294859bb3dcf9416?view=book&page=1"
         },
         {
           "titre": "Perception des activités de plongées et de plaisance",
-          "description": "Stratégies de prévention.",
+          "description": "",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029481abb845fb26b?view=book&page=1 "
         },
         {
             "titre":"Recyclage des filets de pêche",
-            "description":"nnn",
+            "description": "",
             "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029482976c7b393f9?view=book&page=1"
         }
       ]
@@ -55,12 +59,12 @@
         [
             {
                 "titre" : "Erosion de la côte Vermeille",
-                "description" :"nnnn",
+                "description": "",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/003502948232ca4488a38?view=book&page=1"
             },
             {
                 "titre":"Evolution trait de cote ",
-                "description":"vvvv",
+                "description": "",
                 "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf"
             }
         ]
@@ -72,18 +76,18 @@
         [
             {
                 "titre" : "La Faune volante",
-                "description" :"nnnn",
+                "description": "",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/00350294828a4847d6042?view=book&page=1"
             },
             {
                 "titre":"L'Herbier de posidonie",
-                "description":"vvvv",
-                "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf"
+                "description": "",
+                "pdf":"https://parc-marin-golfe-lion.fr/documentation/poster-de-lherbier-de-posidonie"
             },
             {
-                "titre":"Corraligènes",
-                "description":"vvvv",
-                "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf"
+                "titre":"Coralligène",
+                "description": "",
+                "pdf":"https://parc-marin-golfe-lion.fr/documentation/poster-du-coralligene"
             }
         ]
     },
@@ -94,17 +98,17 @@
         [
             {
                 "titre" : "Les fonds marins",
-                "description" :"nnnn",
+                "description": "",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/0035029482698b2689ad1?view=book&page=1"
             },
             {
                 "titre":"Les dunes sableuses des têtes de canyons du Parc",
-                "description":"vvvv",
+                "description": "",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029480cf2bf98b777?view=book&page=1"
             },
             {
                 "titre":"Canyon Profond",
-                "description":"vvvv",
+                "description": "",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/00350294836b5ddaddc91?view=book&page=1"
             }
         ]

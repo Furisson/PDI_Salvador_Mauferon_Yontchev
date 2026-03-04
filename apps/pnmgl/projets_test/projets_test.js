@@ -1,7 +1,7 @@
 const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets_test/projects_tests.json";
 
 /**
- * Retourne une classe CSS (glyphicon) en fonction du nom de la thématique.
+ * Retourne une classe CSS (font awesome) en fonction du nom de la thématique.
  * Sert uniquement si aucune icône n'est fournie dans le JSON.
  */
 function classeIconeParDefaut(nomThematique) 
@@ -53,6 +53,8 @@ async function chargerThematiques()
         {
             titre: p.titre || "Sans titre",
             description: p.description || "",
+            image : p.image || "",
+            desc_img :p.desc_img || "",
             pdf: p.pdf || ""
         }))
     }));
@@ -77,7 +79,9 @@ function ouvrirPanneauProjet(projet)
                 </div>
 
                 <div class="panneau-projet__corps">
+                    ${projet.image ? `<img class="panneau-projet__image" src="${projet.image}" alt="${echapperHtml(projet.desc_img || '')}">` : ""}
                     ${projet.description ? `<p class="panneau-projet__description">${echapperHtml(projet.description)}</p>` : ""}
+                    
 
                     <div class="panneau-projet__actions">
                     ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}

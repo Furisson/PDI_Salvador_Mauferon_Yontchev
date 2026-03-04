@@ -87,6 +87,8 @@
 
   #right-panel .popup-content {
     padding: 14px !important;
+    overflow-y: auto !important;
+    padding-bottom: 100px !important;
   }
 
   #right-panel .panneau-projet__entete {
@@ -109,8 +111,18 @@
 
   #right-panel .panneau-projet__description {
     margin: 0 0 12px 0;
+    margin-right:3%;
     font-size: 13px;
     line-height: 1.4;
+    text-align: justify;
+  }
+
+  #right-panel .panneau-projet__image{
+    height: 200px;
+    width: 290px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 5%;
   }
 
   #right-panel .panneau-projet__actions {
