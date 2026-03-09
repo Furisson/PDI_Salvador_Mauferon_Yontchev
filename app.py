@@ -180,7 +180,6 @@ def upload_file():
     if filename.endswith(".zip"):
         with zipfile.ZipFile(filepath, 'r') as zip_ref:
             zip_ref.extractall(app.config['UPLOAD_FOLDER'])
-        os.remove(filepath)  # supprimer le zip après extraction
         # récupérer le nom du shapefile principal
         for f in os.listdir(app.config['UPLOAD_FOLDER']):
             if f.endswith(".shp"):
@@ -215,7 +214,8 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     headers = {"Content-Type": "application/xml"}
     # Extensions du shapefile
     extensions = [".shp", ".shx", ".dbf", ".prj", ".cpg"]
-    shp_dir = os.path.join(UPLOAD_FOLDER, layer_name).replace("\\", "/")
+    file_name = os.path.basename(shapefile_path).replace(".shp", "")
+    shp_dir = os.path.join(UPLOAD_FOLDER, file_name).replace("\\", "/")
     os.makedirs(shp_dir, exist_ok=True)
     SHAPEFILE_PATH = os.path.join(shp_dir, os.path.basename(shapefile_path)).replace("\\", "/")
     for ext in extensions:

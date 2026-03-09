@@ -1,3 +1,94 @@
+$("#uploadLayerForm").submit(function(e){
+
+    e.preventDefault();
+
+    var formData = new FormData();
+
+    formData.append("theme", $("#themeSelect").val());
+    formData.append("group", $("#groupSelect").val());
+    formData.append("layer_name", $("#layerName").val());
+    formData.append("file", $("#layerFile")[0].files[0]);
+
+    $.ajax({
+
+        url: "http://localhost:5000/upload",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function(response){
+            alert("Couche ajoutée !");
+            $.ajax({
+              url: "http://localhost:5000/reload_config",
+              type: "GET",
+              dataType: "xml",
+              success: function(xml) {
+                  console.log("Config reçue");
+              },
+              error: function(xhr, status, error) {
+                  console.error("Erreur chargement config :", error);
+              }
+            });
+        },
+        error: function(){
+            alert("Erreur lors de l'ajout de la couche");
+        }
+    });
+
+});
+
+function fillGroupsSelect(themeSelect) {
+  const selectedThemeName = themeSelect.value;
+
+  groupSelect.innerHTML = ""; // vide le select
+
+  if (selectedThemeName) {
+      // Cherche le theme correspondant
+      const selectedTheme = mviewer.conf.themes.theme.find(
+          t => t.name === selectedThemeName
+      );
+
+      if (selectedTheme && selectedTheme.group) {
+          // selectedTheme.group peut être un tableau ou un objet unique
+          const groups = Array.isArray(selectedTheme.group)
+              ? selectedTheme.group
+              : [selectedTheme.group];
+
+          groups.forEach(group => {
+              const option = document.createElement("option");
+              option.value = group.name;
+              option.textContent = group.name;
+              groupSelect.appendChild(option);
+          });
+      }
+    }
+  }
+
+$('#addLayerpanel').on('shown.bs.modal', function () {
+    const themeSelect = document.getElementById("themeSelect");
+    const groupSelect = document.getElementById("groupSelect");
+
+    themeSelect.innerHTML = ""; // vide le select
+    groupSelect.innerHTML = ""; // vide le select
+
+    // Remplir les thématiques
+    Object.values(mviewer.conf.themes.theme).forEach(theme => {
+        const option = document.createElement("option");
+        option.value = theme.name;
+        option.textContent = theme.name;
+        themeSelect.appendChild(option);
+    });
+
+    fillGroupsSelect(themeSelect); // Remplir les groupes pour la thématique sélectionnée par défaut
+
+    // Mettre à jour les groupes quand la thématique change
+    themeSelect.addEventListener("change", function () {
+        fillGroupsSelect(themeSelect);
+    });
+
+});
+
 var capabilitiesParser = (function () {
   /**
    * public Method: _parseCSW. Used to parse response of a GetRecords
@@ -333,32 +424,7 @@ var addlayers = (function () {
       });
     }
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const themeSelect = document.getElementById("themeSelect");
-        const groupSelect = document.getElementById("groupSelect");
-
-        // Remplir les thématiques
-        Object.keys(mviewer.config.themes).forEach(themeName => {
-            const option = document.createElement("option");
-            option.value = themeName;
-            option.textContent = themeName;
-            themeSelect.appendChild(option);
-        });
-
-        // Mettre à jour les groupes quand la thématique change
-        themeSelect.addEventListener("change", function () {
-            const selectedTheme = this.value;
-            groupSelect.innerHTML = ""; // vide le select
-            if(selectedTheme && mviewer.config.themes[selectedTheme]) {
-                mviewer.config.themes[selectedTheme].forEach(groupName => {
-                    const option = document.createElement("option");
-                    option.value = groupName;
-                    option.textContent = groupName;
-                    groupSelect.appendChild(option);
-                });
-            }
-        });
-    });
+    
   };
 
   /**

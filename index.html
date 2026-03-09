@@ -1129,6 +1129,7 @@
                 mviewer.env = { ...r.detail };
                 //get JSON conf from xml;
                 var _conf = configuration.parseXML(eData.xml);
+                mviewer.conf = _conf;
                 var style = "css/themes/default.css";
                 if (
                   !theme &&

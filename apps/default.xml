@@ -79,6 +79,18 @@
                 srs="EPSG:3857"
                 format="application/json">
             </layer>
+            
+                <layer id="hydrologie_test:jgprejgoie"
+                name="jgprejgoie"
+                type="geojson"
+                opacity="1"
+                visible="false"
+                queryable="true"
+                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:jgprejgoie&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="hydrologie_test:jgprejgoie"
+                srs="EPSG:3857"
+                format="application/json">
+            </layer>
             </group>
 </theme>
 </themes>
