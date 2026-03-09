@@ -6,24 +6,67 @@
       "projets": [
         {
           "titre": "Pratique de nettoyage des plages",
-          "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32.The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of  (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, , comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from  by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.",
           "image" : "apps/pnmgl/projets_test/img/Littoral-plage-sable.jpg",
           "desc_img":"plage", 
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948a7f2a6b22135?view=book&page=1"
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948a7f2a6b22135?view=book&page=1",
+          "contenu":[
+                      {
+                        "type": "titre",
+                        "texte": "Objectifs"
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Les plages sont le réceptacle des déchets anthropiques apportés par la mer et, ou laissés par le public fréquentant les lieux, particulièrement l'été. Or, l’écosystème dunaire du Languedoc-Roussillon présente une richesse patrimoniale importante et fragile avec :"
+                      },
+                      {
+                        "type": "liste",
+                        "items": [
+                                  "la présence de plantes qui piègent le sable et servent de rempart contre l’érosion et la submersion marine lors de tempête",
+                                  "la laisse de mer qui sert d’apport en nourriture et lieu de nidification notamment pour de nombreux oiseaux marins"
+                                ]
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Les communes pratiquent le nettoyage des plages afin de préparer ces milieux aux publics. Suivant le type de nettoyage utilisé, les impacts sur les écosystèmes sont plus ou moins importants. Cette étude recense les schémas d’organisation de nettoyage des plages mis en oeuvre par les communes du Parc et dégage les principales tendances."
+                      }, 
+                      {
+                        "type": "lien",
+                        "texte": "Consulter les données associées",
+                        "url": "https://parc-marin-golfe-lion.fr/editorial/le-littoral"
+                      }
+                    ]
         },
-        {
-          "titre": "Perception du grand public du nettoyage des plages",
-          "description": "",
-          "image" : "apps/pnmgl/projets_test/img/Dechets_Retour-Peche.jpg",
-          "desc_img":"dechets de plage", 
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948921d59b87809?view=book&page=1"
-        },
+
+
         {
           "titre": "Images satellites et suivis environnementaux",
-          "description": "",
           "image" : "apps/pnmgl/projets_test/img/image_satellite.png",
           "desc_img":"image satellite", 
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948c5451f2b5c80?view=book&page=1"
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948c5451f2b5c80?view=book&page=1",
+          "contenu":[  
+                      {
+                        "type": "titre",
+                        "texte": "Pourquoi ?"
+                      }, 
+                      {
+                        "type": "paragraphe",
+                        "texte": "Les images satellites sont des outils précieux pour suivre l’environnement marin et côtier. Elles permettent d’observer des phénomènes à grande échelle, tels que les panaches turbides, la chlorophylle a ou la production primaire, qui sont des indicateurs importants de la santé de l’écosystème marin. Dans le Parc naturel marin du Golfe du Lion, ces images sont utilisées pour surveiller les impacts des crues sur les eaux côtières et pour mieux comprendre les dynamiques marines. Les données recueillies grâce aux images satellites sont essentielles pour informer les gestionnaires et les scientifiques sur l’état de l’environnement marin et pour adapter les politiques de gestion en conséquence."
+                      },
+
+                      {
+                        "type": "liste",
+                        "items": [
+                                  "Suivi de la chlorophylle a pour évaluer la production primaire et la santé des écosystèmes marins et côtiers",
+                                  "Observation des panaches turbides suite aux crues pour comprendre les impacts sur les eaux côtières",
+                                  "Analyse des données environnementales pour mieux gérer les ressources marines et protéger la biodiversité"
+                                  ]
+                      },
+                      {
+                        "type": "lien",
+                        "texte": "Des images satellites pour suivre la végétation côtière",
+                        "url": "https://www.calameo.com/ofbiodiversite/read/00350294836e56e942934?view=book&page=1"
+                      }
+                    ]
         }
       ]
     },
@@ -31,37 +74,152 @@
     {
       "nom": "Pêche et activités nautiques",
       "icone": "fa fa-anchor",
-      "projets": [
+      "projets": 
+      [
         {
           "titre": "La pêche de loisir",
-          "description": "",
           "image" : "apps/pnmgl/projets_test/img/Peche_recreative_embarquee-3.jpg",
           "desc_img": "pêche de loisir",
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029483d8b7b5329e2?view=book&page=1"
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029483d8b7b5329e2?view=book&page=1",
+          "contenu":[
+                      {
+                        "type": "titre",
+                        "texte": "Qu'est-ce que la pêche de loisir ?"
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "La pêche de loisir est une activité pratiquée pour le plaisir, le sport ou la consommation personnelle, mais les poissons capturés ne peuvent pas être vendus. Dans le Parc naturel marin du Golfe du Lion, elle est très répandue et concerne environ 20 000 pêcheurs chaque année, surtout pendant la période estivale. Cependant, beaucoup de pêcheurs observent une diminution des captures, ce qui souligne l’importance d’une gestion durable des ressources marines."
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "La pêche de loisir englobe diverses pratiques, notamment :"
+                      },
+                      {
+                        "type": "liste",
+                        "items": [
+                                    "la pêche du bord (plages, rochers, surfcasting, pêche au leurre)",
+                                    "la pêche embarquée depuis un bateau",
+                                    "la chasse sous-marine",
+                                    "des pratiques organisées dans des clubs ou lors de compétitions"
+                                  ]
+                      },
+                      {
+                        "type": "lien",
+                        "texte": "Consulter les données associées",
+                        "url": "https://parc-marin-golfe-lion.fr/editorial/decouvrir-la-peche-de-loisir"
+                      }
+                    ]   
         },
+
         {
           "titre": "Etat des lieux de la pêche artisanale",
-          "description": "",
           "image" : "apps/pnmgl/projets_test/img/Peche-professionnelle_petit-metier_3.JPG",
           "desc_img": "pêche artisanale",
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/00350294859bb3dcf9416?view=book&page=1"
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/00350294859bb3dcf9416?view=book&page=1",
+          "contenu":[
+                      {
+                        "type": "titre",
+                        "texte": "La pêche professionnelle dans le Parc naturel marin du Golfe du Lion"
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "La pêche professionnelle est une activité économique importante dans le Parc naturel marin du Golfe du Lion. Elle est principalement pratiquée par des pêcheurs artisanaux appelés “petits métiers”, qui travaillent près des côtes avec de petits bateaux et utilisent des techniques traditionnelles adaptées à la pêche côtière. Les sorties en mer sont souvent courtes et permettent de capturer différentes espèces comme le merlu, la dorade, le rouget, la sole, la seiche ou le poulpe. Cette pêche locale contribue à l’économie du littoral tout en restant liée aux ressources naturelles de la mer."
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Les pêcheurs professionnels utilisent plusieurs techniques pour capturer les poissons :"
+                      },
+                      {
+                        "type": "liste",
+                        "items": [
+                                  "les filets (maillants ou trémails)",
+                                  "les nasses et casiers",
+                                  "les palangres (lignes avec plusieurs hameçons)",
+                                  "les pots à poulpe"
+                                ]
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Afin de préserver les ressources marines, cette activité est encadrée par des règles et suivie par des organismes scientifiques qui observent les captures et les pratiques de pêche. Ces informations permettent d’adapter les méthodes et de favoriser une pêche plus durable dans le parc marin."
+                      },
+                      {
+                        "type": "lien",
+                        "texte": "Consulter les données associées",
+                        "url": "https://parc-marin-golfe-lion.fr/editorial/decouvrir-la-peche-professionnelle"
+                      }
+                    ]
         },
+
         {
           "titre": "Perception des activités de plongées et de plaisance",
-          "description": "",
           "image" : "apps/pnmgl/projets_test/img/Bouee.JPG",
           "desc_img": "Bouée de plaisance",
-          "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029481abb845fb26b?view=book&page=1 "
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029481abb845fb26b?view=book&page=1 ",
+          "contenu":[
+                      {
+                        "type": "titre",
+                        "texte": "Les loisirs nautiques"
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Le Parc naturel marin du Golfe du Lion accueille de nombreuses activités de loisirs en mer et sur le littoral. Ces activités permettent de profiter du milieu marin tout en découvrant la richesse des paysages et de la biodiversité. Parmi les pratiques les plus courantes, on trouve notamment les sports nautiques comme le surf, le kitesurf, le kayak de mer ou le paddle, qui se développent de plus en plus dans la région. Ces loisirs offrent une manière à la fois sportive et respectueuse d’explorer les côtes, les criques et les zones naturelles du parc marin. De plus, les activités de plongée sous-marine sont très populaires dans le Golfe du Lion, permettant aux plongeurs de découvrir la richesse des fonds marins et la diversité des espèces qui y vivent. Ces loisirs nautiques contribuent à faire du parc un lieu de détente et de découverte pour les habitants et les visiteurs, tout en sensibilisant à la préservation de l’environnement marin."
+                      },
+                      {
+                        "type": "liste",
+                        "items": [
+                                  "le surf et les sports de glisse",
+                                  "le kitesurf",
+                                  "le kayak de mer et le paddle",
+                                  "d’autres activités nautiques et sportives liées au littoral"
+                                ]
+                      },
+                      {
+                        "type": "paragraphe",
+                        "texte": "Ces pratiques attirent de nombreux usagers et participent à l’attractivité touristique du territoire. C’est pourquoi le parc suit aussi la perception et les usages des activités marines, afin de mieux comprendre comment ces loisirs sont pratiqués et comment ils peuvent coexister avec la protection de l’environnement marin."
+                      },
+                      {
+                        "type": "lien",
+                        "texte": "Consulter les données associées",
+                        "url": "https://parc-marin-golfe-lion.fr/editorial/decouvrir-les-activites-de-loisirs"
+                      }
+                    ]
         },
+
         {
             "titre":"Recyclage des filets de pêche",
-            "description": "",
             "image" : "apps/pnmgl/projets_test/img/Nasse_poulpe.JPG",
             "desc_img": "filets de pêche",
-            "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029482976c7b393f9?view=book&page=1"
-        }
+            "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029482976c7b393f9?view=book&page=1",
+            "contenu":[
+                        {
+                          "type": "titre",
+                          "texte": "Gestion des déchets de pêche"
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Des actions sont mises en place pour réduire l’impact environnemental des activités de pêche. Une étude a notamment été réalisée pour accompagner la création d’une filière de recyclage des filets de pêche usagés. Ces filets, souvent composés de plastiques, peuvent devenir des déchets marins s’ils ne sont pas correctement gérés. Le projet vise donc à organiser leur collecte dans plusieurs ports du littoral et à développer des solutions pour leur recyclage ou leur valorisation, afin de limiter la pollution marine et de promouvoir une économie circulaire dans le secteur de la pêche."
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Cette initiative s’inscrit dans une démarche plus large de gestion durable des ressources marines et de réduction des impacts environnementaux liés aux activités humaines en mer. En favorisant le recyclage des filets de pêche, le parc contribue à la préservation de la biodiversité marine et à la sensibilisation des acteurs du secteur à l’importance de la protection de l’environnement marin."
+                        },
+                        {
+                          "type": "liste",
+                          "items": [
+                                    "collecter les filets de pêche usagés dans les ports du territoire",
+                                    "réduire les déchets plastiques en mer",
+                                    "mettre en place une filière de recyclage spécialisée"
+                                  ]
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Cette initiative s’inscrit plus largement dans les actions menées par le parc pour accompagner les activités maritimes tout en protégeant l’environnement marin. Elle vise à impliquer les pêcheurs et les gestionnaires de ports dans cette démarche environnementale."
+                        }
+                      ]
+          }
       ]
     },
+    
     {
         "nom":"Erosion",
         "icone":"fa fa-mountain",
@@ -69,24 +227,116 @@
         [
             {
                 "titre" : "Erosion de la côte Vermeille",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Cote-rocheuse.jpg",
                 "desc_img": "érosion de la côte Vermeille",
-                "pdf" :"https://www.calameo.com/ofbiodiversite/read/003502948232ca4488a38?view=book&page=1"
+                "pdf" :"https://www.calameo.com/ofbiodiversite/read/003502948232ca4488a38?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "L’érosion côtière dans le Parc naturel marin du Golfe du Lion"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "L’érosion côtière est un phénomène naturel qui peut être accentué par les activités humaines et les changements climatiques. Dans le Parc naturel marin du Golfe du Lion, certaines zones littorales, notamment la côte Vermeille, sont particulièrement vulnérables à l’érosion en raison de leur géologie et de leur exposition aux tempêtes. Cette étude analyse les processus d’érosion qui affectent cette région, les impacts sur les écosystèmes côtiers et les mesures de gestion mises en place pour limiter les conséquences de ce phénomène sur les habitats naturels et les activités humaines."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le littoral du Golfe du Lion est un espace fragile situé à la frontière entre la terre et la mer. Les plages, les dunes et les falaises y évoluent constamment sous l’effet des vagues, des tempêtes et des courants marins, ce qui provoque un phénomène appelé érosion côtière. Cette érosion peut entraîner le recul du trait de côte, la disparition de certaines plages et des risques pour les infrastructures situées près du littoral. Les études menées dans le Parc naturel marin permettent de suivre l’évolution du littoral et de mieux comprendre ces dynamiques pour anticiper les changements futurs et mettre en place des mesures de gestion adaptées. Pour mieux comprendre et gérer ce phénomène, plusieurs actions sont mises en place :"
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                          "suivi de l’évolution du trait de côte grâce à des observations scientifiques et des images satellites",
+                                          "analyse des plages et des falaises afin d’anticiper les risques liés à l’érosion",
+                                          "réflexion sur l’aménagement du littoral face au recul de la côte",
+                                          "sensibilisation du public et des acteurs locaux aux risques littoraux"
+                                       ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Ces études et ces actions permettent d’aider les gestionnaires et les collectivités à anticiper les évolutions du littoral et adapter les politiques de gestion côtière."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Consulter les données associées : La démarche ambition du Littoral",
+                              "url": "https://parc-marin-golfe-lion.fr/editorial/la-demarche-ambition-littoral"
+                            }
+                          ]
             },
             {
                 "titre":"Evolution trait de cote ",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/image_satellite_trait_de_cote.png",
-                "desc_img": "érosion de la côte Vermeille",
-                "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf"
-            },
+                "desc_img": "image satellite trait de cote",
+                "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "Suivi de l’évolution du trait de côte"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le suivi de l’évolution du trait de côte est essentiel pour comprendre les dynamiques littorales et anticiper les impacts de l’érosion côtière. Dans le Parc naturel marin du Golfe du Lion, des études sont menées pour analyser les changements du trait de côte à l’aide d’observations scientifiques et d’images satellites. Ces analyses permettent de suivre l’évolution des plages, des falaises et des zones côtières, d’identifier les zones les plus vulnérables à l’érosion et de mieux comprendre les processus qui influencent ces changements. Les données recueillies sont utilisées pour informer les gestionnaires et les collectivités sur les risques liés à l’érosion et pour adapter les politiques de gestion côtière en conséquence."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le suivi de l’évolution du trait de côte permet d’anticiper les risques liés à l’érosion et de mieux gérer les espaces littoraux. En analysant les données recueillies, les gestionnaires peuvent identifier les zones les plus vulnérables et mettre en place des mesures de protection adaptées, telles que la restauration des dunes, la création de zones tampons ou la limitation des aménagements dans les zones à risque. De plus, ces études contribuent à sensibiliser le public et les acteurs locaux aux enjeux liés à l’érosion côtière et à promouvoir une gestion durable du littoral. Pour analyser ces changements, les chercheurs et gestionnaires du littoral s’appuient sur différents outils et méthodes :"
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "l’utilisation d’images satellites pour suivre les changements du trait de côte sur de longues périodes",
+                                        "l’analyse des données de terrain pour comprendre les processus d’érosion et les facteurs qui influencent ces changements",
+                                        "la modélisation des dynamiques littorales pour anticiper les évolutions futures du trait de côte"
+                                      ]
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Ces analyses permettent d’informer les politiques de gestion côtière et de mieux protéger les écosystèmes littoraux face aux impacts de l’érosion."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Consulter les données associées : Rendez-vous sur notre page éditoriale !",
+                              "url": "https://parc-marin-golfe-lion.fr/editorial/suivre-le-trait-de-cote"
+                            }
+                          ]
+              },
             {
                 "titre":"Panaches turbides",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Panache_turbide.png",
-                "desc_img": "érosion de la côte rocheuse",
-                "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948fa90866b9e7a?view=book&page=1"
+                "desc_img": "Panache turbide",
+                "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948fa90866b9e7a?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "Les panaches turbides"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Certaines études menées dans le Parc naturel marin du Golfe du Lion s’intéressent au panache turbide, c’est-à-dire une zone d’eau chargée en particules et sédiments en suspension qui rend l’eau plus trouble. Ce phénomène est notamment lié aux apports des fleuves et aux mouvements des sédiments, qui peuvent être transportés en mer par les courants et les tempêtes. Le suivi de ce panache permet de mieux comprendre la circulation des sédiments et la dynamique des eaux côtières dans le golfe."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Dans le parc, ce phénomène peut être observé et analysé grâce à des images satellites et des outils de suivi environnemental, qui permettent de visualiser la matière en suspension et son évolution dans le temps. Ces observations servent aussi à étudier d’autres indicateurs comme l’évolution du trait de côte ou la formation de barres sédimentaires sous-marines. Elles contribuent à mieux comprendre les processus d’érosion et de sédimentation qui affectent le littoral du Golfe du Lion, ainsi que les impacts potentiels sur les écosystèmes marins et les activités humaines. En suivant l’évolution du panache turbide, les gestionnaires peuvent :"
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "observer la présence de matières en suspension dans l’eau",
+                                        "comprendre le transport des sédiments en mer",
+                                        "analyser l’évolution du littoral et des fonds marins",
+                                        "améliorer la gestion et la protection des écosystèmes marins"
+                                      ]       
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Ces études permettent d’améliorer la connaissance des processus côtiers et de mieux gérer les espaces littoraux face aux enjeux liés à l’érosion et à la sédimentation."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Des images satellites pour suivre la chlorophylle a, la production primaire et les panaches turbides suite aux crues",
+                              "url": "https://parc-marin-golfe-lion.fr/documentation/rapports-sur-les-images-satellites-utilisees-pour-des-suivis-environnementaux"
+                            }
+                          ]
             }
         ]
     },
@@ -97,24 +347,188 @@
         [
             {
                 "titre" : "La Faune volante",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Poussin_GCI_2°sem_Torreilles.JPG",
                 "desc_img": "Poussin de goéland",
-                "pdf" :"https://www.calameo.com/ofbiodiversite/read/00350294828a4847d6042?view=book&page=1"
+                "pdf" :"https://www.calameo.com/ofbiodiversite/read/00350294828a4847d6042?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "La faune volante "
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le Parc naturel marin du Golfe du Lion abrite une grande diversité d’oiseaux marins, notamment des goélands, des cormorans, des mouettes et des sternes. Ces espèces jouent un rôle important dans l’écosystème marin et sont souvent utilisées comme indicateurs de la santé de l’environnement. Les études menées dans le parc permettent de suivre les populations d’oiseaux marins, d’analyser leurs comportements et de mieux comprendre les facteurs qui influencent leur présence et leur reproduction. Ces recherches contribuent à la conservation de ces espèces et à la gestion durable des habitats marins."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Les oiseaux marins du parc sont suivis à travers des programmes de comptage et d’observation, qui permettent de recueillir des données sur leur nombre, leur répartition et leurs comportements. Ces données sont utilisées pour évaluer l’état de santé des populations d’oiseaux marins et pour identifier les menaces potentielles qui pourraient affecter ces espèces, telles que :"
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "la pollution marine",
+                                        "la perturbation des habitats de nidification",
+                                        "les changements climatiques",
+                                        "les interactions avec les activités humaines"
+                                      ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "En comprenant mieux les besoins et les menaces qui pèsent sur les oiseaux marins, le parc peut mettre en place des mesures de conservation adaptées pour protéger ces espèces et leurs habitats."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Consulter les données associées : La faune volante du Parc naturel marin du Golfe du Lion",
+                              "url": "https://www.eoliennesenmer.fr/observatoire/migralion"
+                            }
+                        ]
             },
+
+            {
+              "titre": "La biodiversité du Parc",
+              "image" : "apps/pnmgl/projets_test/img/Biodiversite.jpg",
+              "desc_img": "biodiversité du parc",
+              "pdf": "https://parc-marin-golfe-lion.fr/editorial/fiches-especes",
+              "contenu":[
+                          {
+                            "type": "titre",
+                            "texte": "La biodiversité du Parc"
+                          },
+                          {
+                            "type": "paragraphe",
+                            "texte": "Les espèces animales et végétales trouvent au sein du Parc des milieux propices pour se nourrir et se reproduire. La protection de cette biodiversité et de l’équilibre de ces écosystèmes est placée sous la responsabilité du Parc."
+
+
+                          }, 
+                          {
+                            "type":"titre",
+                            "texte":"Des habitats remarquables"
+                          },
+                          {                         
+                            "type": "paragraphe",
+                            "texte": "Dans le périmètre du parc naturel marin, la mer est sous l’influence du courant liguro-provençal, chargé en particules minérales et organiques. Ceci explique que les eaux soient particulièrement riches et qu'une multitude d'espèces colonisent les différents habitats retrouvés. Parmi les espèces les plus emblématiques du parc, on peut citer :"
+                          },
+                          {
+                            "type": "liste",
+                            "items": [
+                                      "Le littoral avec des plages vivantes.",
+                                      "Les fonds sableux : des zones à forte productivité.",
+                                      "Les herbiers de posidonies : des prairies sous-marines où de nombreuses espèces viennent s'épanouir.",
+                                      "Le coralligène : un \"rocher vivant\" se développant à l'abri de la lumière.",
+                                      "Les canyons profonds au sein desquels des peuplements emblématiques et relativement rares se sont développés.",
+                                      "La colonne d'eau fréquentée par de nombreux oiseaux et mammifères marins."
+                                    ]
+                            },
+                            {
+                              "type":"titre",
+                              "texte":"De très nombreuses espèces"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "De très nombreuses espèces animales et végétales sont retrouvées au sein du Parc naturel marin. Plusieurs espèces protégées (au niveau national) sont retrouvées au sein du Parc : "
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                          "La posidonie (Posidonia oceanica) et la cymodocée (Cymodocea nodosa), la patelle géante (Patella ferruginea), la grande nacre (Pinna nobilis), nacre épineuse (Pinna rudis), la datte de mer (Lithophaga lithophaga), la grande cigale de mer (Scyllarides latus), l'oursin diadème (Centrostephanus longispinus).",
+                                          "Tous les mammifères marins et les tortues.",
+                                          "Une majorité d’espèces d’oiseaux est également protégée."
+                                      ]
+                              },
+                              {
+                                "type": "paragraphe",
+                                "texte": "D'autres espèces ne sont pas protégées mais possèdent une réglementation spécifique visant leur préservation (le thon, le mérou, le corb et le labre vert par exemple). Cette forte présence d'espèces protégées et réglementées confirme le caractère d'exception de cette partie du golfe du Lion occidental."
+                              },
+                              {
+                                "type": "lien",
+                                "texte": "Testez vos connaissances sur les espèces du Parc naturel marin du Golfe du Lion : quizz sur la biodiversité",
+                                "url": "https://parc-marin-golfe-lion.fr/editorial/quizz-sur-la-biodiversite"
+                              }
+
+            ]
+          },
+
+
+
             {
                 "titre":"L'Herbier de posidonie",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/herbier_de_posidonie.jpg",
                 "desc_img": "herbier de posidonie",
-                "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948d7920fef7908?view=book&page=1"
+                "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948d7920fef7908?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "L’herbier de posidonie dans le Parc naturel marin du Golfe du Lion"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "L’herbier de posidonie est un écosystème marin important qui joue un rôle crucial dans la biodiversité et la santé des fonds marins. Dans le Parc naturel marin du Golfe du Lion, ces herbiers sont suivis pour évaluer leur état de santé, leur répartition et les menaces qui pèsent sur eux. Les études menées permettent de mieux comprendre les facteurs qui influencent la croissance et la survie de ces herbiers, ainsi que les impacts potentiels des activités humaines et des changements environnementaux sur ces écosystèmes fragiles."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Les herbiers de posidonie sont suivis à travers des programmes de surveillance qui incluent des relevés sous-marins, des analyses de la qualité de l’eau et des études sur les interactions avec les autres espèces marines. Ces données permettent d’évaluer l’état de santé des herbiers et d’identifier les menaces potentielles, telles que :"
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "la pollution marine",
+                                        "les ancrages de bateaux",
+                                        "les activités de pêche",
+                                        "les changements climatiques"
+                                      ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "En comprenant mieux les besoins et les menaces qui pèsent sur les herbiers de posidonie, le parc peut mettre en place des mesures de conservation adaptées pour protéger ces écosystèmes et favoriser leur résilience face aux impacts environnementaux."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Consulter les ressources associées : L’herbier de posidonie dans le Parc naturel marin du Golfe du Lion",
+                              "url": "https://parc-marin-golfe-lion.fr/editorial/lherbier-de-posidonie"
+                            }
+                        ]
             },
             {
                 "titre":"Coralligène",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Coralligene.jpg",
                 "desc_img": "coralligène",
-                "pdf":"https://parc-marin-golfe-lion.fr/documentation/poster-du-coralligene"
+                "pdf":"https://parc-marin-golfe-lion.fr/documentation/poster-du-coralligene",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "Le coralligène qu'est ce que c'est ?"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le coralligène est un écosystème marin constitué de formations rocheuses créées par des organismes marins appelés coralliaires. Ces formations sont souvent recouvertes d’une grande diversité d’espèces marines, telles que :" 
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "Éponges",
+                                        "Gorgones blanches et rouges",
+                                        "Mollusques",
+                                        "Bryozoaires",
+                                        "Crustacés",
+                                        "Poissons se faufilant dans les innombrables trous, interstices et cavités"
+                                      ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Ont été dénombrées 315 espèces d'algues, 1 241 espèces d'invertébrés et 110 espèces de poissons. Retrouvez les espèces les plus emblématiques du coralligène dans le Parc naturel marin du Golfe du Lion :"
+                            },
+                            {
+                              "type" : "lien",
+                              "texte": "Le mérou brun",
+                              "url": "https://parc-marin-golfe-lion.fr/editorial/merou-brun"
+                            },
+                            {
+                              "type" : "lien",
+                              "texte": "Le Corb",
+                              "url": "https://parc-marin-golfe-lion.fr/editorial/corb"
+                            }
+
+                          ]
             }
         ]
     },
@@ -125,24 +539,121 @@
         [
             {
                 "titre" : "Les fonds marins",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Cartographie-Parc.jpg",
                 "desc_img": "cartographie des fonds marins",
-                "pdf" :"https://www.calameo.com/ofbiodiversite/read/0035029482698b2689ad1?view=book&page=1"
+                "pdf" :"https://www.calameo.com/ofbiodiversite/read/0035029482698b2689ad1?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "La cartographie des fonds marins du Parc naturel marin du Golfe du Lion"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "La cartographie des fonds marins est une activité essentielle pour mieux comprendre les habitats et les écosystèmes présents dans le Parc naturel marin du Golfe du Lion. Grâce à des technologies telles que les sonars, les drones et les images satellites, les chercheurs peuvent créer des cartes détaillées des fonds marins, qui permettent d’identifier les différentes zones d’habitat, les formations géologiques et les espèces qui y vivent. Ces cartes sont utilisées pour informer la gestion et la conservation des écosystèmes marins, ainsi que pour sensibiliser le public à la richesse et à la diversité de ces milieux."
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "La cartographie des fonds marins permet de mieux comprendre les habitats et les écosystèmes présents dans le parc, ainsi que les interactions entre les différentes espèces marines. En analysant ces cartes, les gestionnaires peuvent identifier les zones les plus riches en biodiversité, les habitats critiques pour certaines espèces et les zones vulnérables aux impacts humains. Ces informations sont essentielles pour orienter les actions de conservation et de gestion durable des ressources marines dans le parc."
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "utilisation de technologies avancées pour cartographier les fonds marins",
+                                        "identification des habitats et des écosystèmes présents dans le parc",
+                                        "informations pour la gestion et la conservation des écosystèmes marins"
+                                      ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "En comprenant mieux la cartographie des fonds marins, le parc peut mieux protéger ces écosystèmes et sensibiliser le public à la richesse de la biodiversité marine."
+                            },
+                            {
+                              "type": "lien",
+                              "texte": "Consulter les données associées : La cartographie des fonds marins du Parc naturel marin du Golfe du Lion",
+                              "url": "https://parc-marin-golfe-lion.fr/documentation/acces-aux-cartes-du-parc-naturel-marin"
+                            }
+                          ]
             },
             {
-                "titre":"Les dunes sableuses des têtes de canyons du Parc",
-                "description": "",
+                "titre":"Les dunes sableuses",
                 "image" : "apps/pnmgl/projets_test/img/Fond_sable.jpg",
                 "desc_img": "dune sableuse",
-                "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029480cf2bf98b777?view=book&page=1"
+                "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029480cf2bf98b777?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "Les dunes sableuses des têtes de canyons du Parc naturel marin du Golfe du Lion"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Les dunes sableuses des têtes de canyons sont des formations géologiques sous-marines qui se trouvent dans certaines zones du Parc naturel marin du Golfe du Lion. Ces dunes sont créées par l’accumulation de sédiments transportés par les courants marins et peuvent abriter une grande diversité d’espèces marines. Les études menées dans le parc permettent de mieux comprendre la formation et l’évolution de ces dunes, ainsi que les écosystèmes qu’elles soutiennent. Ces recherches contribuent à la conservation de ces habitats uniques et à la gestion durable des ressources marines dans le parc."
+                            },
+                            {
+                              "type": "liste",
+                              "items": [
+                                        "étude de la formation et de l’évolution des dunes sableuses",
+                                        "analyse des écosystèmes soutenus par ces dunes",
+                                        "identification des menaces potentielles pour ces habitats",
+                                        "mise en place de mesures de conservation adaptées"
+                                      ] 
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "En comprenant mieux les dunes sableuses des têtes de canyons, le parc peut mieux protéger ces habitats uniques et sensibiliser le public à la richesse de la biodiversité marine."
+                            }
+                          ]
             },
             {
                 "titre":"Canyon Profond",
-                "description": "",
                 "image" : "apps/pnmgl/projets_test/img/Parc_Carte-Perimetre.png",
                 "desc_img": "cartographie des fonds marins",
-                "pdf":"https://www.calameo.com/ofbiodiversite/read/00350294836b5ddaddc91?view=book&page=1"
+                "pdf":"https://www.calameo.com/ofbiodiversite/read/00350294836b5ddaddc91?view=book&page=1",
+                "contenu":[
+                            {
+                              "type": "titre",
+                              "texte": "Le canyon profond du Parc naturel marin du Golfe du Lion"
+                            },
+                            {
+                              "type": "paragraphe",
+                              "texte": "Le golfe du Lion est entaillé par 9 canyons principaux réparties d'ouest en est : le canyon du cap de Creus, Lacaze-Duthiers, Pruvot, Bourcart, de l'Aude, de l'Hérault, de Sète, de Montpellier, Marti, du petit Rhône et canyon du grand Rhône. Le canyon du cap de Creus et le canyon Lacaze-Duthiers sont les principaux exutoires des eaux de plateau continental : "},
+                              {
+                                "type": "liste",
+                                "items": [
+                                          "90% des eaux du plateau passent par le canyon du cap de Creus",
+                                          "5% par le canyon de Lacaze-Duthiers,", 
+                                          "5% pour les autres canyons."
+                                        ] 
+                              },
+                              {
+                                "type": "paragraphe",
+                                "texte": "Cet important mouvement d'eau a pour conséquence un affleurement fréquent de la roche dans les canyons du cap Creus et Lacaze-Duthiers tandis que la roche présente dans les autres canyons est quasi intégralement recouverte de vase, excepté au niveau des falaises verticales."
+                              },
+                              {
+                                "type": "titre",
+                                "texte": "Un rôle important"
+                              },
+                              {
+                                "type": "paragraphe",
+                                "texte": "Les canyons jouent un rôle important dans les échanges entre le plateau, le talus et les plaines abyssales, entre les continents et les océans. Les canyons jouent également les rôles de refuge, frayère, nurserie pour de nombreuses espèces."
+                              },
+{
+                                "type": "titre",
+                                "texte": "Menace"
+                              },
+                              {
+                                "type": "paragraphe",
+                                "texte": "Les canyons sous-marins sont des zones fragiles et menacées par la pollution et certains types de pêche. De nombreux gobelets et sacs plastiques y sont retrouvés. Cette pollution arrive directement de la terre et est amenée par les courants jusque dans les profondeurs."
+                              },
+                              {
+                                "type": "paragraphe",
+                                "texte": "Des modélisations récentes semblent aujourd'hui indiquer que les plongées d'eaux denses pourraient être affectées, voire arrêtées par le réchauffement climatique. Les conséquences sur la ventilation des eaux intermédiaires et profondes, sur la séquestration du CO2 par l'océan et ou encore sur l'alimentation des écosystèmes profonds pourraient être considérables."
+                              },
+                              {
+                                "type": "lien",
+                                "texte": "Pour en savoir plus ...un film de 4 minutes présentant les actions de recherche et de gestion",
+                                "url": "https://www.youtube.com/watch?v=rLG5U10ClO4&list=PL6MJ0E_Nq6LSuxrrw2HXmEP4lwbl1i0FJ"
+                              }
+                            ]
             }
         ]
     }, 
@@ -151,11 +662,70 @@
       "icone" : "fa fa-trash",
       "projets" : [
         {
-          "titre": "Eutrophisation du Golfe du Lion",
-          "description": "",
+          "titre": "Eutrophisation du Golfe du Lion",       
           "image" : "apps/pnmgl/projets_test/img/Eutrophisation_du_golfe_du_lion.png",
           "desc_img":"eutrophisation du Golfe du Lion", 
-          "pdf": "https://www.inrae.fr/sites/default/files/pdf/expertise-eutrophisation-synthese-148-p-2.pdf"
+          "pdf": "https://www.inrae.fr/sites/default/files/pdf/expertise-eutrophisation-synthese-148-p-2.pdf",
+          "contenu": [
+                        {
+                          "type": "titre",
+                          "texte": "L’eutrophisation du Golfe du Lion"
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "L’eutrophisation est un processus de sur-enrichissement des eaux en nutriments, principalement en azote et en phosphore, qui peut entraîner une prolifération excessive d’algues et de plantes aquatiques. Dans le Golfe du Lion, ce phénomène est principalement causé par les apports de nutriments provenant des activités humaines, telles que l’agriculture, l’urbanisation et les rejets industriels. L’eutrophisation peut avoir des impacts négatifs sur les écosystèmes marins, notamment la diminution de la qualité de l’eau, la perte de biodiversité et la perturbation des chaînes alimentaires. Les études menées dans le Parc naturel marin du Golfe du Lion permettent de mieux comprendre les causes et les conséquences de l’eutrophisation dans cette région, ainsi que les mesures de gestion mises en place pour limiter ce phénomène."
+                        },
+                        {
+                          "type": "liste",
+                          "items": [
+                                      "suivi des apports de nutriments dans le golfe",
+                                      "analyse des impacts de l’eutrophisation sur les écosystèmes marins",
+                                      "mise en place de mesures de gestion pour limiter les apports de nutriments",
+                                      "sensibilisation du public et des acteurs locaux aux enjeux liés à l’eutrophisation"
+                                    ]
+                                  },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Les mesures de gestion mises en place pour limiter l’eutrophisation dans le Golfe du Lion incluent des actions de réduction des apports de nutriments, des programmes de surveillance et d’analyse, ainsi qu’une sensibilisation accrue du public et des acteurs locaux aux enjeux liés à ce phénomène."
+                        }
+                      ]
+        },
+        {
+          "titre": "Améliorer la qualité de l'eau",       
+          "image" : "apps/pnmgl/projets_test/img/dechets_Retour-Peche.jpg",
+          "desc_img":"eutrophisation du Golfe du Lion", 
+          "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948921d59b87809?view=book&page=1",
+          "contenu": [
+                        {
+                          "type": "titre",
+                          "texte": "Suivre les déchets sur le littoral"
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Les agents du Parc naturel marin mènent plusieurs suivis pour suivre et caractériser les déchets : suivis des macrodéchets et des microplastiques sur le littoral."
+                        },
+                        {
+                          "type": "titre",
+                          "texte": "Les macrodéchets"
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Réalisé depuis deux ans sur deux plages, le suivi des macro-déchets permet l‘analyse de l’évolution de cette pollution sur le long terme. Le protocole de suivi utilisé par le Parc consiste, mensuellement, à ramasser, trier, compter, caractériser tous les déchets échoués sur un linéaire de 100 m de plages. Deux plages ont été retenues, répondant aux caractéristiques requises par le protocole européen, l’une sur la côte sableuse (La Crouste), l’autre sur la côte rocheuse (Le Fourat).Ces deux plages constituent deux des six sites de la façade méditerranéenne pris en compte par la France pour l’évaluation de la pollution par les déchets au niveau européen dans le cadre de l’application de la Directive cadre Stratégie Milieu Marin (DCSMM). "
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Un total de 51 423 déchets ont été comptabilisés depuis 2016. Le nombre moyen de déchets récoltés mensuellement sur 100 m de plage varie entre 264 (Fourat) et 806 (La Crouste) avec un maximum de 4 308 ! La plus forte densité sur la plage de La Crouste pourrait être liée à la proximité de l’embouchure de la Têt. À l’échelle de la façade méditerranéenne, le site du Fourat présente des valeurs correspondant au niveau de base défi ni par la convention de Barcelone, alors qu’à La Crouste la quantité est supérieure à ce même niveau de base. 75% des déchets sont des plastiques. Cette proportion est similaire sur les deux plages."
+                        },
+                        {
+                          "type": "titre",
+                          "texte": "Les microplastiques"
+                        },
+                        {
+                          "type": "paragraphe",
+                          "texte": "Après une étude en collaboration avec le CEFREM sur la répartition spatiale et temporelle des microplastiques sur les plages, le Parc test un protocole, élaboré par le CEDRE, qui a pour vocation à être déployée à l’échelle nationale pour le suivi dans le cadre de la DCSMM. "
+                        }
+
+                      ]
         }
       ]
     }

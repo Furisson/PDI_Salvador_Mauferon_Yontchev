@@ -109,12 +109,34 @@
 
   }
 
-  #right-panel .panneau-projet__description {
-    margin: 0 0 12px 0;
-    margin-right:3%;
-    font-size: 13px;
-    line-height: 1.4;
-    text-align: justify;
+  #right-panel .panneau-projet__sous-titre 
+  {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  #right-panel .panneau-projet__liste 
+  {
+    margin-bottom: 12px;
+    padding-left: 20px;
+  }
+
+  #right-panel .panneau-projet__liste li 
+  {
+    margin-bottom: 6px;
+  }
+
+  #right-panel .panneau-projet__lien a 
+  {
+    color: #468798;
+    text-decoration: none;
+  }
+
+  #right-panel .panneau-projet__lien a:hover 
+  {
+    text-decoration: underline;
   }
 
   #right-panel .panneau-projet__image{

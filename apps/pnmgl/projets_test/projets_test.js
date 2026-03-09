@@ -52,12 +52,51 @@ async function chargerThematiques()
         projets: (t.projets || []).map((p) => (
         {
             titre: p.titre || "Sans titre",
-            description: p.description || "",
+            contenu: Array.isArray(p.contenu) ? p.contenu : [],
             image : p.image || "",
             desc_img :p.desc_img || "",
             pdf: p.pdf || ""
         }))
     }));
+}
+
+function rendreBlocContenu(bloc) 
+{
+    if (!bloc || !bloc.type) return "";
+    switch (bloc.type) 
+    {
+        case "titre":
+            return `<h4 class="panneau-projet__sous-titre">${echapperHtml(bloc.texte || "")}</h4>`;
+
+        case "paragraphe":
+            return `<p class="panneau-projet__description">${echapperHtml(bloc.texte || "")}</p>`;
+
+        case "liste":
+            return `
+                <ul class="panneau-projet__liste">
+                    ${(bloc.items || [])
+                        .map(item => `<li>${echapperHtml(item)}</li>`)
+                        .join("")}
+                </ul>`;
+
+        case "lien":
+            return bloc.url
+                ? `<p class="panneau-projet__lien">
+                        <a href="${bloc.url}" target="_blank" rel="noopener noreferrer">
+                            ${echapperHtml(bloc.texte || bloc.url)}
+                        </a>
+                   </p>`
+                : "";
+
+        default:
+            return "";
+    }
+}
+
+function rendreContenuProjet(contenu) 
+{
+    if (!Array.isArray(contenu)) return "";
+    return contenu.map(rendreBlocContenu).join("");
 }
 
 /**
@@ -80,8 +119,7 @@ function ouvrirPanneauProjet(projet)
 
                 <div class="panneau-projet__corps">
                     ${projet.image ? `<img class="panneau-projet__image" src="${projet.image}" alt="${echapperHtml(projet.desc_img || '')}">` : ""}
-                    ${projet.description ? `<p class="panneau-projet__description">${echapperHtml(projet.description)}</p>` : ""}
-                    
+                    ${rendreContenuProjet(projet.contenu)}
 
                     <div class="panneau-projet__actions">
                     ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
