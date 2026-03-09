@@ -18,6 +18,11 @@
     position: relative;
 }
 
+#wrapper.toggled-2 #projectfilter-form 
+{
+    display: none;
+}
+
 #projectfilter-field 
 {
     padding-right: 28px;
@@ -79,6 +84,7 @@
 {
     font-size: 1.33333em;
     text-align: center;
+    margin-left: -5px;
 }
 
 .mv-theme-name 
@@ -112,30 +118,33 @@
 
 .mv-project-item 
 {
-    padding: 0 6px;              /* vertical à 0 quand fermé */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    text-indent: 0 !important;
+    line-height: 18px !important;
+    box-sizing: border-box;
+
     margin-left: 40px;
     cursor: pointer;
     font-size: 12px;
     color: #999999;
 
     max-height: 0;
-    will-change: max-height, padding;
     overflow: hidden;
+    padding: 0 10px;
+
+    will-change: max-height, padding;
     transition: max-height 0.25s ease, padding 0.25s ease;
 }
 
 .mv-projects.ouvert .mv-project-item 
 {
-    max-height: 80px;           
+    max-height: 80px;
     padding: 10px 10px;
-    display: flex;
-    justify-content: flex-start;   
-    align-items: center;       
-    text-align: left;  
-    text-indent: 0px;
-    line-height: 18px;      
-    
 }
+
 
 .mv-projects.ouvert .mv-project-item:hover 
 {

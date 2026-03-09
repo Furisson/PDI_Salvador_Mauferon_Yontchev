@@ -94,6 +94,36 @@ function ouvrirPanneauProjet(projet)
     panneau.classList.add("active");
 }
 
+
+function wrapperEstFerme() {
+    const wrapper = document.getElementById("wrapper");
+    if (!wrapper) return false;
+
+    return wrapper.classList.contains("toggled-2");
+}
+
+function ouvrirWrapperSiFerme(callback) {
+    const boutonMenu = document.querySelector(".menu-toggle");
+    const wrapper = document.getElementById("wrapper");
+
+    if (!wrapper || !boutonMenu) {
+        if (callback) callback();
+        return;
+    }
+
+    if (!wrapperEstFerme()) {
+        if (callback) callback();
+        return;
+    }
+
+    boutonMenu.click();
+
+    setTimeout(() => {
+        if (callback) callback();
+    }, 250);
+}
+
+
 /**
  * Affiche les thématiques et leurs projets (dépliables au clic).
  */
@@ -147,31 +177,49 @@ function afficherThematiques(thematiques)
         });
 
         ligne.addEventListener("click", () => 
+        {
+            // Si le wrapper est fermé, on l’ouvre puis on ouvre directement cette thématique
+            if (wrapperEstFerme()) 
             {
-                const etaitOuvert = blocProjets.classList.contains("ouvert");
-
-                // ferme les autres (accordéon)
-                document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
+                ouvrirWrapperSiFerme(() => 
                 {
-                    if (autre !== blocProjets) 
+                    document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
                     {
-                        appliquerDelaisFermeture(autre);
-                        autre.classList.remove("ouvert");
-                    }
+                        if (autre !== blocProjets) 
+                        {
+                            appliquerDelaisFermeture(autre);
+                            autre.classList.remove("ouvert");
+                        }
+                    });
+
+                    appliquerDelaisOuverture(blocProjets);
+                    blocProjets.classList.add("ouvert");
                 });
 
-        if (etaitOuvert) 
-        {
-            // fermeture : délais inversés
-            appliquerDelaisFermeture(blocProjets);
-            blocProjets.classList.remove("ouvert");
-        } 
-        else 
-        {
-            // ouverture : délais normaux
-            appliquerDelaisOuverture(blocProjets);
-            blocProjets.classList.add("ouvert");
-        }
+                return;
+            }
+
+            const etaitOuvert = blocProjets.classList.contains("ouvert");
+
+            document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
+            {
+                if (autre !== blocProjets) 
+                    {
+                    appliquerDelaisFermeture(autre);
+                    autre.classList.remove("ouvert");
+                    }
+            });
+
+                if (etaitOuvert) 
+                {
+                    appliquerDelaisFermeture(blocProjets);
+                    blocProjets.classList.remove("ouvert");
+                } 
+                else 
+                {
+                    appliquerDelaisOuverture(blocProjets);
+                    blocProjets.classList.add("ouvert");
+                }
         });
 
         function appliquerDelaisOuverture(conteneur) 
@@ -240,23 +288,55 @@ function initialiserRecherche(thematiques)
         afficherThematiques(resultat.thematiques);
 
         // Si filtré : on déplie tout pour montrer les résultats
-        if (resultat.toutDeplier) {
-        document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => {
-            el.classList.add("ouvert");
-        });
-        }
+        if (resultat.toutDeplier) 
+            {
+                document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => 
+                    {
+                        el.classList.add("ouvert");
+                    });
+            }
     }
 
     champ.addEventListener("input", appliquer);
 
     if (boutonEffacer) 
     {
-        boutonEffacer.addEventListener("click", () => {
-        champ.value = "";
-        appliquer();
-        champ.focus();
+        boutonEffacer.addEventListener("click", () => 
+        {
+            champ.value = "";
+            appliquer();
+            champ.focus();
         });
     }
+}
+
+function refermerToutesLesThematiques() 
+{
+    document
+        .querySelectorAll("#mv-project-section .mv-projects.ouvert")
+        .forEach((element) => 
+        {
+            element.classList.remove("ouvert");
+        });
+}
+
+function initialiserFermetureMenuProjets() 
+{
+    const boutonMenu = document.querySelector(".menu-toggle");
+    const wrapper = document.getElementById("wrapper");
+
+    if (!boutonMenu || !wrapper) return;
+
+    boutonMenu.addEventListener("click", () => 
+    {
+        setTimeout(() => 
+        {
+            if (wrapper.classList.contains("toggled-2")) 
+                {
+                    refermerToutesLesThematiques();
+                }
+        }, 50);
+    });
 }
 
 /**
@@ -276,6 +356,7 @@ function initialiserRecherche(thematiques)
         {
             afficherThematiques(thematiques);
             initialiserRecherche(thematiques);
+            initialiserFermetureMenuProjets();
         })
         .catch((erreur) => 
         {
