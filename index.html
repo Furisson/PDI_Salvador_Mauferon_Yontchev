@@ -579,6 +579,17 @@
                 <li role="presentation" class="active">
                   <a
                     onclick="mviewer.tools.addlayers.clearResultsList();"
+                    href="#add_file"
+                    aria-controls="home"
+                    role="tab"
+                    data-toggle="tab"
+                    i18n="addlayers.modal.file">
+                    Fichier local
+                  </a>
+                </li>
+                <li role="presentation" >
+                  <a
+                    onclick="mviewer.tools.addlayers.clearResultsList();"
                     href="#add_ogc"
                     aria-controls="profile"
                     role="tab"
@@ -611,8 +622,47 @@
                 </li>
               </ul>
               <!-- Tab panes -->
-              <div class="tab-content" id="addlayers_tabs">
-                <div role="tabpanel" class="tab-pane active" id="add_ogc">
+              <div class="tab-content" id="add_upload_layer">
+                <div role="tabpanel" class="tab-pane active" id="add_file">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p>
+                          Glissez-déposez votre fichier shp zippé ou cliquez pour sélectionner un
+                          fichier sur votre ordinateur.
+                        </p>
+                        <form id="uploadLayerForm">
+                          <div class="form-group">
+                            <label for="themeSelect">Thématique</label>
+                            <select id="themeSelect" class="form-control">
+                              <!-- Options remplies dynamiquement -->
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="groupSelect">Groupe</label>
+                            <select id="groupSelect" class="form-control">
+                              <!-- Options mises à jour selon thématique -->
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="layerName">Nom de la couche</label>
+                            <input type="text" id="layerName" class="form-control" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="layerFile">Fichier ZIP</label>
+                            <input type="file" id="layerFile" class="form-control" accept=".zip" required>
+                          </div>
+
+                          <button type="submit" class="btn btn-primary">Ajouter la couche</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="add_ogc">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col">

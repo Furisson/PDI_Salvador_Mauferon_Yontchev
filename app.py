@@ -55,7 +55,7 @@ def generate_config_xml():
     xml_content = """<?xml version="1.0" encoding="UTF-8"?>
     <config>
         <!-- Définition des paramètres généraux de l'application  -->
-    <application id='stats' title="Mviewer Parc Naturel Marin du Golfe du Lion" mouseposition="false" logo="apps/pnmgl/img/logo_pnmgl.png" help="mviewer_help.html" measuretools="true" mapprint="true" exportpng="true" style="css/themes/pnmgl.css" togglealllayersfromtheme="true"/>
+    <application id='stats' title="Mviewer Parc Naturel Marin du Golfe du Lion" mouseposition="false" logo="apps/pnmgl/img/logo_pnmgl.png" help="mviewer_help.html" measuretools="true" addlayerstools="true" mapprint="true" exportpng="true" style="css/themes/pnmgl.css" togglealllayersfromtheme="true"/>
     <mapoptions maxzoom="19" projection="EPSG:3857" center="374538.481483,5269369.993240" zoom="10" projextent="-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244" />
 
     <!-- Fonds de cartes au choix -->
@@ -99,11 +99,6 @@ def generate_config_xml():
     <!-- Appel de la fonctionnalité de statistiques -->
     <extensions>
     <extension type="component" id="stats" path="apps/pnmgl"/>
-    </extensions>
-
-    <!-- Appel de la fonctionnalité d'ajout de couches -->
-    <extensions>
-    <extension type="component" id="add_layer" path="apps/pnmgl"/>
     </extensions>
 
         <themes>

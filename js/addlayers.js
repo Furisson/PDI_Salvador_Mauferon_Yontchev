@@ -332,6 +332,33 @@ var addlayers = (function () {
         }
       });
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const themeSelect = document.getElementById("themeSelect");
+        const groupSelect = document.getElementById("groupSelect");
+
+        // Remplir les thématiques
+        Object.keys(mviewer.config.themes).forEach(themeName => {
+            const option = document.createElement("option");
+            option.value = themeName;
+            option.textContent = themeName;
+            themeSelect.appendChild(option);
+        });
+
+        // Mettre à jour les groupes quand la thématique change
+        themeSelect.addEventListener("change", function () {
+            const selectedTheme = this.value;
+            groupSelect.innerHTML = ""; // vide le select
+            if(selectedTheme && mviewer.config.themes[selectedTheme]) {
+                mviewer.config.themes[selectedTheme].forEach(groupName => {
+                    const option = document.createElement("option");
+                    option.value = groupName;
+                    option.textContent = groupName;
+                    groupSelect.appendChild(option);
+                });
+            }
+        });
+    });
   };
 
   /**
