@@ -1,0 +1,9 @@
+{
+  "target": "sidebar-wrapper",
+  "html": "add_layer.html",
+  "js": ["add_layer.js"],
+  "css": ["add_layer.css"],
+  "options": {
+    "position" : 1000
+  }
+}

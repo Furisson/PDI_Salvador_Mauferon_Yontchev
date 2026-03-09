@@ -100,6 +100,12 @@ def generate_config_xml():
     <extensions>
     <extension type="component" id="stats" path="apps/pnmgl"/>
     </extensions>
+
+    <!-- Appel de la fonctionnalité d'ajout de couches -->
+    <extensions>
+    <extension type="component" id="add_layer" path="apps/pnmgl"/>
+    </extensions>
+
         <themes>
         <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
         </theme>
