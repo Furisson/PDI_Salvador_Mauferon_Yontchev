@@ -69,7 +69,6 @@ var zoom = (function () {
    * @public
    */
   const initZoomBtn = () => {
-    // add buttons to DOM
     document.getElementById("zoomtoolbar").prepend(stringToHTML(buttonIn));
     document.getElementById("zoomtoolbar").append(stringToHTML(buttonOut));
   };
