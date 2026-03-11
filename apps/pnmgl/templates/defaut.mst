@@ -18,7 +18,7 @@
         <h4 class="fiche-section-titre">Informations générales</h4>
         <table class="fiche-table">
 
-            {{#source}}        
+            {{#source}}
             <tr>
                 <th>Source</th>
                 <td>{{source}}</td>
@@ -58,7 +58,6 @@
                 <td>{{nb_payante}}</td>
             </tr>
             {{/nb_payante}}
-
 
             {{#nb_gratuite}}
             <tr>
