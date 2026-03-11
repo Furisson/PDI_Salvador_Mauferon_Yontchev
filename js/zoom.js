@@ -24,6 +24,45 @@ var zoom = (function () {
     _map.getView().animate({
       zoom: _map.getView().getZoom() + toValue,
     });
+ 
+ // Fonction permettant de centrer et zoomer sur une couche
+let ZoomSurLaCouche = function (layer) {
+  if (!layer.getSource) return;
+  const source = layer.getSource();
+  if (!source) return;
+  const Zoom = () => {
+    const emprise = source.getExtent();
+    if (emprise && !ol.extent.isEmpty(emprise)) {
+      _map.getView().fit(emprise, {
+        padding: [100, 10, 100, 10],
+        duration: 1200
+      });
+      return true;
+    }
+    return false;
+  };
+
+  // Prise en compte des couches dont l'emprise n'était pas dispo au chargement
+  if (!Zoom()) {
+    const verif = layer.on("postrender", function () {
+      if (Zoom()) {
+        ol.Observable.unByKey(verif);
+      }
+    });
+  }
+};
+
+// Zoom automatique lorsqu'une couche devient visible
+let ZoomCoucheVisible = function () {
+  _map.getLayers().forEach(function (layer) {
+    layer.on("change:visible", function () {
+      if (layer.getVisible()) {
+        ZoomSurLaCouche(layer);
+      }
+    });
+  });
+};
+
   const buttonIn = `<button 
             href="#"
             onclick="mviewer.tools.zoom.changeZoom(1)"
@@ -69,6 +108,7 @@ var zoom = (function () {
    * @public
    */
   const initZoomBtn = () => {
+    // add buttons to DOM    
     document.getElementById("zoomtoolbar").prepend(stringToHTML(buttonIn));
     document.getElementById("zoomtoolbar").append(stringToHTML(buttonOut));
   };
@@ -80,6 +120,9 @@ var zoom = (function () {
   const initTbar = () => {
     _map = mviewer.getMap();
     document.getElementById("mviewerinfosbar").after(stringToHTML(zoomToolbar));
+
+    //Activation du zoom automatique lors de l'affichage des couches
+    ZoomCoucheVisible();
   };
 
   /**
@@ -91,6 +134,7 @@ var zoom = (function () {
       .getElementById("zoomtoolbar")
       .firstChild.after(stringToHTML(buttonZoomToInitialExtent));
   };
+
   return {
     init: initTbar,
     initExtentBtn: initZoomToInitExtent,
