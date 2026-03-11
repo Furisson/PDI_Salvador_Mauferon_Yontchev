@@ -199,6 +199,23 @@ def upload_file():
     gdf = gdf.rename(columns={
         "sources": "source",
     })
+    columns = gdf.columns.str
+    if columns.contains("source").any() or columns.contains("auteur").any() or columns.contains("maj").any():
+        gdf["info"] = True
+    else:
+        gdf["info"] = False
+    if columns.contains("nb_payantes").any() or columns.contains("nb_gratuites").any() or columns.contains("import_t").any() or columns.contains("export_t").any():
+        gdf["cara"] = True
+    else:
+        gdf["cara"] = False
+    if columns.contains("regl_mdtx").any() or columns.contains("cat_regl").any() or columns.contains("arrete_nom").any() or columns.contains("regl_type").any() or columns.contains("info_regl").any() or columns.contains("actv_inter").any():
+        gdf["regl"] = True
+    else:
+        gdf["regl"] = False
+    if columns.contains("id").any() or columns.contains("num").any() or columns.contains("fid").any() or columns.contains("id_bdd").any():
+        gdf["tech"] = True
+    else:
+        gdf["tech"] = False
     gdf.to_file(shapefile_path, driver='ESRI Shapefile')
 
     # --- Publier sur GeoServer via REST ---
