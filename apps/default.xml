@@ -51,7 +51,7 @@
 
     <!-- Appel de la fonctionnalité de recherche de projets -->
     <extensions>
-    <extension type="component" id="projets_test" path="apps/pnmgl"/>
+    <extension type="component" id="projets" path="apps/pnmgl"/>
     </extensions>
 
 

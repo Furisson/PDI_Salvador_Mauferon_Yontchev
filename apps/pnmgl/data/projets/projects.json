@@ -6,7 +6,7 @@
       "projets": [
         {
           "titre": "Pratique de nettoyage des plages",
-          "image" : "apps/pnmgl/projets_test/img/Littoral-plage-sable.jpg",
+          "image" : "apps/pnmgl/projets/img/Littoral-plage-sable.jpg",
           "desc_img":"plage", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948a7f2a6b22135?view=book&page=1",
           "contenu":[
@@ -40,7 +40,7 @@
 
         {
           "titre": "Images satellites et suivis environnementaux",
-          "image" : "apps/pnmgl/projets_test/img/image_satellite.png",
+          "image" : "apps/pnmgl/projets/img/image_satellite.png",
           "desc_img":"image satellite", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948c5451f2b5c80?view=book&page=1",
           "contenu":[  
@@ -78,7 +78,7 @@
       [
         {
           "titre": "La pêche de loisir",
-          "image" : "apps/pnmgl/projets_test/img/Peche_recreative_embarquee-3.jpg",
+          "image" : "apps/pnmgl/projets/img/Peche_recreative_embarquee-3.jpg",
           "desc_img": "pêche de loisir",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029483d8b7b5329e2?view=book&page=1",
           "contenu":[
@@ -113,7 +113,7 @@
 
         {
           "titre": "Etat des lieux de la pêche artisanale",
-          "image" : "apps/pnmgl/projets_test/img/Peche-professionnelle_petit-metier_3.JPG",
+          "image" : "apps/pnmgl/projets/img/Peche-professionnelle_petit-metier_3.JPG",
           "desc_img": "pêche artisanale",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/00350294859bb3dcf9416?view=book&page=1",
           "contenu":[
@@ -152,7 +152,7 @@
 
         {
           "titre": "Perception des activités de plongées et de plaisance",
-          "image" : "apps/pnmgl/projets_test/img/Bouee.JPG",
+          "image" : "apps/pnmgl/projets/img/Bouee.JPG",
           "desc_img": "Bouée de plaisance",
           "pdf": "https://www.calameo.com/ofbiodiversite/read/0035029481abb845fb26b?view=book&page=1 ",
           "contenu":[
@@ -187,7 +187,7 @@
 
         {
             "titre":"Recyclage des filets de pêche",
-            "image" : "apps/pnmgl/projets_test/img/Nasse_poulpe.JPG",
+            "image" : "apps/pnmgl/projets/img/Nasse_poulpe.JPG",
             "desc_img": "filets de pêche",
             "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029482976c7b393f9?view=book&page=1",
             "contenu":[
@@ -227,7 +227,7 @@
         [
             {
                 "titre" : "Erosion de la côte Vermeille",
-                "image" : "apps/pnmgl/projets_test/img/Cote-rocheuse.jpg",
+                "image" : "apps/pnmgl/projets/img/Cote-rocheuse.jpg",
                 "desc_img": "érosion de la côte Vermeille",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/003502948232ca4488a38?view=book&page=1",
                 "contenu":[
@@ -265,7 +265,7 @@
             },
             {
                 "titre":"Evolution trait de cote ",
-                "image" : "apps/pnmgl/projets_test/img/image_satellite_trait_de_cote.png",
+                "image" : "apps/pnmgl/projets/img/image_satellite_trait_de_cote.png",
                 "desc_img": "image satellite trait de cote",
                 "pdf":"https://oai-gem.ofb.fr/exl-php/document-affiche/ofb_recherche_oai_panier/OUVRE_DOC/61734?fic=doc00085318.pdf",
                 "contenu":[
@@ -302,7 +302,7 @@
               },
             {
                 "titre":"Panaches turbides",
-                "image" : "apps/pnmgl/projets_test/img/Panache_turbide.png",
+                "image" : "apps/pnmgl/projets/img/Panache_turbide.png",
                 "desc_img": "Panache turbide",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948fa90866b9e7a?view=book&page=1",
                 "contenu":[
@@ -347,7 +347,7 @@
         [
             {
                 "titre" : "La Faune volante",
-                "image" : "apps/pnmgl/projets_test/img/Poussin_GCI_2°sem_Torreilles.JPG",
+                "image" : "apps/pnmgl/projets/img/Poussin_GCI_2°sem_Torreilles.JPG",
                 "desc_img": "Poussin de goéland",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/00350294828a4847d6042?view=book&page=1",
                 "contenu":[
@@ -386,7 +386,7 @@
 
             {
               "titre": "La biodiversité du Parc",
-              "image" : "apps/pnmgl/projets_test/img/Biodiversite.jpg",
+              "image" : "apps/pnmgl/projets/img/Biodiversite.jpg",
               "desc_img": "biodiversité du parc",
               "pdf": "https://parc-marin-golfe-lion.fr/editorial/fiches-especes",
               "contenu":[
@@ -452,7 +452,7 @@
 
             {
                 "titre":"L'Herbier de posidonie",
-                "image" : "apps/pnmgl/projets_test/img/herbier_de_posidonie.jpg",
+                "image" : "apps/pnmgl/projets/img/herbier_de_posidonie.jpg",
                 "desc_img": "herbier de posidonie",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/003502948d7920fef7908?view=book&page=1",
                 "contenu":[
@@ -490,7 +490,7 @@
             },
             {
                 "titre":"Coralligène",
-                "image" : "apps/pnmgl/projets_test/img/Coralligene.jpg",
+                "image" : "apps/pnmgl/projets/img/Coralligene.jpg",
                 "desc_img": "coralligène",
                 "pdf":"https://parc-marin-golfe-lion.fr/documentation/poster-du-coralligene",
                 "contenu":[
@@ -539,7 +539,7 @@
         [
             {
                 "titre" : "Les fonds marins",
-                "image" : "apps/pnmgl/projets_test/img/Cartographie-Parc.jpg",
+                "image" : "apps/pnmgl/projets/img/Cartographie-Parc.jpg",
                 "desc_img": "cartographie des fonds marins",
                 "pdf" :"https://www.calameo.com/ofbiodiversite/read/0035029482698b2689ad1?view=book&page=1",
                 "contenu":[
@@ -576,7 +576,7 @@
             },
             {
                 "titre":"Les dunes sableuses",
-                "image" : "apps/pnmgl/projets_test/img/Fond_sable.jpg",
+                "image" : "apps/pnmgl/projets/img/Fond_sable.jpg",
                 "desc_img": "dune sableuse",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/0035029480cf2bf98b777?view=book&page=1",
                 "contenu":[
@@ -605,7 +605,7 @@
             },
             {
                 "titre":"Canyon Profond",
-                "image" : "apps/pnmgl/projets_test/img/Parc_Carte-Perimetre.png",
+                "image" : "apps/pnmgl/projets/img/Parc_Carte-Perimetre.png",
                 "desc_img": "cartographie des fonds marins",
                 "pdf":"https://www.calameo.com/ofbiodiversite/read/00350294836b5ddaddc91?view=book&page=1",
                 "contenu":[
@@ -663,7 +663,7 @@
       "projets" : [
         {
           "titre": "Eutrophisation du Golfe du Lion",       
-          "image" : "apps/pnmgl/projets_test/img/Eutrophisation_du_golfe_du_lion.png",
+          "image" : "apps/pnmgl/projets/img/Eutrophisation_du_golfe_du_lion.png",
           "desc_img":"eutrophisation du Golfe du Lion", 
           "pdf": "https://www.inrae.fr/sites/default/files/pdf/expertise-eutrophisation-synthese-148-p-2.pdf",
           "contenu": [
@@ -692,7 +692,7 @@
         },
         {
           "titre": "Améliorer la qualité de l'eau",       
-          "image" : "apps/pnmgl/projets_test/img/dechets_Retour-Peche.jpg",
+          "image" : "apps/pnmgl/projets/img/dechets_Retour-Peche.jpg",
           "desc_img":"eutrophisation du Golfe du Lion", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948921d59b87809?view=book&page=1",
           "contenu": [

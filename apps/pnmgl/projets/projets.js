@@ -1,4 +1,4 @@
-const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets_test/projects_tests.json";
+const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets/projects.json";
 
 /**
  * Retourne une classe CSS (font awesome) en fonction du nom de la thématique.
