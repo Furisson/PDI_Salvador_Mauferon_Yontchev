@@ -1,92 +1,269 @@
 {{#features}}
-<br>
-  <li id="{{feature_ol_uid}}" class="item" style="width:238px;">  {{! on itère sur chaque attribut présent dans la couche }}
+<li id="{{feature_ol_uid}}" class="fiche-couche item">
 
-      <ul>
+    <!-- ################################# -->
+    <!-- TITRE PRINCIPAL -->
+    <!-- ################################# -->
 
-        {{#fields_kv}}
+    {{#nom}}
+    <h3 class="fiche-titre">{{nom}}</h3>
+    {{/nom}}
 
-        <strong><li>{{key}}</strong> : {{value}}</li>
+    <!-- ################################# -->
+    <!-- INFORMATIONS GENERALES -->
+    <!-- ################################# -->
 
-        {{/fields_kv}}
+    {{#info}}
+    <div class="fiche-section">
+        <h4 class="fiche-section-titre">Informations générales</h4>
+        <table class="fiche-table">
 
-      </ul>
+            {{#source}}        
+            <tr>
+                <th>Source</th>
+                <td>{{source}}</td>
+            </tr>
+            {{/source}}
 
-  </li>
+            {{#auteur}}
+            <tr>
+                <th>Auteur</th>
+                <td>{{auteur}}</td>
+            </tr>
+            {{/auteur}}
 
+            {{#maj}}
+            <tr>
+                <th>Mise à jour</th>
+                <td>{{maj}}</td>
+            </tr>
+            {{/maj}}
+
+        </table>
+    </div>
+    {{/info}}
+
+    <!-- ################################# -->
+    <!-- CARACTERISTIQUES -->
+    <!-- ################################# -->
+
+    {{#cara}}
+    <div class="fiche-section">
+        <h4 class="fiche-section-titre">Caractéristiques</h4>
+        <table class="fiche-table">
+
+            {{#nb_payante}}
+            <tr>
+                <th>Cales payantes</th>
+                <td>{{nb_payante}}</td>
+            </tr>
+            {{/nb_payante}}
+
+
+            {{#nb_gratuite}}
+            <tr>
+                <th>Cales gratuites</th>
+                <td>{{nb_gratuite}}</td>
+            </tr>
+            {{/nb_gratuite}}
+
+            {{#import_t}}
+            <tr>
+                <th>Import</th>
+                <td>{{import_t}}</td>
+            </tr>
+            {{/import_t}}
+
+            {{#export_t}}
+            <tr>
+                <th>Export</th>
+                <td>{{export_t}}</td>
+            </tr>
+            {{/export_t}}
+
+        </table>
+    </div>
+    {{/cara}}
+
+    <!-- ################################# -->
+    <!-- REGLEMENTATION -->
+    <!-- ################################# -->
+
+    {{#regl}}
+    <div class="fiche-section">
+        <h4 class="fiche-section-titre">Réglementation</h4>
+        <table class="fiche-table">
+
+            {{#regl_type}}
+            <tr>
+                <th>Type</th>
+                <td>{{regl_type}}</td>
+            </tr>
+            {{/regl_type}}
+
+            {{#regl_medtx}}
+            <tr>
+                <th>Texte</th>
+                <td>{{regl_medtx}}</td>
+            </tr>
+            {{/regl_medtx}}
+
+            {{#cat_regl}}
+            <tr>
+                <th>Catégorie</th>
+                <td>{{cat_regl}}</td>
+            </tr>
+            {{/cat_regl}}
+
+            {{#info_regl}}
+            <tr>
+                <th>Informations</th>
+                <td>{{info_regl}}</td>
+            </tr>
+            {{/info_regl}}
+
+            {{#arrete_nom}}
+            <tr>
+                <th>Arrêté</th>
+                <td>{{arrete_nom}}</td>
+            </tr>
+            {{/arrete_nom}}
+
+            {{#actv_inter}}
+            <tr>
+                <th>Activité interdite</th>
+                <td>{{actv_inter}}</td>
+            </tr>
+            {{/actv_inter}}
+
+        </table>
+    </div>
+    {{/regl}}
+
+
+    <!-- ################################# -->
+    <!-- IDENTIFIANTS TECHNIQUES -->
+    <!-- ################################# -->
+
+    {{#tech}}
+    <div class="fiche-section">
+        <h4 class="fiche-section-titre">Identifiants techniques</h4>
+        <table class="fiche-table">
+
+            {{#id}}
+            <tr>
+                <th>ID</th>
+                <td>{{id}}</td>
+            </tr>
+            {{/id}}
+
+            {{#num}}
+            <tr>
+                <th>Numéro</th>
+                <td>{{num}}</td>
+            </tr>
+            {{/num}}
+
+            {{#fid}}
+            <tr>
+                <th>FID</th>
+                <td>{{fid}}</td>
+            </tr>
+            {{/fid}}
+
+            {{#id_bdd}}
+            <tr>
+                <th>ID base</th>
+                <td>{{id_bdd}}</td>
+            </tr>
+            {{/id_bdd}}
+
+        </table>
+    </div>
+    {{/tech}}
+
+</li>
 {{/features}}
 
- <style>
 
-	ul{
-		list-style-type: none;
-		line-height:1.6;
-	}
+<!-- ################################# -->
+<!-- STYLE D'AFFICHAGE DES METADONNEES -->
+<!-- ################################# -->
 
-     .title-feature {
 
-         color: #BA88A4;
+<style>
+.fiche-couche {
+    width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-family: "roboto_regular", Arial, sans-serif;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.45;
+}
 
-         font-family:"Trebuchet MS";
+.fiche-titre {
+    color: #468798;
+    font-family: "roboto_bold", Arial, sans-serif;
+    font-size: 18px;
+    margin: 30px 0 12px 30px;
+    line-height: 1.2;
+    padding: 0 15px;
+}
 
-         font-size:20px;
+.fiche-section {
+    margin-top: 16px;
+    padding: 0 15px;
+}
 
-         margin-bottom:3%;
+.fiche-section-titre {
+    font-family: "roboto_bold", Arial, sans-serif;
+    font-size: 14px;
+    color: #468798;
+    margin: 0 0 8px 0;
+    padding: 6px 0;
+}
 
-         line-height:1;
+.fiche-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 13px;
+}
 
-     }
+.fiche-table tr {
+    border-bottom: 1px solid #f0f0f0;
+}
 
-     .text-feature{
+.fiche-table tr:last-child {
+    border-bottom: none;
+}
 
-         font-family:"Trebuchet MS";
+.fiche-table th {
+    width: 38%;
+    text-align: left;
+    vertical-align: top;
+    padding: 7px 8px 7px 0;
+    color: #666;
+    font-family: "roboto_bold", Arial, sans-serif;
+    font-weight: normal;
+}
 
-         color:#555;
+.fiche-table td {
+    vertical-align: top;
+    padding: 7px 0 7px 8px;
+    color: #555;
+    overflow-wrap: anywhere;
+}
 
-         font-size:13px;
+.fiche-table td:empty::after {
+    content: "—";
+    color: #aaa;
+}
 
-         margin-top:2%;
-
-         margin-bottom:2%;
-
-     }
-
-     .but-link, .but-link:focus, .but-link:hover{
-
-         display:inline-block;
-
-         padding:0.5em 1em;
-
-         margin:0 0.3em 0.3em 0;
-
-         border-radius:0.3em;
-
-         box-sizing: border-box;
-
-         text-decoration:none;
-
-         font-family:'Trebuchet MS';
-
-         font-weight:300;
-
-         color:#FFFFFF;
-
-         background-color:#BA88A4;
-
-         text-align:center;
-
-         transition: all 0.2s;
-
-     }
-
-     .but-link:hover{
-
-         background-color:#b0006b;
-
-     }
-
-	.item{
-		font-size:13px;	
-
-	}
- </style>
+.wfs_complements {
+    margin-top: 12px;
+    padding: 0 15px;
+}
+</style>
