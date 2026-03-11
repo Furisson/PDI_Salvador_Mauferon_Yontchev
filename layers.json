@@ -18,5 +18,10 @@
         "name": "test 10",
         "theme": "thematique_test",
         "group": "Nouveau test"
+    },
+    {
+        "name": "test 11",
+        "theme": "thematique_test",
+        "group": "Groupe de test"
     }
 ]

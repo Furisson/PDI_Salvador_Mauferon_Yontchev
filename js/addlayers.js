@@ -99,6 +99,8 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
     });
 
     // Afficher les champs de saisie pour la thématique et le groupe par défaut
+    themeSelect.parentNode.querySelectorAll("#newThemeInput").forEach(el => el.remove());
+    groupSelect.parentNode.querySelectorAll("#newGroupInput").forEach(el => el.remove());
     addNewThemeInput();
     addNewGroupInput(); 
     fillGroupsSelect(themeSelect);

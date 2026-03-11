@@ -99,6 +99,19 @@
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
+            
+                <layer id="thematique_test:test_11"
+                name="test 11"
+                type="geojson"
+                opacity="1"
+                visible="false"
+                queryable="true"
+                url="http://localhost:8080/geoserver/thematique_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=thematique_test:test 11&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="thematique_test:test 11"
+                srs="EPSG:3857"
+                format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
+            </layer>
             </group>
 
             <group name="Nouveau test" id ="nouveau_test">

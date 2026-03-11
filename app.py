@@ -7,6 +7,7 @@ import zipfile
 import json
 import fiona
 import shutil
+import geopandas as gpd
 
 # --- Configuration ---
 UPLOAD_FOLDER = "C:/Geoserver_data/uploads"
@@ -189,10 +190,16 @@ def upload_file():
             if f.endswith(".shp"):
                 shapefile_path = os.path.join(app.config['UPLOAD_FOLDER'], f).replace("\\", "/")
                 break
-    elif filename.endswith(".geojson"):
-        shapefile_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     else:
         return jsonify({"error": "Format non supporté"}), 400
+
+    # Normaliser le nom des attributs de la couche
+    gdf = gpd.read_file(shapefile_path)
+    gdf = gdf.rename(columns=lambda x: x.replace(" ", "_").lower())
+    gdf = gdf.rename(columns={
+        "sources": "source",
+    })
+    gdf.to_file(shapefile_path, driver='ESRI Shapefile')
 
     # --- Publier sur GeoServer via REST ---
     try:
