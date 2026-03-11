@@ -48,7 +48,7 @@ async function chargerThematiques()
 
     thematiques.forEach(theme => {
         (theme.projets || []).forEach(p => {
-            indexProjets[p.titre] = p.pdf;
+            indexProjets[p.titre] = p;
         });
     });
 
@@ -422,4 +422,10 @@ window.getRapportUrl = function(nomProjet){
     }
 
     return null;
+}
+
+window.ouvrirProjetDepuisNom = function(nomProjet) {
+    if (indexProjets[nomProjet]) {
+        ouvrirPanneauProjet(indexProjets[nomProjet]);
+    }
 }
