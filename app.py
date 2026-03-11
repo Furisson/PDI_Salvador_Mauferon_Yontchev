@@ -199,7 +199,7 @@ def upload_file():
     save_layer_metadata(layer_name, theme, group)
     generate_config_xml()
 
-    return jsonify({"status": "success", "layer": layer_name})
+    return jsonify({"success": "true", "layer": layer_name, "id": f"{theme}:{layer_name.replace(' ', '_').lower()}", "url": f"{GEOSERVER_URL}/{theme}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={theme}:{layer_name}&outputFormat=application/json&srsname=EPSG:3857"})
 
 @app.route("/reload_config")
 def serve_config():

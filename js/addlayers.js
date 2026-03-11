@@ -18,18 +18,27 @@ $("#uploadLayerForm").submit(function(e){
         contentType: false,
 
         success: function(response){
+            if(response.success == "true"){
+
+              var layerConfig = {
+                  id: response.id,
+                  name: response.layer,
+                  layername: response.layer,
+                  title: response.layer,
+                  type: "geojson",
+                  url: response.url,
+                  visible: true,
+                  opacity: 1,
+                  queryable: true,
+                  typeName: response.id,
+                  srs: "EPSG:3857",
+                  format: "application/json"
+              };
+              mviewer.addLayer(layerConfig);
+              info.addQueryableLayer(layerConfig);
+            }
             alert("Couche ajoutée !");
-            $.ajax({
-              url: "http://localhost:5000/reload_config",
-              type: "GET",
-              dataType: "xml",
-              success: function(xml) {
-                  console.log("Config reçue");
-              },
-              error: function(xhr, status, error) {
-                  console.error("Erreur chargement config :", error);
-              }
-            });
+            location.reload();
         },
         error: function(){
             alert("Erreur lors de l'ajout de la couche");
