@@ -1,11 +1,130 @@
+function addNewThemeInput() {
+  const inputNewTheme = document.createElement("input");
+  inputNewTheme.type = "text";
+  inputNewTheme.id = "newThemeInput";
+  inputNewTheme.placeholder = "Nom de la nouvelle thématique";
+  inputNewTheme.style.marginTop = "10px";
+  inputNewTheme.required = true;
+  inputNewTheme.classList.add("form-control");
+  themeSelect.parentNode.appendChild(inputNewTheme);
+}
+
+function addNewGroupInput() {
+  const inputNewGroup = document.createElement("input");
+  inputNewGroup.type = "text";
+  inputNewGroup.id = "newGroupInput";
+  inputNewGroup.placeholder = "Nom du nouveau groupe";
+  inputNewGroup.style.marginTop = "10px";
+  inputNewGroup.required = true;
+  inputNewGroup.classList.add("form-control");
+  groupSelect.parentNode.appendChild(inputNewGroup);
+}
+
+function fillGroupsSelect(themeSelect) {
+  const selectedThemeName = themeSelect.value;
+
+  groupSelect.innerHTML = ""; // vide le select
+
+  // Ajoute une option par défaut pour créer un nouveau groupe
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Créer un nouveau groupe";
+  groupSelect.appendChild(defaultOption);
+
+  if (selectedThemeName) {
+      // Cherche le theme correspondant
+      const selectedTheme = mviewer.conf.themes.theme.find(
+          t => t.name === selectedThemeName
+      );
+
+      if (selectedTheme && selectedTheme.group) {
+          // selectedTheme.group peut être un tableau ou un objet unique
+          const groups = Array.isArray(selectedTheme.group)
+              ? selectedTheme.group
+              : [selectedTheme.group];
+
+          groups.forEach(group => {
+              const option = document.createElement("option");
+              option.value = group.name;
+              option.textContent = group.name;
+              groupSelect.appendChild(option);
+          });
+      }
+    }
+  }
+
+$('#addLayerpanel').on('shown.bs.modal', function () {
+    const themeSelect = document.getElementById("themeSelect");
+    const groupSelect = document.getElementById("groupSelect");
+
+    themeSelect.innerHTML = ""; // vide le select
+    groupSelect.innerHTML = ""; // vide le select
+
+    const optionsDefault = document.createElement("option");
+    optionsDefault.value = "";
+    optionsDefault.textContent = "Ajouter une nouvelle thématique";
+    themeSelect.appendChild(optionsDefault);
+
+    // Mettre à jour les groupes quand la thématique change
+    themeSelect.addEventListener("change", function () {
+      if (themeSelect.selectedIndex === 0) {
+        addNewThemeInput();
+      }
+      else {
+        themeSelect.parentNode.querySelectorAll("#newThemeInput").forEach(el => el.remove());
+      }
+      if (groupSelect.selectedIndex !== 0) {
+          addNewGroupInput();
+        }
+      fillGroupsSelect(themeSelect);
+    });
+
+  // Afficher le champ de saisie pour le groupe si l'utilisateur choisit de créer un nouveau groupe
+  groupSelect.addEventListener("change", function () {
+    // Si l'utilisateur choisit de créer un nouveau groupe, affiche un champ de saisie
+    if (groupSelect.selectedIndex === 0) {
+      addNewGroupInput();
+    }
+    else {
+      groupSelect.parentNode.querySelectorAll("#newGroupInput").forEach(el => el.remove());
+    }
+  });
+
+    // Remplir les thématiques
+    Object.values(mviewer.conf.themes.theme).forEach(theme => {
+        const option = document.createElement("option");
+        option.value = theme.name;
+        option.textContent = theme.name;
+        themeSelect.appendChild(option);
+    });
+
+    // Afficher les champs de saisie pour la thématique et le groupe par défaut
+    addNewThemeInput();
+    addNewGroupInput(); 
+    fillGroupsSelect(themeSelect);
+});
+
+
 $("#uploadLayerForm").submit(function(e){
 
     e.preventDefault();
 
     var formData = new FormData();
 
-    formData.append("theme", $("#themeSelect").val());
+    const newThemeInput = document.getElementById("newThemeInput");
+    const newGroupInput = document.getElementById("newGroupInput");
+    
+    if (newThemeInput && newThemeInput.value.trim() !== "") {
+      formData.append("theme", newThemeInput.value.trim());
+    } else {
+      formData.append("theme", $("#themeSelect").val());
+    }
+    if (newGroupInput && newGroupInput.value.trim() !== "") {
+      formData.append("group", newGroupInput.value.trim());
+    }
+    else {
     formData.append("group", $("#groupSelect").val());
+    }
     formData.append("layer_name", $("#layerName").val());
     formData.append("file", $("#layerFile")[0].files[0]);
 
@@ -43,57 +162,6 @@ $("#uploadLayerForm").submit(function(e){
         error: function(){
             alert("Erreur lors de l'ajout de la couche");
         }
-    });
-
-});
-
-function fillGroupsSelect(themeSelect) {
-  const selectedThemeName = themeSelect.value;
-
-  groupSelect.innerHTML = ""; // vide le select
-
-  if (selectedThemeName) {
-      // Cherche le theme correspondant
-      const selectedTheme = mviewer.conf.themes.theme.find(
-          t => t.name === selectedThemeName
-      );
-
-      if (selectedTheme && selectedTheme.group) {
-          // selectedTheme.group peut être un tableau ou un objet unique
-          const groups = Array.isArray(selectedTheme.group)
-              ? selectedTheme.group
-              : [selectedTheme.group];
-
-          groups.forEach(group => {
-              const option = document.createElement("option");
-              option.value = group.name;
-              option.textContent = group.name;
-              groupSelect.appendChild(option);
-          });
-      }
-    }
-  }
-
-$('#addLayerpanel').on('shown.bs.modal', function () {
-    const themeSelect = document.getElementById("themeSelect");
-    const groupSelect = document.getElementById("groupSelect");
-
-    themeSelect.innerHTML = ""; // vide le select
-    groupSelect.innerHTML = ""; // vide le select
-
-    // Remplir les thématiques
-    Object.values(mviewer.conf.themes.theme).forEach(theme => {
-        const option = document.createElement("option");
-        option.value = theme.name;
-        option.textContent = theme.name;
-        themeSelect.appendChild(option);
-    });
-
-    fillGroupsSelect(themeSelect); // Remplir les groupes pour la thématique sélectionnée par défaut
-
-    // Mettre à jour les groupes quand la thématique change
-    themeSelect.addEventListener("change", function () {
-        fillGroupsSelect(themeSelect);
     });
 
 });

@@ -39,9 +39,11 @@ def save_layer_metadata(layer_name, theme, group):
         with open("layers.json", "r") as f:
             data = json.load(f)
 
+    theme_clean = theme.replace(" ", "_").lower()
+
     data.append({
         "name": layer_name,
-        "theme": theme,
+        "theme": theme_clean,
         "group": group
     })
 
@@ -126,7 +128,8 @@ def generate_config_xml():
         themes[theme].append(group)
 
     for theme_name, theme_layers in themes.items():
-        xml_content += f'        <theme name="{theme_name}" collapsed="true" id="{theme_name.replace(" ", "_").lower()}" icon="fas fa-ship">\n'
+        theme_name_unclean = theme_name.replace("_", " ").title()
+        xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name.replace(" ", "_").lower()}" icon="fas fa-ship">\n'
         for group in theme_layers:
             xml_content += f'''
             <group name="{group[0]["group"]}" id ="{group[0]["group"].replace(" ", "_").lower()}">
@@ -143,6 +146,7 @@ def generate_config_xml():
                 typeName="{layer["theme"]}:{layer["name"]}"
                 srs="EPSG:3857"
                 format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
             '''
             xml_content += "</group>\n"
@@ -212,7 +216,10 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     Crée un datastore et publie la couche shapefile sur GeoServer
     """
     headers = {"Content-Type": "application/xml"}
-    # Extensions du shapefile
+    
+    theme_clean = theme.replace(" ", "_").lower()
+
+    # Déplacer tous les fichiers du shapefile dans un sous-dossier pour le datastore GeoServer
     extensions = [".shp", ".shx", ".dbf", ".prj", ".cpg"]
     file_name = os.path.basename(shapefile_path).replace(".shp", "")
     shp_dir = os.path.join(UPLOAD_FOLDER, file_name).replace("\\", "/")
@@ -225,10 +232,10 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
             shutil.move(src, dst)
 
     # Création du workspace
-    if not workspace_exists(theme):
+    if not workspace_exists(theme_clean):
         url_workspace = f"{GEOSERVER_URL}/rest/workspaces"
         xml_workspace = f"""<workspace>
-        <name>{theme}</name>
+        <name>{theme_clean}</name>
         </workspace>"""
         r_workspace = requests.post(url_workspace, data=xml_workspace, headers=headers,
                                     auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
@@ -237,13 +244,13 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     
     # Création du datastore 
     datastore_name = shp_dir.split("/")[-1]
-    if not datastore_exists(theme, datastore_name):
-        url_datastore = f"{GEOSERVER_URL}/rest/workspaces/{theme}/datastores"
+    if not datastore_exists(theme_clean, datastore_name):
+        url_datastore = f"{GEOSERVER_URL}/rest/workspaces/{theme_clean}/datastores"
         xml_datastore = f"""<dataStore>
         <name>{datastore_name}</name>
         <connectionParameters>
             <entry key="url">file:{shp_dir}</entry>
-            <entry key="namespace">{theme}</entry>
+            <entry key="namespace">{theme_clean}</entry>
         </connectionParameters>
         </dataStore>"""
         r_datastore = requests.post(url_datastore, data=xml_datastore, headers=headers,
@@ -254,7 +261,7 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     # Nom de la couche = layer_name
     with fiona.open(SHAPEFILE_PATH, "r") as source:
         src_crs = source.crs
-    url_layer = f"{GEOSERVER_URL}/rest/workspaces/{theme}/datastores/{datastore_name}/featuretypes?recalculate=nativebbox,latlonbbox"
+    url_layer = f"{GEOSERVER_URL}/rest/workspaces/{theme_clean}/datastores/{datastore_name}/featuretypes?recalculate=nativebbox,latlonbbox"
     xml_layer = f"""
     <featureType>
         <name>{layer_name}</name>

@@ -52,7 +52,7 @@
         </theme>
         <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
         </theme>
-            <theme name="hydrologie_test" collapsed="true" id="hydrologie_test" icon="fas fa-ship">
+            <theme name="Hydrologie Test" collapsed="true" id="hydrologie_test" icon="fas fa-ship">
 
             <group name="groupe_test_2" id ="groupe_test_2">
             
@@ -66,6 +66,7 @@
                 typeName="hydrologie_test:test_7"
                 srs="EPSG:3857"
                 format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
             
                 <layer id="hydrologie_test:test_8"
@@ -78,18 +79,41 @@
                 typeName="hydrologie_test:test_8"
                 srs="EPSG:3857"
                 format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
+            </group>
+</theme>
+        <theme name="Thematique Test" collapsed="true" id="thematique_test" icon="fas fa-ship">
+
+            <group name="Groupe de test" id ="groupe_de_test">
             
-                <layer id="hydrologie_test:test_9"
+                <layer id="thematique_test:test_9"
                 name="test_9"
                 type="geojson"
                 opacity="1"
                 visible="false"
                 queryable="true"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_9"
+                url="http://localhost:8080/geoserver/thematique_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=thematique_test:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="thematique_test:test_9"
                 srs="EPSG:3857"
                 format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
+            </layer>
+            </group>
+
+            <group name="Nouveau test" id ="nouveau_test">
+            
+                <layer id="thematique_test:test_10"
+                name="test 10"
+                type="geojson"
+                opacity="1"
+                visible="false"
+                queryable="true"
+                url="http://localhost:8080/geoserver/thematique_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=thematique_test:test 10&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="thematique_test:test 10"
+                srs="EPSG:3857"
+                format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
             </group>
 </theme>
