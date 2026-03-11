@@ -33,7 +33,7 @@ def datastore_exists(workspace_name, datastore_name):
     r = requests.get(url, auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     return r.status_code == 200
 
-def save_layer_metadata(layer_name, theme, group):
+def save_layer_metadata(layer_name, theme, group, icon):
     data = []
 
     if os.path.exists("layers.json"):
@@ -45,7 +45,8 @@ def save_layer_metadata(layer_name, theme, group):
     data.append({
         "name": layer_name,
         "theme": theme_clean,
-        "group": group
+        "icon": icon,
+        "group" : group
     })
 
     with open("layers.json", "w") as f:
@@ -105,14 +106,15 @@ def generate_config_xml():
     </extensions>
 
         <themes>
-        <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
-        </theme>
-        <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
-        </theme>
+            <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
+            </theme>
+            <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
+            </theme>
     """
 
     themes = {}
     groups = {}
+    icons = {}
 
     # Regrouper par groupe
     for layer in layers:
@@ -127,10 +129,11 @@ def generate_config_xml():
         if theme not in themes:
             themes[theme] = []
         themes[theme].append(group)
+        icons[theme] = group[0]["icon"]  # Utiliser l'icône du premier layer du groupe
 
     for theme_name, theme_layers in themes.items():
         theme_name_unclean = theme_name.replace("_", " ").title()
-        xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name.replace(" ", "_").lower()}" icon="fas fa-ship">\n'
+        xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name.replace(" ", "_").lower()}" icon="{icons[theme_name]}">\n'
         for group in theme_layers:
             xml_content += f'''
             <group name="{group[0]["group"]}" id ="{group[0]["group"].replace(" ", "_").lower()}">
@@ -172,6 +175,7 @@ def upload_file():
     layer_name = request.form.get("layer_name")
     theme = request.form.get("theme")
     group = request.form.get("group")
+    icon = request.form.get("icon")
     
     if "file" not in request.files:
         return jsonify({"error": "Aucun fichier envoyé"}), 400
@@ -224,7 +228,7 @@ def upload_file():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-    save_layer_metadata(layer_name, theme, group)
+    save_layer_metadata(layer_name, theme, group, icon)
     generate_config_xml()
 
     return jsonify({"success": "true", "layer": layer_name, "id": f"{theme}:{layer_name.replace(' ', '_').lower()}", "url": f"{GEOSERVER_URL}/{theme}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={theme}:{layer_name}&outputFormat=application/json&srsname=EPSG:3857"})

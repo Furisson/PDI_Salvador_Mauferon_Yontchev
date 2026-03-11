@@ -1,4 +1,38 @@
 function addNewThemeInput() {
+  const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash"] 
+
+  div_icons = document.createElement("div");
+  div_icons.classList.add("form-group", "div-icons");
+  label_icons = document.createElement("label");
+  label_icons.textContent = "Icône de la thématique";
+  label_icons.style.marginTop = "10px";
+  label_icons.id = "label_icons";
+  div_icons.appendChild(label_icons);
+  div_list_icons = document.createElement("div");
+  div_list_icons.id = "logoList";
+  div_list_icons.style.display = "flex";
+  div_list_icons.style.gap = "10px";
+  div_list_icons.style.flexWrap = "wrap";
+  div_icons.appendChild(div_list_icons);
+  themeSelect.parentNode.appendChild(div_icons);
+  listIcon.forEach(icon => {
+        div_logo_item = document.createElement("div");
+        div_logo_item.classList.add("logo-item");
+        div_logo_item.style.textAlign = "center";
+        div_logo_item.style.cursor = "pointer";
+        div_logo_item.addEventListener("click", (event) => {
+          document.querySelectorAll(".logo-item")
+              .forEach(el => el.classList.remove("selected"));
+          event.currentTarget.classList.add("selected");
+        });
+
+        i_logo = document.createElement("i");
+        i_logo.className = icon;
+        i_logo.style.fontSize = "24px";
+        div_logo_item.appendChild(i_logo);
+        div_list_icons.appendChild(div_logo_item);
+    });
+
   const inputNewTheme = document.createElement("input");
   inputNewTheme.type = "text";
   inputNewTheme.id = "newThemeInput";
@@ -72,6 +106,7 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
       }
       else {
         themeSelect.parentNode.querySelectorAll("#newThemeInput").forEach(el => el.remove());
+        themeSelect.parentNode.querySelectorAll(".div-icons").forEach(el => el.remove());
       }
       if (groupSelect.selectedIndex !== 0) {
           addNewGroupInput();
@@ -115,6 +150,7 @@ $("#uploadLayerForm").submit(function(e){
 
     const newThemeInput = document.getElementById("newThemeInput");
     const newGroupInput = document.getElementById("newGroupInput");
+    const selectedIcon = document.querySelector(".logo-item.selected i");
     
     if (newThemeInput && newThemeInput.value.trim() !== "") {
       formData.append("theme", newThemeInput.value.trim());
@@ -126,6 +162,12 @@ $("#uploadLayerForm").submit(function(e){
     }
     else {
     formData.append("group", $("#groupSelect").val());
+    }
+    if (selectedIcon) {
+      formData.append("icon", selectedIcon.className);
+    }
+    else {
+      formData.append("icon", "fas fa-ship");
     }
     formData.append("layer_name", $("#layerName").val());
     formData.append("file", $("#layerFile")[0].files[0]);

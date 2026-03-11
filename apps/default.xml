@@ -48,48 +48,58 @@
     </extensions>
 
         <themes>
-        <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
-        </theme>
-        <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
-        </theme>
+            <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
+            </theme>
+            <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
+            </theme>
             <theme name="Hydrologie Test" collapsed="true" id="hydrologie_test" icon="fas fa-ship">
 
             <group name="groupe_test_2" id ="groupe_test_2">
             
-                <layer id="hydrologie_test:test_7"
-                name="test_7"
+                <layer id="hydrologie_test:test_9"
+                name="test_9"
                 type="geojson"
                 opacity="1"
                 visible="false"
                 queryable="true"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_7&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_7"
+                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="hydrologie_test:test_9"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
+            </group>
+</theme>
+        <theme name="Thematique Test" collapsed="true" id="thematique_test" icon="fas fa-leaf">
+
+            <group name="Groupe de test" id ="groupe_de_test">
             
-                <layer id="hydrologie_test:test_8"
-                name="test_8"
+                <layer id="thematique_test:test_10"
+                name="test 10"
                 type="geojson"
                 opacity="1"
                 visible="false"
                 queryable="true"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_8&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_8"
+                url="http://localhost:8080/geoserver/thematique_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=thematique_test:test 10&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="thematique_test:test 10"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
+            </group>
+</theme>
+        <theme name="Recyclage" collapsed="true" id="recyclage" icon="fas fa-trash">
+
+            <group name="Poubelles" id ="poubelles">
             
-                <layer id="hydrologie_test:test_12"
-                name="test_12"
+                <layer id="recyclage:test_11"
+                name="Test 11"
                 type="geojson"
                 opacity="1"
                 visible="false"
                 queryable="true"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_12&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_12"
+                url="http://localhost:8080/geoserver/recyclage/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=recyclage:Test 11&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="recyclage:Test 11"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />

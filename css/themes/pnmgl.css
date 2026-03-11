@@ -20,6 +20,15 @@
   background-color: #3d839a;
   color: white; }
 
+.logo-item {
+    padding: 6px;
+}
+
+.logo-item.selected {
+    border: 2px solid #007bff;
+    border-radius: 5px;
+}
+
 /*******************************
 ------------- NAVBAR -----------
 ********************************/

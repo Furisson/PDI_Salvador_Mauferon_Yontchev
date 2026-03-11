@@ -1,17 +1,20 @@
 [
     {
-        "name": "test_7",
+        "name": "test_9",
         "theme": "hydrologie_test",
+        "icon": "fas fa-ship",
         "group": "groupe_test_2"
     },
     {
-        "name": "test_8",
-        "theme": "hydrologie_test",
-        "group": "groupe_test_2"
+        "name": "test 10",
+        "theme": "thematique_test",
+        "icon": "fas fa-leaf",
+        "group": "Groupe de test"
     },
     {
-        "name": "test_12",
-        "theme": "hydrologie_test",
-        "group": "groupe_test_2"
+        "name": "Test 11",
+        "theme": "recyclage",
+        "icon": "fas fa-trash",
+        "group": "Poubelles"
     }
 ]
