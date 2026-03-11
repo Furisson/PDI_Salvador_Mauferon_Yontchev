@@ -1,4 +1,5 @@
 const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets/projects.json";
+let indexProjets = {};
 
 /**
  * Retourne une classe CSS (font awesome) en fonction du nom de la thématique.
@@ -12,6 +13,7 @@ function classeIconeParDefaut(nomThematique)
     
     return "glyphicon glyphicon-folder-open";
 }
+
 
 /**
  * Échappe les caractères spéciaux HTML pour éviter les problèmes d'affichage et de sécurité.
@@ -42,8 +44,13 @@ async function chargerThematiques()
     }
 
     const donnees = await reponse.json();
-
     const thematiques = donnees.thematiques || [];
+
+    thematiques.forEach(theme => {
+        (theme.projets || []).forEach(p => {
+            indexProjets[p.titre] = p.pdf;
+        });
+    });
 
     return thematiques.map((t) => (
     {
@@ -407,3 +414,12 @@ function initialiserFermetureMenuProjets()
             }
         });
 })();
+
+window.getRapportUrl = function(nomProjet){
+
+    if(indexProjets[nomProjet]){
+        return indexProjets[nomProjet];
+    }
+
+    return null;
+}

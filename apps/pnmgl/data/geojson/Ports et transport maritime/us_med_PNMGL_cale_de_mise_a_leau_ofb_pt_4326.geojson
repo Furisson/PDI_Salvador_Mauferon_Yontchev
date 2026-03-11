@@ -39,8 +39,14 @@
 "id_bdd": "BD_PORTS_001",
 "fid": "feature_001",
 "num": "PNMGL_GOIMARD_2014",
-"tech":true
+"tech":true,
 
+"test":"test",
+"test_1":"test",
+"test_2":"test",
+"test_3":"test",
+
+"projet" : "Pratique de nettoyage des plages"
 
 
 },

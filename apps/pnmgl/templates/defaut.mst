@@ -181,6 +181,34 @@
     </div>
     {{/tech}}
 
+    <!-- ################################# -->
+    <!-- AUTRES CHAMPS -->
+    <!-- ################################# -->
+
+    {{#has_fields_kv_extras}}
+    <div class="fiche-section">
+        <h4 class="fiche-section-titre">Autres informations</h4>
+            <table class="fiche-table">
+                {{#fields_kv_extras}}
+                <tr>
+                <th>{{key}}</th>
+                <td>{{value}}</td>
+                </tr>
+                {{/fields_kv_extras}}
+            </table>
+    </div>
+    {{/has_fields_kv_extras}}
+
+    <!-- ################################# -->
+    <!-- BOUNTON RAPPORT -->
+    <!-- ################################# -->
+
+    {{#projet}}
+        <button class="btn" onclick="window.open(getRapportUrl('{{projet}}'),'_blank')">
+        Voir le rapport associé
+        </button>
+    {{/projet}}
+
 </li>
 {{/features}}
 
@@ -259,6 +287,18 @@
 .fiche-table td:empty::after {
     content: "—";
     color: #aaa;
+}
+
+.btn {
+    border-radius: 4px;
+    padding: 6px 10px;
+    margin :10px auto 10px auto;
+    background-color: #3d839a;
+    border-color: #3d839a;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: center;
 }
 
 .wfs_complements {
