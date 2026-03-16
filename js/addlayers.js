@@ -1,3 +1,263 @@
+// Gère l'ajout d'un style personnalisé à une couche ajoutée par l'utilisateur
+document.addEventListener("DOMContentLoaded", () => {
+    const fillInput = document.getElementById("fillColor");
+    const strokeInput = document.getElementById("strokeColor");
+    const widthInput = document.getElementById("strokeWidth");
+    const canvas = document.getElementById("stylePreview");
+    const ctx = canvas.getContext("2d");
+    const hiddenInput = document.getElementById("dynamicStyle");
+
+    function updatePreview() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Rectangle rempli avec contour
+        ctx.fillStyle = fillInput.value;
+        ctx.strokeStyle = strokeInput.value;
+        ctx.lineWidth = parseInt(widthInput.value, 10);
+
+        ctx.beginPath();
+        ctx.rect(5, 5, 50, 50);
+        ctx.fill();
+        ctx.stroke();
+
+        // Mettre à jour le champ caché
+        hiddenInput.value = JSON.stringify({
+            fill: fillInput.value,
+            stroke: strokeInput.value,
+            width: parseInt(widthInput.value, 10)
+        });
+    }
+
+    // Événements pour mise à jour
+    [fillInput, strokeInput, widthInput].forEach(input => {
+        input.addEventListener("input", updatePreview);
+    });
+
+    // Initialiser l'aperçu
+    updatePreview();
+});
+
+function addNewThemeInput() {
+  const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash", "fas fa-book", "fas fa-box", "fas fa-city", "fas fa-cloud", "fas fa-fire"] 
+
+  // Ajouter la section pour les icônes
+  div_icons = document.createElement("div");
+  div_icons.classList.add("form-group", "div-icons");
+  label_icons = document.createElement("label");
+  label_icons.textContent = "Icône de la thématique";
+  label_icons.style.marginTop = "10px";
+  label_icons.id = "label_icons";
+  div_icons.appendChild(label_icons);
+
+  // Créer une liste d'icônes à sélectionner
+  div_list_icons = document.createElement("div");
+  div_list_icons.id = "logoList";
+  div_list_icons.style.display = "flex";
+  div_list_icons.style.gap = "10px";
+  div_list_icons.style.flexWrap = "wrap";
+  div_icons.appendChild(div_list_icons);
+  themeSelect.parentNode.appendChild(div_icons);
+
+  // Ajouter les icônes à la liste
+  listIcon.forEach(icon => {
+        div_logo_item = document.createElement("div");
+        div_logo_item.classList.add("logo-item");
+        div_logo_item.style.textAlign = "center";
+        div_logo_item.style.cursor = "pointer";
+        div_logo_item.addEventListener("click", (event) => {
+          document.querySelectorAll(".logo-item")
+              .forEach(el => el.classList.remove("selected"));
+          event.currentTarget.classList.add("selected");
+        });
+
+        i_logo = document.createElement("i");
+        i_logo.className = icon;
+        i_logo.style.fontSize = "24px";
+        div_logo_item.appendChild(i_logo);
+        div_list_icons.appendChild(div_logo_item);
+    });
+
+  // Ajouter le champ de saisie pour la nouvelle thématique
+  const inputNewTheme = document.createElement("input");
+  inputNewTheme.type = "text";
+  inputNewTheme.id = "newThemeInput";
+  inputNewTheme.placeholder = "Nom de la nouvelle thématique";
+  inputNewTheme.style.marginTop = "10px";
+  inputNewTheme.required = true;
+  inputNewTheme.classList.add("form-control");
+  themeSelect.parentNode.appendChild(inputNewTheme);
+}
+
+function addNewGroupInput() {
+  // Ajouter le champ de saisie pour le nouveau groupe
+  const inputNewGroup = document.createElement("input");
+  inputNewGroup.type = "text";
+  inputNewGroup.id = "newGroupInput";
+  inputNewGroup.placeholder = "Nom du nouveau groupe";
+  inputNewGroup.style.marginTop = "10px";
+  inputNewGroup.required = true;
+  inputNewGroup.classList.add("form-control");
+  groupSelect.parentNode.appendChild(inputNewGroup);
+}
+
+function fillGroupsSelect(themeSelect) {
+  const selectedThemeName = themeSelect.value;
+
+  groupSelect.innerHTML = ""; // vide le select
+
+  // Ajoute une option par défaut pour créer un nouveau groupe
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "";
+  defaultOption.textContent = "Créer un nouveau groupe";
+  groupSelect.appendChild(defaultOption);
+
+  if (selectedThemeName) {
+      // Cherche le theme correspondant
+      const selectedTheme = mviewer.conf.themes.theme.find(
+          t => t.name === selectedThemeName
+      );
+
+      if (selectedTheme && selectedTheme.group) {
+          // selectedTheme.group peut être un tableau ou un objet unique
+          const groups = Array.isArray(selectedTheme.group)
+              ? selectedTheme.group
+              : [selectedTheme.group];
+
+          groups.forEach(group => {
+              const option = document.createElement("option");
+              option.value = group.name;
+              option.textContent = group.name;
+              groupSelect.appendChild(option);
+          });
+      }
+    }
+  }
+
+$('#addLayerpanel').on('shown.bs.modal', function () {
+    const themeSelect = document.getElementById("themeSelect");
+    const groupSelect = document.getElementById("groupSelect");
+
+    themeSelect.innerHTML = ""; // vide le select
+    groupSelect.innerHTML = ""; // vide le select
+
+    const optionsDefault = document.createElement("option");
+    optionsDefault.value = "";
+    optionsDefault.textContent = "Ajouter une nouvelle thématique";
+    themeSelect.appendChild(optionsDefault);
+
+    // Mettre à jour les groupes quand la thématique change
+    themeSelect.addEventListener("change", function () {
+      if (themeSelect.selectedIndex === 0) {
+        addNewThemeInput();
+      }
+      else {
+        themeSelect.parentNode.querySelectorAll("#newThemeInput").forEach(el => el.remove());
+        themeSelect.parentNode.querySelectorAll(".div-icons").forEach(el => el.remove());
+      }
+      if (groupSelect.selectedIndex !== 0) {
+          addNewGroupInput();
+        }
+      fillGroupsSelect(themeSelect);
+    });
+
+  // Afficher le champ de saisie pour le groupe si l'utilisateur choisit de créer un nouveau groupe
+  groupSelect.addEventListener("change", function () {
+    // Si l'utilisateur choisit de créer un nouveau groupe, affiche un champ de saisie
+    if (groupSelect.selectedIndex === 0) {
+      addNewGroupInput();
+    }
+    else {
+      groupSelect.parentNode.querySelectorAll("#newGroupInput").forEach(el => el.remove());
+    }
+  });
+
+    // Remplir les thématiques
+    Object.values(mviewer.conf.themes.theme).forEach(theme => {
+        const option = document.createElement("option");
+        option.value = theme.name;
+        option.textContent = theme.name;
+        themeSelect.appendChild(option);
+    });
+
+    // Afficher les champs de saisie pour la thématique et le groupe par défaut
+    themeSelect.parentNode.querySelectorAll("#newThemeInput").forEach(el => el.remove());
+    groupSelect.parentNode.querySelectorAll("#newGroupInput").forEach(el => el.remove());
+    addNewThemeInput();
+    addNewGroupInput(); 
+    fillGroupsSelect(themeSelect);
+});
+
+
+$("#uploadLayerForm").submit(function(e){
+
+    e.preventDefault();
+
+    var formData = new FormData();
+
+    const newThemeInput = document.getElementById("newThemeInput");
+    const newGroupInput = document.getElementById("newGroupInput");
+    const selectedIcon = document.querySelector(".logo-item.selected i");
+    const selectedStyle = document.getElementById("dynamicStyle").value;
+    
+    if (newThemeInput && newThemeInput.value.trim() !== "") {
+      formData.append("theme", newThemeInput.value.trim());
+    } else {
+      formData.append("theme", $("#themeSelect").val());
+    }
+    if (newGroupInput && newGroupInput.value.trim() !== "") {
+      formData.append("group", newGroupInput.value.trim());
+    }
+    else {
+    formData.append("group", $("#groupSelect").val());
+    }
+    if (selectedIcon) {
+      formData.append("icon", selectedIcon.className);
+    }
+    else {
+      formData.append("icon", "fas fa-ship");
+    }
+    formData.append("layer_name", $("#layerName").val());
+    formData.append("file", $("#layerFile")[0].files[0]);
+    formData.append("style", selectedStyle);
+
+    $.ajax({
+
+        url: "http://localhost:5000/upload",
+        type: "POST",
+        data: formData,
+        processData: false,
+        contentType: false,
+
+        success: function(response){
+            if(response.success == "true"){
+
+              var layerConfig = {
+                  id: response.id,
+                  name: response.layer,
+                  layername: response.layer,
+                  title: response.layer,
+                  type: "geojson",
+                  url: response.url,
+                  visible: true,
+                  opacity: 1,
+                  queryable: true,
+                  typeName: response.id,
+                  srs: "EPSG:3857",
+                  format: "application/json"
+              };
+              mviewer.addLayer(layerConfig);
+              info.addQueryableLayer(layerConfig);
+            }
+            alert("Couche ajoutée !");
+            location.reload();
+        },
+        error: function(){
+            alert("Erreur lors de l'ajout de la couche");
+        }
+    });
+
+});
+
 var capabilitiesParser = (function () {
   /**
    * public Method: _parseCSW. Used to parse response of a GetRecords
@@ -332,6 +592,8 @@ var addlayers = (function () {
         }
       });
     }
+
+    
   };
 
   /**
