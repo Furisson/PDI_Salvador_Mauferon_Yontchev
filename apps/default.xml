@@ -64,31 +64,6 @@
             <group name="Ports et transport maritime" id="ptm">
 
                 <!-- Définition des layers, voir la doc utilisateur ou le fichier pnmgl/aide_user/format_ajout_couche.xml  -->
-                <layer id="usage_cale"
-                    name="Cale"
-                    visible="false"
-                    type="customlayer"
-                    opacity="1"
-                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/usage_cale.js"
-                    infoformat="application/vnd.ogc.gm"
-                    queryable="true"
-                    attribution="OFB"
-                    legendurl="apps/pnmgl/img/1.svg">
-                    <template url="apps/pnmgl/templates/defaut.mst"></template>
-                </layer>
-
-                <layer id="usage_cale2"
-                    name="Cale"
-                    visible="false"
-                    type="customlayer"
-                    opacity="1"
-                    url="apps/pnmgl/customlayers/Usages/Ports et transport maritime/usage_cale2.js"
-                    infoformat="application/vnd.ogc.gm"
-                    queryable="true"
-                    attribution="OFB"
-                    legendurl="apps/pnmgl/img/1.svg">
-                    <template url="apps/pnmgl/templates/defaut.mst"></template>
-                </layer>
                 
                 
                 

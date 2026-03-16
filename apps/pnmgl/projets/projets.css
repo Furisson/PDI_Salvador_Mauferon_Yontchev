@@ -103,7 +103,7 @@
     max-height: 0;
     will-change: max-height;
     overflow: hidden;
-    transition: max-height 0.45s ease;  /* Animation de déploiement pour un effet vertical ne pas jouer sur l'opacité*/
+    transition: max-height 0.45s ease;
 }
 
 .mv-projects.ouvert 

@@ -30,13 +30,28 @@ function echapperHtml(texte)
         .replaceAll("'", "&#039;");
 }
 
+/**
+ * Permet de normaliser les noms des couches (sécurité), sous la forme theme_couche
+ */
 function normaliserIdCouche(texte) {
     return (texte || "")
         .toLowerCase()
         .replace(/\s+/g, "_");
 }
 
-
+/**
+ * Charge le fichier layers.json et construit un index permettant
+ * d’associer un projet à ses couches associées.
+ *
+ * Structure obtenue :
+ *
+ * indexCouchesParProjet = {
+ *   "Nom du projet": [couche1, couche2, ...]
+ * }
+ *
+ * Cet index est ensuite utilisé pour activer, ouvrir, afficher, automatiquement
+ * les couches liées à un projet dans l’interface.
+ */
 
 async function chargerCouchesParProjet() {
     const reponse = await fetch("../../../layers.json", { cache: "no-store" });
@@ -62,11 +77,14 @@ async function chargerCouchesParProjet() {
 
 
 /**
- * Charge les données JSON et retourne une structure normalisée :
- * [
- *   { nom, icone, projets: [{ titre, description, pdf }, ...] },
- *   ...
- * ]
+ * Cette fonction permet de charger les thématiques et les projets depuis le fichier JSON,
+ * les normalise pour les adapter à l’interface.
+ *
+ * Cette fonction construit aussi un index global des projets
+ * (`indexProjets`) permettant de retrouver un projet
+ * à partir de son titre.
+ *
+ * @returns {Promise<Array>} Tableau de thématiques contenant leurs projets
  */
 async function chargerThematiques() 
 {
@@ -99,6 +117,20 @@ async function chargerThematiques()
         }))
     }));
 }
+
+/**
+ * Génère le HTML correspondant à un bloc de contenu de projet.
+ *
+ * Chaque bloc possède un type (`titre`, `paragraphe`, `liste`, `lien`, etc.)
+ * qui détermine le HTML généré.
+ *
+ * Elle permet de décrire le contenu des projets détaillé dans le JSON
+ * de manière structurée sans écrire du HTML en brut.
+ *
+ * @param {Object} bloc - Objet décrivant un bloc de contenu
+ * @param {string} bloc.type - Type de bloc (titre, paragraphe, liste...)
+ * @returns {string} HTML correspondant au bloc
+ */
 
 function rendreBlocContenu(bloc) 
 {
@@ -133,6 +165,23 @@ function rendreBlocContenu(bloc)
     }
 }
 
+/**
+ * Transforme le contenu structuré d’un projet en JSON
+ * en une chaîne HTML qui pourra être injectée dans le panneau projet.
+ *
+ * Le contenu d’un projet est défini comme suit :
+ * [
+ *   { type: "titre", texte: "..." },
+ *   { type: "paragraphe", texte: "..." },
+ *   { type: "liste", items: [...] }
+ * ]
+ *
+ * Chaque bloc est converti en HTML via la fonction `rendreBlocContenu`.
+ *
+ * @param {Array} contenu - Tableau de blocs décrivant le contenu du projet
+ * @returns {string} HTML généré à partir des blocs
+ */
+
 function rendreContenuProjet(contenu) 
 {
     if (!Array.isArray(contenu)) return "";
@@ -140,7 +189,14 @@ function rendreContenuProjet(contenu)
 }
 
 /**
- * Ouvre le panneau latéral droit et affiche les informations d'un projet.
+ * Ouvre le panneau latéral droit et affiche la fiche détaillée d’un projet.
+ *
+ * Cette fonction :
+ * - injecte le contenu HTML du projet dans le panneau
+ * - affiche éventuellement une image et des actions (PDF, couches associées)
+ * - active l’ouverture du panneau droit dans l’interface Mviewer
+ *
+ * @param {Object} projet - Objet projet issu du JSON
  */
 
 function ouvrirPanneauProjet(projet) 
@@ -173,6 +229,9 @@ function ouvrirPanneauProjet(projet)
     panneau.classList.add("active");
 }
 
+/**
+ * Catch le wrapper correspondant à son état fermé
+ */
 
 function wrapperEstFerme() {
     const wrapper = document.getElementById("wrapper");
@@ -180,6 +239,10 @@ function wrapperEstFerme() {
 
     return wrapper.classList.contains("toggled-2");
 }
+
+/**
+ * Ouvre le wrapper contenant les projets au clic sur une thématique
+ */
 
 function ouvrirWrapperSiFerme(callback) {
     const boutonMenu = document.querySelector(".menu-toggle");
@@ -202,16 +265,30 @@ function ouvrirWrapperSiFerme(callback) {
     }, 250);
 }
 
+/**
+ * Ouvre automatiquement dans le menu des couches le thème et le groupe
+ * auxquels appartient une couche donnée.
+ *
+ * Cette fonction est utilisée lorsqu’on clique sur afficher les couches associées à un projet. 
+ * Elle permet de dérouler l’arborescence du menu pour rendre la couche visible
+ * dans l’interface avant de l’activer.
+ *
+ * Fonctionnement :
+ * - remonte dans le DOM à partir de l’élément de couche
+ * - ouvre le groupe (niveau level-2)
+ * - ouvre le thème (niveau level-1)
+ * - force l'affichage des sous-listes si elles sont repliées
+ *
+ * @param {HTMLElement} liCouche - Élément DOM correspondant à la couche dans le menu
+ */
 function ouvrirThemeEtGroupeDepuisCouche(liCouche) {
     if (!liCouche) return;
 
-    // 1) ouvrir le <ul> qui contient directement la couche
     const ulGroupe = liCouche.parentElement;
     if (ulGroupe && ulGroupe.tagName === "UL") {
         ulGroupe.style.display = "block";
     }
 
-    // 2) ouvrir le groupe (li.level-2 > a)
     const liGroupe = liCouche.closest("li.level-2");
     if (liGroupe) {
         const aGroupe = liGroupe.querySelector(":scope > a");
@@ -226,7 +303,6 @@ function ouvrirThemeEtGroupeDepuisCouche(liCouche) {
         }
     }
 
-    // 3) ouvrir le thème (li.level-1 > a)
     const liTheme = liCouche.closest("li.level-1");
     if (liTheme) {
         const aTheme = liTheme.querySelector(":scope > a");
@@ -243,7 +319,24 @@ function ouvrirThemeEtGroupeDepuisCouche(liCouche) {
 }
 
 /**
- * Affiche les thématiques et leurs projets (dépliables au clic).
+ * Génère et affiche la liste des thématiques et de leurs projets
+ * dans le panneau latéral gauche de l'interface.
+ *
+ * Pour chaque thématique :
+ * - crée une ligne contenant une icône et le nom de la thématique
+ * - crée un conteneur repliable contenant la liste des projets
+ * - permet d’ouvrir ou fermer la liste des projets au clic
+ *
+ * Les projets sont affichés sous forme d’éléments cliquables.
+ * Lorsqu’un projet est sélectionné, la fonction `ouvrirPanneauProjet`
+ * est appelée afin d’afficher la fiche détaillée dans le panneau droit.
+ *
+ * La fonction gère également :
+ * - l’animation d’ouverture et de fermeture des projets
+ * - la fermeture automatique des autres thématiques ouvertes
+ * - l’ouverture automatique du menu si le panneau gauche est replié
+ *
+ * @param {Array} thematiques - Tableau des thématiques contenant leurs projets
  */
 
 function afficherThematiques(thematiques) 
@@ -273,7 +366,7 @@ function afficherThematiques(thematiques)
         nomSpan.textContent = t.nom;
         ligne.appendChild(nomSpan);
 
-        // Conteneur projets (repliable)
+        // Conteneur projets
         const blocProjets = document.createElement("div");
         blocProjets.className = "mv-projects";
         blocProjets.id = idBlocProjets;
@@ -287,7 +380,7 @@ function afficherThematiques(thematiques)
 
             item.addEventListener("click", (e) => 
             {
-                e.stopPropagation(); // évite de replier la thématique
+                e.stopPropagation(); // Ne pas replier thématique
                 ouvrirPanneauProjet(p);
             });
 
@@ -355,7 +448,7 @@ function afficherThematiques(thematiques)
             const n = items.length;
             items.forEach((it, i) => 
             {
-                // inversé : dernier disparaît en premier
+                // inversé : dernier disparaît en premier : effet défilement 
                 it.style.transitionDelay = ((n - 1 - i) * 60) + "ms";
             });
         }
@@ -428,6 +521,10 @@ function initialiserRecherche(thematiques)
     }
 }
 
+/**
+ * Permet de refermer toutes les thématiques si celles-ci étaient ouvertes : utile si clique sur une autre thématique
+ */
+
 function refermerToutesLesThematiques() 
 {
     document
@@ -437,6 +534,10 @@ function refermerToutesLesThematiques()
             element.classList.remove("ouvert");
         });
 }
+
+/**
+ * Ferme toutes les thématiques
+ */
 
 function initialiserFermetureMenuProjets() 
 {
@@ -489,6 +590,10 @@ function initialiserFermetureMenuProjets()
         });
 })();
 
+/**
+ * Gère les liens entre les différentes fenêtres notamment entre les projets et les couches popur afficher un projet depuis une couche et des données depuis un projet. 
+ */
+
 window.getRapportUrl = function(nomProjet){
 
     if(indexProjets[nomProjet]){
@@ -502,6 +607,17 @@ window.ouvrirProjetDepuisNom = function(nomProjet) {
         ouvrirPanneauProjet(indexProjets[nomProjet]);
     }
 }
+
+/**
+ * Affiche sur la carte toutes les couches associées à un projet.
+ *
+ * La fonction :
+ * - retrouve les couches liées au projet via l’index
+ * - ouvre automatiquement le menu des couches si fermé
+ * - active la couche dans Mviewer
+ *
+ * @param {string} nomProjet - Nom du projet
+ */
 
 window.afficherCouchesDuProjet = function(nomProjet) {
     const couches = indexCouchesParProjet[nomProjet];
