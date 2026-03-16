@@ -1,16 +1,2 @@
 [
-    {
-        "name": "test_9",
-        "theme": "hydrologie_test",
-        "icon": "fas fa-ship",
-        "group": "groupe_test_2",
-        "style": "circle1"
-    },
-    {
-        "name": "Test 10",
-        "theme": "hydrologie_test",
-        "icon": "fas fa-ship",
-        "group": "groupe_test_2",
-        "style": "hydrologie_test_test_10_style"
-    }
 ]

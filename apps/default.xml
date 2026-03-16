@@ -950,43 +950,6 @@
             </group>
             
         </theme>
-        <theme name="Hydrologie Test" collapsed="true" id="hydrologie_test" icon="fas fa-ship">
-
-            <group name="groupe_test_2" id ="groupe_test_2">
-            
-                <layer id="hydrologie_test:test_9"
-                name="test_9"
-                type="geojson"
-                opacity="1"
-                visible="false"
-                searchable="true"   
-                queryable="true"
-                vectorlegend="true"
-                style="circle1"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_9"
-                srs="EPSG:3857"
-                format="application/json">
-                <template url="apps/pnmgl/templates/defaut.mst" />
-            </layer>
-            
-                <layer id="hydrologie_test:test_10"
-                name="Test 10"
-                type="geojson"
-                opacity="1"
-                visible="false"
-                searchable="true"   
-                queryable="true"
-                vectorlegend="true"
-                style="hydrologie_test_test_10_style"
-                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_10&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="hydrologie_test:test_10"
-                srs="EPSG:3857"
-                format="application/json">
-                <template url="apps/pnmgl/templates/defaut.mst" />
-            </layer>
-            </group>
-</theme>
 </themes>
     </config>
     
