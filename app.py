@@ -1,4 +1,5 @@
 import os
+import unicodedata
 from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import requests
@@ -8,6 +9,7 @@ import json
 import fiona
 import shutil
 import geopandas as gpd
+import re
 
 # --- Configuration ---
 UPLOAD_FOLDER = "C:/Geoserver_data/uploads"
@@ -33,6 +35,16 @@ def datastore_exists(workspace_name, datastore_name):
     r = requests.get(url, auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     return r.status_code == 200
 
+def normalize_name(name):
+    nfkd_form = unicodedata.normalize('NFKD', name)
+    no_accents = "".join([c for c in nfkd_form if not unicodedata.combining(c)])
+
+    cleaned = re.sub(r"[^\w\s]", "_", no_accents)  # garde lettres, chiffres et espaces
+
+    cleaned = re.sub(r"\s+", "_", cleaned)
+
+    return cleaned.lower()
+
 def save_layer_metadata(layer_name, theme, group, icon, style):
     data = []
 
@@ -40,7 +52,7 @@ def save_layer_metadata(layer_name, theme, group, icon, style):
         with open("layers.json", "r") as f:
             data = json.load(f)
 
-    theme_clean = theme.replace(" ", "_").lower()
+    theme_clean = normalize_name(theme)
 
     data.append({
         "name": layer_name,
@@ -135,18 +147,18 @@ def generate_config_xml():
             themes[theme] = []
         themes[theme].append(group)
         icons[theme] = group[0]["icon"]  # Utiliser l'icône du premier layer du groupe
-        
 
     for theme_name, theme_layers in themes.items():
         theme_name_unclean = theme_name.replace("_", " ").title()
-        xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name.replace(" ", "_").lower()}" icon="{icons[theme_name]}">\n'
+        xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name}" icon="{icons[theme_name]}">\n'
         for group in theme_layers:
             xml_content += f'''
-            <group name="{group[0]["group"]}" id ="{group[0]["group"].replace(" ", "_").lower()}">
+            <group name="{group[0]["group"]}" id ="{normalize_name(group[0]["group"])}">
             '''
             for layer in group:
+                layer_name = normalize_name(layer["name"])
                 xml_content += f'''
-                <layer id="{layer["theme"]}:{layer["name"].replace(" ", "_").lower()}"
+                <layer id="{layer["theme"]}:{layer_name}"
                 name="{layer["name"]}"
                 type="geojson"
                 opacity="1"
@@ -155,8 +167,8 @@ def generate_config_xml():
                 queryable="true"
                 vectorlegend="true"
                 style="{layer["style"]}"
-                url="{GEOSERVER_URL}/{layer["theme"]}/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName={layer["theme"]}:{layer["name"].replace(" ", "_").lower()}&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="{layer["theme"]}:{layer["name"].replace(" ", "_").lower()}"
+                url="{GEOSERVER_URL}/{layer["theme"]}/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName={layer["theme"]}:{layer_name}&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="{layer["theme"]}:{layer_name}"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
@@ -293,12 +305,12 @@ def upload_file():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-    nom_style = f"{theme.replace(' ', '_').lower()}_{layer_name.replace(' ', '_').lower()}_style"
+    nom_style = f"{normalize_name(theme)}_{normalize_name(layer_name)}_style"
     generate_style(style, nom_style, type_geom)
     save_layer_metadata(layer_name, theme, group, icon, nom_style)
     generate_config_xml()
 
-    return jsonify({"success": "true", "layer": layer_name, "id": f"{theme.replace(' ', '_').lower()}:{layer_name.replace(' ', '_').lower()}", "url": f"{GEOSERVER_URL}/{theme.replace(' ', '_').lower()}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={theme.replace(' ', '_').lower()}:{layer_name.replace(' ', '_').lower()}&outputFormat=application/json&srsname=EPSG:3857"})
+    return jsonify({"success": "true", "layer": layer_name, "id": f"{normalize_name(theme)}:{normalize_name(layer_name)}", "url": f"{GEOSERVER_URL}/{normalize_name(theme)}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={normalize_name(theme)}:{normalize_name(layer_name)}&outputFormat=application/json&srsname=EPSG:3857"})
 
 @app.route("/reload_config")
 def serve_config():
@@ -312,8 +324,8 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     """
     headers = {"Content-Type": "application/xml"}
     
-    theme_clean = theme.replace(" ", "_").lower()
-    layer_name_clean = layer_name.replace(" ", "_").lower()
+    theme_clean = normalize_name(theme)
+    layer_name_clean = normalize_name(layer_name)
 
     # Déplacer tous les fichiers du shapefile dans un sous-dossier pour le datastore GeoServer
     extensions = [".shp", ".shx", ".dbf", ".prj", ".cpg"]

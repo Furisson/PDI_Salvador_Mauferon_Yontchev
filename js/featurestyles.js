@@ -163,3 +163,19 @@ mviewer.featureStyles.sensorPoint = (f) =>
         });
     };
     
+
+    mviewer.featureStyles.l_appel_du_loup_test_11_style = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: "#000000"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#ffffff",
+                    width: 4
+                })
+            })
+        });
+    };
+    

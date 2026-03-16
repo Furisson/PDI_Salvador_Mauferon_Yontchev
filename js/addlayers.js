@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function addNewThemeInput() {
-  const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash"] 
+  const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash", "fas fa-book", "fas fa-box", "fas fa-city", "fas fa-cloud", "fas fa-fire"] 
 
   // Ajouter la section pour les icônes
   div_icons = document.createElement("div");
