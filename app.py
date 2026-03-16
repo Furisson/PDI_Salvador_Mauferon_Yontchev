@@ -26,16 +26,45 @@ CORS(app)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def workspace_exists(workspace_name):
+    """
+    Test si un theme existe déjà dans le geoserver
+
+    Attributes:
+        workspace_name (str): nom du theme à tester
+    Returns:
+        bool: True si le theme existe, False sinon
+    """
     url = f"{GEOSERVER_URL}/rest/workspaces/{workspace_name}.json"
     r = requests.get(url, auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     return r.status_code == 200
 
 def datastore_exists(workspace_name, datastore_name):
+    """
+    Test si un groupe existe déjà dans le geoserver
+
+    Attributes:
+        workspace_name (str): nom du theme du groupe
+        datastore_name (str): nom du groupe à tester
+    Returns:
+        bool: True si le groupe existe, False sinon
+    """
     url = f"{GEOSERVER_URL}/rest/workspaces/{workspace_name}/datastores/{datastore_name}.json"
     r = requests.get(url, auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     return r.status_code == 200
 
 def normalize_name(name):
+    """
+    Normalise un nom de couche ou de thème pour créer des identifiants compatibles avec GeoServer et mViewer
+    - Supprime les accents
+    - Remplace les caractères spéciaux par des underscores
+    - Remplace les espaces par des underscores
+    - Met en minuscules
+
+    Attributes:
+        name (str): nom à normaliser
+    Returns:
+        str: nom normalisé
+    """
     nfkd_form = unicodedata.normalize('NFKD', name)
     no_accents = "".join([c for c in nfkd_form if not unicodedata.combining(c)])
 
@@ -46,6 +75,19 @@ def normalize_name(name):
     return cleaned.lower()
 
 def save_layer_metadata(layer_name, theme, group, icon, style):
+    """
+    Sauvegarde les métadonnées de la couche dans un fichier JSON local pour pouvoir les réutiliser dans le config.xml de mViewer
+
+    Attributes:
+        layer_name (str): nom de la couche
+        theme (str): thème de la couche
+        group (str): groupe de la couche
+        icon (str): icône du thème
+        style (str): nom du style de la couche
+
+    Returns:
+        None
+    """
     data = []
 
     if os.path.exists("layers.json"):
@@ -66,6 +108,15 @@ def save_layer_metadata(layer_name, theme, group, icon, style):
         json.dump(data, f, indent=4)
 
 def generate_config_xml():
+    """
+    Génère dynamiquement le fichier config.xml de mViewer en fonction des couches présentes dans le fichier layers.json, qui contient les métadonnées des couches uploadées par l'utilisateur.
+    
+    Attributes :
+        None
+
+    Returns :
+        None
+    """
     with open("layers.json", "r") as f:
         layers = json.load(f)
 
@@ -121,9 +172,9 @@ def generate_config_xml():
         <themes>
     """
 
+    # Ajout des couches par défaut (non modifiables depuis l'interface)
     file_default_layers = "./apps/pnmgl/default_layers.xml"
 
-    # Ouvrir et lire le fichier
     with open(file_default_layers, "r", encoding="utf-8") as f:
         default_layers = f.read()
 
@@ -148,6 +199,7 @@ def generate_config_xml():
         themes[theme].append(group)
         icons[theme] = group[0]["icon"]  # Utiliser l'icône du premier layer du groupe
 
+    # Générer le XML pour chaque thème et groupe
     for theme_name, theme_layers in themes.items():
         theme_name_unclean = theme_name.replace("_", " ").title()
         xml_content += f'        <theme name="{theme_name_unclean}" collapsed="true" id="{theme_name}" icon="{icons[theme_name]}">\n'
@@ -186,6 +238,17 @@ def generate_config_xml():
         f.write(xml_content)
 
 def generate_style(style, nom_style, type_geom):
+    """
+    Génère une fonction de style JavaScript à partir des paramètres de style définis par l'utilisateur et l'ajoute au fichier featurestyles.js de mViewer, si elle n'existe pas déjà.
+
+    Attributes:
+        style (dict): dictionnaire contenant les paramètres de style (stroke, fill, width)
+        nom_style (str): nom du style à créer (ex: "theme_layer_style")
+        type_geom (str): type de géométrie de la couche ("Point", "LineString", "Polygon")
+
+    Returns:
+        None
+    """
     # Chemin vers ton featurestyles.js
     js_file_path = "./js/featurestyles.js"
 
@@ -221,106 +284,33 @@ def generate_style(style, nom_style, type_geom):
     }};
     """
 
-
     # Lire le fichier existant
     with open(js_file_path, "r", encoding="utf-8") as f:
         content = f.read()
 
     # Vérifier si le style existe déjà
     if f"mviewer.featureStyles.{nom_style}" not in content:
+        # Ajouter le nouveau style à la fin
         if type_geom == "Point":
-            # Ajouter le nouveau style à la fin
             content += "\n" + new_style_js_point
         else:
-            # Ajouter le nouveau style à la fin
             content += "\n" + new_style_js
 
         # Réécrire le fichier
         with open(js_file_path, "w", encoding="utf-8") as f:
             f.write(content)
 
-# --- Endpoint upload ---
-@app.route("/upload", methods=["POST"])
-def upload_file():
-    """
-    Reçoit un fichier shapefile zip ou geojson + info (nom, theme, group)
-    Dépose dans le dossier uploads et publie sur GeoServer
-    """
-    # --- Récupérer les informations ---
-    layer_name = request.form.get("layer_name")
-    theme = request.form.get("theme")
-    group = request.form.get("group")
-    icon = request.form.get("icon")
-    style = json.loads(request.form.get("style"))
-    
-    if "file" not in request.files:
-        return jsonify({"error": "Aucun fichier envoyé"}), 400
-    
-    file = request.files["file"]
-    filename = file.filename
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    file.save(filepath)
-
-    # --- Si zip, dézipper ---
-    if filename.endswith(".zip"):
-        with zipfile.ZipFile(filepath, 'r') as zip_ref:
-            zip_ref.extractall(app.config['UPLOAD_FOLDER'])
-        # récupérer le nom du shapefile principal
-        for f in os.listdir(app.config['UPLOAD_FOLDER']):
-            if f.endswith(".shp"):
-                shapefile_path = os.path.join(app.config['UPLOAD_FOLDER'], f).replace("\\", "/")
-                break
-    else:
-        return jsonify({"error": "Format non supporté"}), 400
-
-    # Normaliser le nom des attributs de la couche
-    gdf = gpd.read_file(shapefile_path)
-    type_geom = gdf.geom_type.iloc[0]
-    gdf = gdf.rename(columns=lambda x: x.replace(" ", "_").lower())
-    gdf = gdf.rename(columns={
-        "sources": "source",
-    })
-    columns = gdf.columns.str
-    if columns.contains("source").any() or columns.contains("auteur").any() or columns.contains("maj").any():
-        gdf["info"] = True
-    else:
-        gdf["info"] = False
-    if columns.contains("nb_payantes").any() or columns.contains("nb_gratuites").any() or columns.contains("import_t").any() or columns.contains("export_t").any():
-        gdf["cara"] = True
-    else:
-        gdf["cara"] = False
-    if columns.contains("regl_mdtx").any() or columns.contains("cat_regl").any() or columns.contains("arrete_nom").any() or columns.contains("regl_type").any() or columns.contains("info_regl").any() or columns.contains("actv_inter").any():
-        gdf["regl"] = True
-    else:
-        gdf["regl"] = False
-    if columns.contains("id").any() or columns.contains("num").any() or columns.contains("fid").any() or columns.contains("id_bdd").any():
-        gdf["tech"] = True
-    else:
-        gdf["tech"] = False
-    gdf.to_file(shapefile_path, driver='ESRI Shapefile')
-
-    # --- Publier sur GeoServer via REST ---
-    try:
-        publish_layer_to_geoserver(layer_name, shapefile_path, theme)
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-    nom_style = f"{normalize_name(theme)}_{normalize_name(layer_name)}_style"
-    generate_style(style, nom_style, type_geom)
-    save_layer_metadata(layer_name, theme, group, icon, nom_style)
-    generate_config_xml()
-
-    return jsonify({"success": "true", "layer": layer_name, "id": f"{normalize_name(theme)}:{normalize_name(layer_name)}", "url": f"{GEOSERVER_URL}/{normalize_name(theme)}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={normalize_name(theme)}:{normalize_name(layer_name)}&outputFormat=application/json&srsname=EPSG:3857"})
-
-@app.route("/reload_config")
-def serve_config():
-    generate_config_xml() 
-    return send_file("./apps/default.xml", mimetype="application/xml")
-
-# --- Fonction utilitaire pour GeoServer REST ---
 def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     """
     Crée un datastore et publie la couche shapefile sur GeoServer
+
+    Attributes:
+        layer_name (str): nom de la couche à publier
+        shapefile_path (str): chemin vers le fichier shapefile à publier
+        theme (str): thème dans lequel publier la couche
+
+    Returns:
+        None
     """
     headers = {"Content-Type": "application/xml"}
     
@@ -382,6 +372,93 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
                             auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     if r_layer.status_code not in [201, 202]:
         raise Exception(f"Erreur publication couche: {r_layer.status_code} {r_layer.text}")
+
+
+############################ ROUTES FLASK ############################
+
+# --- Endpoint upload ---
+@app.route("/upload", methods=["POST"])
+def upload_file():
+    """
+    Reçoit un fichier shapefile zip ou geojson + info (nom, theme, group, icon, style)
+    Dépose dans le dossier uploads et publie sur GeoServer
+
+    Attributes:
+        None (les données sont envoyées dans la requête POST)
+
+    Returns:
+        JSON contenant le succès ou l'erreur, le nom de la couche, son id (theme:layer) et son url WFS pour l'affichage dans mViewer
+    """
+    # --- Récupérer les informations ---
+    layer_name = request.form.get("layer_name")
+    theme = request.form.get("theme")
+    group = request.form.get("group")
+    icon = request.form.get("icon")
+    style = json.loads(request.form.get("style"))
+    
+    if "file" not in request.files:
+        return jsonify({"error": "Aucun fichier envoyé"}), 400
+    
+    file = request.files["file"]
+    filename = file.filename
+    filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    file.save(filepath)
+
+    # Si zip, dézipper
+    if filename.endswith(".zip"):
+        with zipfile.ZipFile(filepath, 'r') as zip_ref:
+            zip_ref.extractall(app.config['UPLOAD_FOLDER'])
+        # récupérer le nom du shapefile principal
+        for f in os.listdir(app.config['UPLOAD_FOLDER']):
+            if f.endswith(".shp"):
+                shapefile_path = os.path.join(app.config['UPLOAD_FOLDER'], f).replace("\\", "/")
+                break
+    else:
+        return jsonify({"error": "Format non supporté"}), 400
+
+    # Normaliser le nom des attributs de la couche
+    gdf = gpd.read_file(shapefile_path)
+    type_geom = gdf.geom_type.iloc[0]
+    gdf = gdf.rename(columns=lambda x: x.replace(" ", "_").lower())
+    gdf = gdf.rename(columns={
+        "sources": "source",
+    })
+    columns = gdf.columns.str
+    if columns.contains("source").any() or columns.contains("auteur").any() or columns.contains("maj").any():
+        gdf["info"] = True
+    else:
+        gdf["info"] = False
+    if columns.contains("nb_payantes").any() or columns.contains("nb_gratuites").any() or columns.contains("import_t").any() or columns.contains("export_t").any():
+        gdf["cara"] = True
+    else:
+        gdf["cara"] = False
+    if columns.contains("regl_mdtx").any() or columns.contains("cat_regl").any() or columns.contains("arrete_nom").any() or columns.contains("regl_type").any() or columns.contains("info_regl").any() or columns.contains("actv_inter").any():
+        gdf["regl"] = True
+    else:
+        gdf["regl"] = False
+    if columns.contains("id").any() or columns.contains("num").any() or columns.contains("fid").any() or columns.contains("id_bdd").any():
+        gdf["tech"] = True
+    else:
+        gdf["tech"] = False
+    gdf.to_file(shapefile_path, driver='ESRI Shapefile')
+
+    # Publier sur GeoServer via REST 
+    try:
+        publish_layer_to_geoserver(layer_name, shapefile_path, theme)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+    nom_style = f"{normalize_name(theme)}_{normalize_name(layer_name)}_style"
+    generate_style(style, nom_style, type_geom)
+    save_layer_metadata(layer_name, theme, group, icon, nom_style)
+    generate_config_xml()
+
+    return jsonify({"success": "true", "layer": layer_name, "id": f"{normalize_name(theme)}:{normalize_name(layer_name)}", "url": f"{GEOSERVER_URL}/{normalize_name(theme)}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={normalize_name(theme)}:{normalize_name(layer_name)}&outputFormat=application/json&srsname=EPSG:3857"})
+
+@app.route("/reload_config")
+def serve_config():
+    generate_config_xml() 
+    return send_file("./apps/default.xml", mimetype="application/xml")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function updatePreview() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Exemple : rectangle rempli avec contour
+        // Rectangle rempli avec contour
         ctx.fillStyle = fillInput.value;
         ctx.strokeStyle = strokeInput.value;
         ctx.lineWidth = parseInt(widthInput.value, 10);
