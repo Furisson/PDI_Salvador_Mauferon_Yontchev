@@ -9,6 +9,7 @@
           "image" : "apps/pnmgl/projets/img/Littoral-plage-sable.jpg",
           "desc_img":"plage", 
           "pdf": "https://www.calameo.com/ofbiodiversite/read/003502948a7f2a6b22135?view=book&page=1",
+          "layer_group" : "Nettoyage",
           "contenu":[
                       {
                         "type": "titre",

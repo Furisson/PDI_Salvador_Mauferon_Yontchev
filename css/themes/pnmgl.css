@@ -91,6 +91,13 @@
     padding-bottom: 100px !important;
   }
 
+
+#right-panel,
+#right-panel .popup-content {
+    overflow-x: hidden !important;
+}
+
+
   #right-panel .panneau-projet__entete {
     padding: 10px;
     margin-bottom: 20px;
@@ -149,13 +156,15 @@
 
   #right-panel .panneau-projet__actions {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
   }
 
   #right-panel .panneau-projet__bouton {
+    width: 100%;
+    word-break: break-word;
     border-radius: 4px;
     padding: 6px 10px;
-    margin :10px auto 10px auto;
+    margin :5px auto 10px auto;
     background-color: #3d839a;
     border-color: #3d839a;
     color: white;

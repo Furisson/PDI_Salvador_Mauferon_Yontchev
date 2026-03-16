@@ -1,4 +1,6 @@
 const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets/projects.json";
+
+let indexCouchesParProjet = {};
 let indexProjets = {};
 
 /**
@@ -27,6 +29,37 @@ function echapperHtml(texte)
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 }
+
+function normaliserIdCouche(texte) {
+    return (texte || "")
+        .toLowerCase()
+        .replace(/\s+/g, "_");
+}
+
+
+
+async function chargerCouchesParProjet() {
+    const reponse = await fetch("../../../layers.json", { cache: "no-store" });
+    if (!reponse.ok) {
+        throw new Error("Impossible de charger layer.json");
+    }
+
+    const couches = await reponse.json();
+
+    indexCouchesParProjet = {};
+
+    couches.forEach((couche) => {
+        if (!couche.projet) return;
+
+        if (!indexCouchesParProjet[couche.projet]) {
+            indexCouchesParProjet[couche.projet] = [];
+        }
+
+        indexCouchesParProjet[couche.projet].push(couche);
+    });
+}
+
+
 
 /**
  * Charge les données JSON et retourne une structure normalisée :
@@ -129,9 +162,10 @@ function ouvrirPanneauProjet(projet)
                     ${rendreContenuProjet(projet.contenu)}
 
                     <div class="panneau-projet__actions">
-                    ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
+                        ${indexCouchesParProjet[projet.titre] ? `<button class="btn btn-primary panneau-projet__bouton" onclick="afficherCouchesDuProjet('${echapperHtml(projet.titre)}')"> Afficher les couches associées </button>` : ""}
+                        ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
+                        
                     </div>
-                </div>
 
             </div>
         </div> `;
@@ -168,6 +202,45 @@ function ouvrirWrapperSiFerme(callback) {
     }, 250);
 }
 
+function ouvrirThemeEtGroupeDepuisCouche(liCouche) {
+    if (!liCouche) return;
+
+    // 1) ouvrir le <ul> qui contient directement la couche
+    const ulGroupe = liCouche.parentElement;
+    if (ulGroupe && ulGroupe.tagName === "UL") {
+        ulGroupe.style.display = "block";
+    }
+
+    // 2) ouvrir le groupe (li.level-2 > a)
+    const liGroupe = liCouche.closest("li.level-2");
+    if (liGroupe) {
+        const aGroupe = liGroupe.querySelector(":scope > a");
+        const ulSousGroupe = liGroupe.querySelector(":scope > ul");
+
+        if (ulSousGroupe) {
+            ulSousGroupe.style.display = "block";
+        }
+
+        if (aGroupe) {
+            liGroupe.classList.add("open");
+        }
+    }
+
+    // 3) ouvrir le thème (li.level-1 > a)
+    const liTheme = liCouche.closest("li.level-1");
+    if (liTheme) {
+        const aTheme = liTheme.querySelector(":scope > a");
+        const ulTheme = liTheme.querySelector(":scope > ul");
+
+        if (ulTheme) {
+            ulTheme.style.display = "block";
+        }
+
+        if (aTheme) {
+            liTheme.classList.add( "open");
+        }
+    }
+}
 
 /**
  * Affiche les thématiques et leurs projets (dépliables au clic).
@@ -395,8 +468,9 @@ function initialiserFermetureMenuProjets()
         document.getElementById("themes-list");
 
     if (!pret) return setTimeout(initialiserQuandPret, 200);
-
+    chargerCouchesParProjet()
     chargerThematiques()
+
         .then((thematiques) => 
         {
             afficherThematiques(thematiques);
@@ -420,7 +494,6 @@ window.getRapportUrl = function(nomProjet){
     if(indexProjets[nomProjet]){
         return indexProjets[nomProjet];
     }
-
     return null;
 }
 
@@ -429,3 +502,40 @@ window.ouvrirProjetDepuisNom = function(nomProjet) {
         ouvrirPanneauProjet(indexProjets[nomProjet]);
     }
 }
+
+window.afficherCouchesDuProjet = function(nomProjet) {
+    const couches = indexCouchesParProjet[nomProjet];
+
+    if (!couches || couches.length === 0) {
+        console.warn("Aucune couche trouvée pour le projet :", nomProjet);
+        return;
+    }
+
+    // Ouvrir le menu gauche si besoin
+    ouvrirWrapperSiFerme(() => {
+
+        couches.forEach((couche) => {
+            const idCouche = normaliserIdCouche(couche.theme) +"_"+ normaliserIdCouche(couche.name);
+            const liCouche = document.querySelector(`[data-layerid = "${idCouche}"]`);
+
+            if (!liCouche) {
+                console.warn("Couche introuvable dans le DOM :", idCouche);
+                return;
+            }
+
+            // ouvrir le thème / groupe avant d'activer la couche
+            ouvrirThemeEtGroupeDepuisCouche(liCouche);
+
+            const checkbox = liCouche.querySelector('input[type="checkbox"]');
+
+            if (!checkbox) {
+                console.warn("Checkbox introuvable pour la couche :", idCouche);
+                return;
+            }
+
+            if (checkbox.value !== "true") {
+                mviewer.toggleLayer(liCouche);
+            }
+        });
+    });
+};
