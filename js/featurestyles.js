@@ -146,3 +146,4 @@ mviewer.featureStyles.sensorPoint = (f) =>
       stroke: new ol.style.Stroke({ color: "rgba(217, 85, 82,1)", width: 4 }),
     }),
   });
+    

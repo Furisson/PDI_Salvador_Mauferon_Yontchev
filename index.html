@@ -242,7 +242,8 @@
       </nav>
       <div id="wrapper">
         <!-- LEFT MENU SIDEBAR -->
-        <div id="sidebar-wrapper"></div>
+        <div id="sidebar-wrapper">
+        </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
           <div class="container-fluid xyz">
@@ -578,6 +579,17 @@
                 <li role="presentation" class="active">
                   <a
                     onclick="mviewer.tools.addlayers.clearResultsList();"
+                    href="#add_file"
+                    aria-controls="home"
+                    role="tab"
+                    data-toggle="tab"
+                    i18n="addlayers.modal.file">
+                    Fichier local SHP
+                  </a>
+                </li>
+                <li role="presentation" >
+                  <a
+                    onclick="mviewer.tools.addlayers.clearResultsList();"
                     href="#add_ogc"
                     aria-controls="profile"
                     role="tab"
@@ -610,8 +622,78 @@
                 </li>
               </ul>
               <!-- Tab panes -->
-              <div class="tab-content" id="addlayers_tabs">
-                <div role="tabpanel" class="tab-pane active" id="add_ogc">
+              <div class="tab-content" id="add_upload_layer">
+                <div role="tabpanel" class="tab-pane active" id="add_file">
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col">
+                        <p>
+                          Glissez-déposez votre fichier shp zippé ou cliquez pour sélectionner un
+                          fichier sur votre ordinateur.
+                        </p>
+                        <form id="uploadLayerForm">
+                          <div class="form-group">
+                            <label for="themeSelect">Thématique</label>
+                            <select id="themeSelect" class="form-control">
+
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="groupSelect">Groupe</label>
+                            <select id="groupSelect" class="form-control">
+
+                            </select>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="layerName">Nom de la couche</label>
+                            <input type="text" id="layerName" class="form-control" required>
+                          </div>
+
+                          <div class="form-group">
+                            <label for="layerFile">Fichier ZIP</label>
+                            <input type="file" id="layerFile" class="form-control" accept=".zip" required>
+                          </div>
+
+                          <div class="form-group" >
+                            <div id="div_add_style">
+                                <!-- Couleur de remplissage -->
+                                <div>
+                                    <label for="fillColor">Couleur de remplissage</label>
+                                    <input type="color" id="fillColor" class="form-control form-control-color" value="#00ff00">
+                                </div>
+
+                                <!-- Couleur de contour -->
+                                <div>
+                                    <label for="strokeColor">Couleur du contour</label>
+                                    <input type="color" id="strokeColor" class="form-control form-control-color"  value="#000000">
+                                </div>
+
+                                <!-- Épaisseur du contour -->
+                                <div>
+                                    <label for="strokeWidth">Épaisseur du contour</label>
+                                    <input type="number" id="strokeWidth" class="form-control" value="2" min="0" max="10">
+                                </div>
+                            </div>
+
+                            <!-- Aperçu dynamique -->
+                            <div style="margin-top:10px;">
+                                <label>Aperçu :</label>
+                            </div>
+                            <canvas id="stylePreview" width="60" height="60" style="border:1px solid #ccc;"></canvas>
+
+                            <!-- Champ caché pour envoyer les valeurs au serveur -->
+                            <input type="hidden" id="dynamicStyle" name="style">
+                        </div>
+
+                          <button type="submit" class="btn btn-primary">Ajouter la couche</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="add_ogc">
                   <div class="container-fluid">
                     <div class="row">
                       <div class="col">
@@ -1033,6 +1115,7 @@
           }
         }
 
+
         // If no config param nor fragment then use the default config file
         if (!configFile) {
           configFile = "apps/default.xml";
@@ -1042,6 +1125,18 @@
         API.config = configFile;
 
         var theme = API.theme ? API.theme : null;
+
+        $.ajax({
+          url: "http://localhost:5000/reload_config",
+          type: "GET",
+          dataType: "xml",
+          success: function(xml) {
+              console.log("Config reçue");
+          },
+          error: function(xhr, status, error) {
+              console.error("Erreur chargement config :", error);
+          }
+        });
 
         $.ajax({
           url: configFile + "?_dc=" + new Date().getTime(),
@@ -1056,7 +1151,7 @@
             $(document).on("configurationCompleted", function (e, eData) {
               // load env var
               configuration.getEnvData(
-                configFile.replace(".xml", ".json"),
+                configFile,
                 defaultEnvFile
               );
               // load config on env var available
@@ -1065,6 +1160,7 @@
                 mviewer.env = { ...r.detail };
                 //get JSON conf from xml;
                 var _conf = configuration.parseXML(eData.xml);
+                mviewer.conf = _conf;
                 var style = "css/themes/default.css";
                 if (
                   !theme &&
