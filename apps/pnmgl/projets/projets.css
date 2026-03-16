@@ -1,0 +1,154 @@
+@font-face {
+  font-family: 'roboto_bold';
+  src: url("../font/Roboto/Roboto-Bold.ttf"); }
+
+
+/* Style pour la section de projets */
+
+#mv-project-section {
+    padding: 0;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+
+#projectfilter-form 
+{
+    padding: 10px;
+    position: relative;
+}
+
+#wrapper.toggled-2 #projectfilter-form 
+{
+    display: none;
+}
+
+#projectfilter-field 
+{
+    padding-right: 28px;
+}
+
+#projectfilter-clear 
+{
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999999;
+    cursor: pointer;
+    display: none;
+}
+
+#projectfilter-clear:hover {
+  color: #999999;
+}
+
+/* Thématique */
+
+.mv-theme-row 
+{
+    width: 100%;
+    margin: 0;
+    padding: 8px 10px;
+    height: 40px;  
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    color: #999999;
+}
+
+
+.mv-theme-row:hover 
+{
+    background-color: #468798;
+    color: #fff;
+}
+
+
+#themes-list 
+{
+    padding: 0;
+}
+
+/* Ligne des thématiques */
+
+.mv-theme-row:hover .mv-theme-icon 
+{
+      color: #fff;
+}
+
+.mv-theme-icon 
+{
+    font-size: 1.33333em;
+    text-align: center;
+    margin-left: -5px;
+}
+
+.mv-theme-name 
+{
+    flex: 1;
+    font-weight: bold;
+}
+
+
+/* Projets contenus dans les thématiques */
+
+.mv-projects 
+{
+    padding-left: 10px;
+    padding-bottom: 6px;
+    max-height: 0;
+    will-change: max-height;
+    overflow: hidden;
+    transition: max-height 0.45s ease;
+}
+
+.mv-projects.ouvert 
+{
+    max-height: 900px;
+}
+
+.mv-projects:not(.ouvert) .mv-project-item 
+{
+    pointer-events: none;
+}
+
+.mv-project-item 
+{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    text-indent: 0 !important;
+    line-height: 18px !important;
+    box-sizing: border-box;
+
+    margin-left: 40px;
+    cursor: pointer;
+    font-size: 12px;
+    color: #999999;
+
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 10px;
+
+    will-change: max-height, padding;
+    transition: max-height 0.25s ease, padding 0.25s ease;
+}
+
+.mv-projects.ouvert .mv-project-item 
+{
+    max-height: 80px;
+    padding: 10px 10px;
+}
+
+
+.mv-projects.ouvert .mv-project-item:hover 
+{
+    background-color: #468798;
+    color: #fff;
+}
+

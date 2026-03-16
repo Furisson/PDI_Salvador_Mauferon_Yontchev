@@ -169,6 +169,11 @@ def generate_config_xml():
     <extension type="component" id="stats" path="apps/pnmgl"/>
     </extensions>
 
+    <!-- Appel de la fonctionnalité de recherche de projets -->
+    <extensions>
+    <extension type="component" id="projets" path="apps/pnmgl"/>
+    </extensions>
+
         <themes>
     """
 

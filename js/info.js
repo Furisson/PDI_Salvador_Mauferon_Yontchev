@@ -1005,8 +1005,40 @@ var info = (function () {
         "serialized",
         "feature_ol_uid",
         "mviewerid",
+        "fields_kv_extras",
+        "has_fields_kv_extras",
         geometryName,
       ];
+
+      var knownTemplateFields = [
+        "nom",
+        "source",
+        "auteur",
+        "maj",
+        "nb_payante",
+        "nb_gratuite",
+        "import_t",
+        "export_t",
+        "etiquette",
+        "regl_type",
+        "regl_medtx",
+        "cat_regl",
+        "info_regl",
+        "arrete_nom",
+        "actv_inter",
+        "id",
+        "fid",
+        "id_bdd",
+        "num",
+        "info",
+        "tech",
+        "cara",
+        "regl"
+      ];
+
+
+
+
       var extractFeaturePropertiesFn = function (properties) {
         return Object.keys(properties).reduce((filteredProps, propertyName) => {
           var value = properties[propertyName];
@@ -1024,9 +1056,30 @@ var info = (function () {
           return { key, value };
         });
       };
+
+      var fields_kv_extras = function () {
+      var properties = extractFeaturePropertiesFn(this);
+      return Object.entries(properties)
+        .filter(([key, value]) => {
+          return (
+            !knownTemplateFields.includes(key) &&
+            value !== null &&
+            value !== undefined &&
+            value !== ""
+          );
+        })
+        .map(([key, value]) => {
+          return { key, value };
+        });
+      };
+
+      var has_fields_kv_extras = function () {
+        return fields_kv_extras.call(this).length > 0;
+      };
+
       // except  vector tile feature
       if (feature.setProperties) {
-        feature.setProperties({ fields_kv: fields_kv });
+        feature.setProperties({fields_kv: fields_kv,fields_kv_extras: fields_kv_extras,has_fields_kv_extras: has_fields_kv_extras});
         // add a serialized version of the object so it can easily be passed through HTML GET request
         // you can deserialize it with `JSON.parse(decodeURIComponent(feature.getProperties().serialized()))`
         // when data is the serialized data

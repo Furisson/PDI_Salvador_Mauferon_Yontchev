@@ -47,13 +47,25 @@
     <extension type="component" id="stats" path="apps/pnmgl"/>
     </extensions>
 
-        <themes>
-    <theme name="Usages"  collapsed="true" id="environnement" icon="fas fa-ship">
+    <!-- Appel de la fonctionnalité de recherche de projets -->
+    <extensions>
+    <extension type="component" id="projets" path="apps/pnmgl"/>
+    </extensions>
+
+
+    <!-- Regroupement en thèmes  -->
+    <themes>
+
+        <theme name="Usages"  collapsed="true" id="environnement" icon="fas fa-ship">
 
             <!-- Regroupement en groupes -->
             <group name="Ports et transport maritime" id="ptm">
 
                 <!-- Définition des layers, voir la doc utilisateur ou le fichier pnmgl/aide_user/format_ajout_couche.xml  -->
+                
+                
+                
+                
                 <layer id="us_med_PNMGL_cale_de_mise_a_leau_ofb_pt_4326"
                     name="Cale de mise à l'eau"
                     visible="false"
