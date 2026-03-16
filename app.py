@@ -107,11 +107,15 @@ def generate_config_xml():
     </extensions>
 
         <themes>
-            <theme name="Eco"  collapsed="true" id="eco" icon="fas fa-leaf">
-            </theme>
-            <theme name="Gouvernance"  collapsed="true" id="gouvernance" icon="fas fa-globe">
-            </theme>
     """
+
+    file_default_layers = "./apps/pnmgl/default_layers.xml"
+
+    # Ouvrir et lire le fichier
+    with open(file_default_layers, "r", encoding="utf-8") as f:
+        default_layers = f.read()
+
+    xml_content += default_layers
 
     themes = {}
     groups = {}
@@ -172,7 +176,6 @@ def generate_config_xml():
 def generate_style(style, nom_style, type_geom):
     # Chemin vers ton featurestyles.js
     js_file_path = "./js/featurestyles.js"
-    print(style)
 
     # Nouveau style JS à ajouter
     new_style_js = f"""
@@ -223,10 +226,6 @@ def generate_style(style, nom_style, type_geom):
         # Réécrire le fichier
         with open(js_file_path, "w", encoding="utf-8") as f:
             f.write(content)
-
-        print("Style ajouté avec succès !")
-    else:
-        print("Le style existe déjà.")
 
 # --- Endpoint upload ---
 @app.route("/upload", methods=["POST"])
