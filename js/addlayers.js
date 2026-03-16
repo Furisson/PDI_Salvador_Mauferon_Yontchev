@@ -1,6 +1,46 @@
+// Gère l'ajout d'un style personnalisé à une couche ajoutée par l'utilisateur
+document.addEventListener("DOMContentLoaded", () => {
+    const fillInput = document.getElementById("fillColor");
+    const strokeInput = document.getElementById("strokeColor");
+    const widthInput = document.getElementById("strokeWidth");
+    const canvas = document.getElementById("stylePreview");
+    const ctx = canvas.getContext("2d");
+    const hiddenInput = document.getElementById("dynamicStyle");
+
+    function updatePreview() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Exemple : rectangle rempli avec contour
+        ctx.fillStyle = fillInput.value;
+        ctx.strokeStyle = strokeInput.value;
+        ctx.lineWidth = parseInt(widthInput.value, 10);
+
+        ctx.beginPath();
+        ctx.rect(5, 5, 50, 50);
+        ctx.fill();
+        ctx.stroke();
+
+        // Mettre à jour le champ caché
+        hiddenInput.value = JSON.stringify({
+            fill: fillInput.value,
+            stroke: strokeInput.value,
+            width: parseInt(widthInput.value, 10)
+        });
+    }
+
+    // Événements pour mise à jour
+    [fillInput, strokeInput, widthInput].forEach(input => {
+        input.addEventListener("input", updatePreview);
+    });
+
+    // Initialiser l'aperçu
+    updatePreview();
+});
+
 function addNewThemeInput() {
   const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash"] 
 
+  // Ajouter la section pour les icônes
   div_icons = document.createElement("div");
   div_icons.classList.add("form-group", "div-icons");
   label_icons = document.createElement("label");
@@ -8,6 +48,8 @@ function addNewThemeInput() {
   label_icons.style.marginTop = "10px";
   label_icons.id = "label_icons";
   div_icons.appendChild(label_icons);
+
+  // Créer une liste d'icônes à sélectionner
   div_list_icons = document.createElement("div");
   div_list_icons.id = "logoList";
   div_list_icons.style.display = "flex";
@@ -15,6 +57,8 @@ function addNewThemeInput() {
   div_list_icons.style.flexWrap = "wrap";
   div_icons.appendChild(div_list_icons);
   themeSelect.parentNode.appendChild(div_icons);
+
+  // Ajouter les icônes à la liste
   listIcon.forEach(icon => {
         div_logo_item = document.createElement("div");
         div_logo_item.classList.add("logo-item");
@@ -33,6 +77,7 @@ function addNewThemeInput() {
         div_list_icons.appendChild(div_logo_item);
     });
 
+  // Ajouter le champ de saisie pour la nouvelle thématique
   const inputNewTheme = document.createElement("input");
   inputNewTheme.type = "text";
   inputNewTheme.id = "newThemeInput";
@@ -44,6 +89,7 @@ function addNewThemeInput() {
 }
 
 function addNewGroupInput() {
+  // Ajouter le champ de saisie pour le nouveau groupe
   const inputNewGroup = document.createElement("input");
   inputNewGroup.type = "text";
   inputNewGroup.id = "newGroupInput";
@@ -151,6 +197,7 @@ $("#uploadLayerForm").submit(function(e){
     const newThemeInput = document.getElementById("newThemeInput");
     const newGroupInput = document.getElementById("newGroupInput");
     const selectedIcon = document.querySelector(".logo-item.selected i");
+    const selectedStyle = document.getElementById("dynamicStyle").value;
     
     if (newThemeInput && newThemeInput.value.trim() !== "") {
       formData.append("theme", newThemeInput.value.trim());
@@ -171,6 +218,7 @@ $("#uploadLayerForm").submit(function(e){
     }
     formData.append("layer_name", $("#layerName").val());
     formData.append("file", $("#layerFile")[0].files[0]);
+    formData.append("style", selectedStyle);
 
     $.ajax({
 

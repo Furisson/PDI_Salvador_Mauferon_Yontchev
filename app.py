@@ -33,7 +33,7 @@ def datastore_exists(workspace_name, datastore_name):
     r = requests.get(url, auth=HTTPBasicAuth(GEOSERVER_USER, GEOSERVER_PASSWORD))
     return r.status_code == 200
 
-def save_layer_metadata(layer_name, theme, group, icon):
+def save_layer_metadata(layer_name, theme, group, icon, style):
     data = []
 
     if os.path.exists("layers.json"):
@@ -46,7 +46,8 @@ def save_layer_metadata(layer_name, theme, group, icon):
         "name": layer_name,
         "theme": theme_clean,
         "icon": icon,
-        "group" : group
+        "group" : group,
+        "style": style
     })
 
     with open("layers.json", "w") as f:
@@ -130,6 +131,7 @@ def generate_config_xml():
             themes[theme] = []
         themes[theme].append(group)
         icons[theme] = group[0]["icon"]  # Utiliser l'icône du premier layer du groupe
+        
 
     for theme_name, theme_layers in themes.items():
         theme_name_unclean = theme_name.replace("_", " ").title()
@@ -145,9 +147,12 @@ def generate_config_xml():
                 type="geojson"
                 opacity="1"
                 visible="false"
+                searchable="true"   
                 queryable="true"
-                url="{GEOSERVER_URL}/{layer["theme"]}/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName={layer["theme"]}:{layer["name"]}&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="{layer["theme"]}:{layer["name"]}"
+                vectorlegend="true"
+                style="{layer["style"]}"
+                url="{GEOSERVER_URL}/{layer["theme"]}/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName={layer["theme"]}:{layer["name"].replace(" ", "_").lower()}&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="{layer["theme"]}:{layer["name"].replace(" ", "_").lower()}"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
@@ -164,6 +169,65 @@ def generate_config_xml():
     with open("./apps/default.xml", "w", encoding="utf-8") as f:
         f.write(xml_content)
 
+def generate_style(style, nom_style, type_geom):
+    # Chemin vers ton featurestyles.js
+    js_file_path = "./js/featurestyles.js"
+    print(style)
+
+    # Nouveau style JS à ajouter
+    new_style_js = f"""
+    mviewer.featureStyles.{nom_style} = function(feature) {{
+        return new ol.style.Style({{
+            stroke: new ol.style.Stroke({{
+                color: "{style['stroke']}",
+                width: {style['width']}
+            }}),
+            fill: new ol.style.Fill({{
+                color: "{style['fill']}"
+            }})
+        }});
+    }};
+    """
+
+    new_style_js_point = f"""
+    mviewer.featureStyles.{nom_style} = function(feature) {{
+        return new ol.style.Style({{
+            image: new ol.style.Circle({{
+                radius: 7,
+                fill: new ol.style.Fill({{
+                    color: "{style['fill']}"
+                }}),
+                stroke: new ol.style.Stroke({{
+                    color: "{style['stroke']}",
+                    width: {style['width']}
+                }})
+            }})
+        }});
+    }};
+    """
+
+
+    # Lire le fichier existant
+    with open(js_file_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    # Vérifier si le style existe déjà
+    if f"mviewer.featureStyles.{nom_style}" not in content:
+        if type_geom == "Point":
+            # Ajouter le nouveau style à la fin
+            content += "\n" + new_style_js_point
+        else:
+            # Ajouter le nouveau style à la fin
+            content += "\n" + new_style_js
+
+        # Réécrire le fichier
+        with open(js_file_path, "w", encoding="utf-8") as f:
+            f.write(content)
+
+        print("Style ajouté avec succès !")
+    else:
+        print("Le style existe déjà.")
+
 # --- Endpoint upload ---
 @app.route("/upload", methods=["POST"])
 def upload_file():
@@ -176,6 +240,7 @@ def upload_file():
     theme = request.form.get("theme")
     group = request.form.get("group")
     icon = request.form.get("icon")
+    style = json.loads(request.form.get("style"))
     
     if "file" not in request.files:
         return jsonify({"error": "Aucun fichier envoyé"}), 400
@@ -199,6 +264,7 @@ def upload_file():
 
     # Normaliser le nom des attributs de la couche
     gdf = gpd.read_file(shapefile_path)
+    type_geom = gdf.geom_type.iloc[0]
     gdf = gdf.rename(columns=lambda x: x.replace(" ", "_").lower())
     gdf = gdf.rename(columns={
         "sources": "source",
@@ -228,10 +294,12 @@ def upload_file():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-    save_layer_metadata(layer_name, theme, group, icon)
+    nom_style = f"{theme.replace(' ', '_').lower()}_{layer_name.replace(' ', '_').lower()}_style"
+    generate_style(style, nom_style, type_geom)
+    save_layer_metadata(layer_name, theme, group, icon, nom_style)
     generate_config_xml()
 
-    return jsonify({"success": "true", "layer": layer_name, "id": f"{theme}:{layer_name.replace(' ', '_').lower()}", "url": f"{GEOSERVER_URL}/{theme}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={theme}:{layer_name}&outputFormat=application/json&srsname=EPSG:3857"})
+    return jsonify({"success": "true", "layer": layer_name, "id": f"{theme.replace(' ', '_').lower()}:{layer_name.replace(' ', '_').lower()}", "url": f"{GEOSERVER_URL}/{theme.replace(' ', '_').lower()}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={theme.replace(' ', '_').lower()}:{layer_name.replace(' ', '_').lower()}&outputFormat=application/json&srsname=EPSG:3857"})
 
 @app.route("/reload_config")
 def serve_config():
@@ -246,6 +314,7 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     headers = {"Content-Type": "application/xml"}
     
     theme_clean = theme.replace(" ", "_").lower()
+    layer_name_clean = layer_name.replace(" ", "_").lower()
 
     # Déplacer tous les fichiers du shapefile dans un sous-dossier pour le datastore GeoServer
     extensions = [".shp", ".shx", ".dbf", ".prj", ".cpg"]
@@ -292,8 +361,8 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
     url_layer = f"{GEOSERVER_URL}/rest/workspaces/{theme_clean}/datastores/{datastore_name}/featuretypes?recalculate=nativebbox,latlonbbox"
     xml_layer = f"""
     <featureType>
-        <name>{layer_name}</name>
-        <title>{layer_name}</title>
+        <name>{layer_name_clean}</name>
+        <title>{layer_name_clean}</title>
         <srs>{src_crs}</srs>
         <nativeName>{os.path.basename(shapefile_path).replace('.shp', '')}</nativeName>
     </featureType>

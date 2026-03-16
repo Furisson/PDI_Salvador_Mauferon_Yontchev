@@ -656,6 +656,37 @@
                             <input type="file" id="layerFile" class="form-control" accept=".zip" required>
                           </div>
 
+                          <div class="form-group" >
+                            <div id="div_add_style">
+                                <!-- Couleur de remplissage -->
+                                <div>
+                                    <label for="fillColor">Couleur de remplissage</label>
+                                    <input type="color" id="fillColor" class="form-control form-control-color" value="#00ff00">
+                                </div>
+
+                                <!-- Couleur de contour -->
+                                <div>
+                                    <label for="strokeColor">Couleur du contour</label>
+                                    <input type="color" id="strokeColor" class="form-control form-control-color"  value="#000000">
+                                </div>
+
+                                <!-- Épaisseur du contour -->
+                                <div>
+                                    <label for="strokeWidth">Épaisseur du contour</label>
+                                    <input type="number" id="strokeWidth" class="form-control" value="2" min="0" max="10">
+                                </div>
+                            </div>
+
+                            <!-- Aperçu dynamique -->
+                            <div style="margin-top:10px;">
+                                <label>Aperçu :</label>
+                            </div>
+                            <canvas id="stylePreview" width="60" height="60" style="border:1px solid #ccc;"></canvas>
+
+                            <!-- Champ caché pour envoyer les valeurs au serveur -->
+                            <input type="hidden" id="dynamicStyle" name="style">
+                        </div>
+
                           <button type="submit" class="btn btn-primary">Ajouter la couche</button>
                         </form>
                       </div>

@@ -61,45 +61,28 @@
                 type="geojson"
                 opacity="1"
                 visible="false"
+                searchable="true"   
                 queryable="true"
+                vectorlegend="true"
+                style="circle1"
                 url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
                 typeName="hydrologie_test:test_9"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />
             </layer>
-            </group>
-</theme>
-        <theme name="Thematique Test" collapsed="true" id="thematique_test" icon="fas fa-leaf">
-
-            <group name="Groupe de test" id ="groupe_de_test">
             
-                <layer id="thematique_test:test_10"
-                name="test 10"
+                <layer id="hydrologie_test:test_10"
+                name="Test 10"
                 type="geojson"
                 opacity="1"
                 visible="false"
+                searchable="true"   
                 queryable="true"
-                url="http://localhost:8080/geoserver/thematique_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=thematique_test:test 10&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="thematique_test:test 10"
-                srs="EPSG:3857"
-                format="application/json">
-                <template url="apps/pnmgl/templates/defaut.mst" />
-            </layer>
-            </group>
-</theme>
-        <theme name="Recyclage" collapsed="true" id="recyclage" icon="fas fa-trash">
-
-            <group name="Poubelles" id ="poubelles">
-            
-                <layer id="recyclage:test_11"
-                name="Test 11"
-                type="geojson"
-                opacity="1"
-                visible="false"
-                queryable="true"
-                url="http://localhost:8080/geoserver/recyclage/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=recyclage:Test 11&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="recyclage:Test 11"
+                vectorlegend="true"
+                style="hydrologie_test_test_10_style"
+                url="http://localhost:8080/geoserver/hydrologie_test/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=hydrologie_test:test_10&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="hydrologie_test:test_10"
                 srs="EPSG:3857"
                 format="application/json">
                 <template url="apps/pnmgl/templates/defaut.mst" />

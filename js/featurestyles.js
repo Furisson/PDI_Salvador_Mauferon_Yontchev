@@ -146,3 +146,20 @@ mviewer.featureStyles.sensorPoint = (f) =>
       stroke: new ol.style.Stroke({ color: "rgba(217, 85, 82,1)", width: 4 }),
     }),
   });
+    
+
+    mviewer.featureStyles.hydrologie_test_test_10_style = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: "#00ff00"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#000000",
+                    width: 2
+                })
+            })
+        });
+    };
+    
