@@ -150,7 +150,15 @@ CORRESPONDANCES = {
 # =========================================================
 
 def valeur_non_vide(valeur) -> bool:
-    """Retourne True si la valeur est considérée comme exploitable."""
+    """
+    Retourne True si la valeur est considérée comme exploitable.
+    
+    Attributes:
+        valeur: La valeur à évaluer.
+
+    Returns:
+        bool: True si la valeur est non nulle et non vide, False sinon.
+    """
     if valeur is None:
         return False
     if isinstance(valeur, str) and valeur.strip() == "":
@@ -159,7 +167,15 @@ def valeur_non_vide(valeur) -> bool:
 
 
 def premiere_valeur(properties: dict, candidats: list):
-    """Retourne la première valeur non vide trouvée parmi une liste de clés candidates."""
+    """
+    Retourne la première valeur non vide trouvée parmi une liste de clés candidates.
+    
+    Attributes:
+        properties (dict): Le dictionnaire de propriétés à rechercher.
+        candidats (list): Une liste de clés à tester dans l'ordre de priorité.
+    Returns:
+        La première valeur non vide trouvée, ou une chaîne vide si aucune n'est trouvée.
+    """
     for cle in candidats:
         if cle in properties and valeur_non_vide(properties[cle]):
             return properties[cle]
@@ -167,7 +183,15 @@ def premiere_valeur(properties: dict, candidats: list):
 
 
 def determiner_projet(nom_dossier: str) -> str:
-    """Détermine le nom du projet à partir des propriétés ou du nom de fichier."""
+    """
+    Détermine le nom du projet à partir des propriétés ou du nom de fichier.
+
+    Attributes:
+        nom_dossier (str): Le nom du dossier contenant le fichier.
+
+    Returns:
+        str: Le nom du projet lié.
+    """
     projet_existant = PROJET_PAR_DOSSIER[nom_dossier] if nom_dossier in PROJET_PAR_DOSSIER else ""
     if valeur_non_vide(projet_existant):
         return projet_existant
@@ -175,12 +199,17 @@ def determiner_projet(nom_dossier: str) -> str:
         print(f"[AVERTISSEMENT] Le dossier '{nom_dossier}' n'est pas référencé dans PROJET_PAR_DOSSIER.")
         raise Exception(f"Le projet n'est pas renseigné dans les propriétés du fichier")
 
-    stem = Path(nom_fichier).stem
-    return PROJET_PAR_DOSSIER.get(stem, "")
-
 
 def construire_booleens(props: dict) -> dict:
-    """Construit les booléens de sections attendus par le template."""
+    """
+    Construit les booléens de sections attendus par le template.
+    
+    Attributes:
+        props (dict): Un dictionnaire de propriétés d'une feature.
+
+    Returns:
+        dict: Un dictionnaire contenant les booléens 'info', 'cara', 'regl', 'tech'.
+    """
     info = any([
         valeur_non_vide(props.get("nom")),
         valeur_non_vide(props.get("source")),
@@ -235,6 +264,13 @@ def normaliser_properties(properties: dict, projet: str) -> dict:
 
     Les champs absents ne sont pas instanciés, à l’exception des booléens
     de section (`info`, `cara`, `regl`, `tech`) qui sont toujours présents.
+
+    Attributes:
+        properties (dict): Le dictionnaire de propriétés d’une feature à normaliser.
+        projet (str): Le nom du projet à associer à cette feature.
+
+    Returns:
+        dict: Un dictionnaire de propriétés normalisé.
     """
     original = deepcopy(properties)
     resultat = {}
@@ -307,7 +343,16 @@ def normaliser_properties(properties: dict, projet: str) -> dict:
 
 
 def normaliser_geojson(fichier: Path, projet: str):
-    """Normalise toutes les features d’un fichier GeoJSON."""
+    """
+    Normalise toutes les features d’un fichier GeoJSON.
+    
+    Attributes:
+        fichier (Path): Le chemin vers le fichier GeoJSON à normaliser.
+        projet (str): Le nom du projet à associer à toutes les features de ce fichier.
+
+    Returns:
+        None
+    """
     with fichier.open("r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -365,5 +410,6 @@ def main():
                 print(f"[ERREUR] {fichier.name} : {e}")
 
     print(f"\nTerminé : {total_fichiers} fichier(s) traité(s).")
+    
 if __name__ == "__main__":
     main()

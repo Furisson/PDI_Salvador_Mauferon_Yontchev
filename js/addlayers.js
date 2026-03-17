@@ -7,6 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const ctx = canvas.getContext("2d");
     const hiddenInput = document.getElementById("dynamicStyle");
 
+    /**
+     * Met à jour l'aperçu du style et le champ caché avec les valeurs actuelles des inputs
+     * @return void
+     */
     function updatePreview() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -37,6 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
     updatePreview();
 });
 
+/**
+ * Affiche un champ de saisie pour ajouter une nouvelle thématique et une liste d'icônes à sélectionner
+ * @return void
+ */
 function addNewThemeInput() {
   const listIcon = ["fas fa-ship", "fas fa-leaf", "fas fa-globe", "fas fa-water", "fas fa-anchor", "fas fa-mountain", "fas fa-dove", "fas fa-map", "fas fa-trash", "fas fa-book", "fas fa-box", "fas fa-city", "fas fa-cloud", "fas fa-fire"] 
 
@@ -88,6 +96,10 @@ function addNewThemeInput() {
   themeSelect.parentNode.appendChild(inputNewTheme);
 }
 
+/**
+ * Affiche un champ de saisie pour ajouter un nouveau groupe
+ * @return void
+ */
 function addNewGroupInput() {
   // Ajouter le champ de saisie pour le nouveau groupe
   const inputNewGroup = document.createElement("input");
@@ -100,6 +112,11 @@ function addNewGroupInput() {
   groupSelect.parentNode.appendChild(inputNewGroup);
 }
 
+/**
+ * Remplit la liste des groupes en fonction de la thématique sélectionnée
+ * @param {*} themeSelect select contenant la liste des thématiques
+ * @returns void
+ */
 function fillGroupsSelect(themeSelect) {
   const selectedThemeName = themeSelect.value;
 
@@ -133,11 +150,15 @@ function fillGroupsSelect(themeSelect) {
     }
   }
 
+  /**
+   * Remplit la liste des projets
+   * @returns void
+   */
 function fillProjectsSelect() {
     //Remplir les projets
     const projetsSelect = document.getElementById("liste_projets");
     projetsSelect.innerHTML = ""; // vide le select
-    file_liste_projets = "../apps/pnmgl/data/projets/projects.json";
+    file_liste_projets = "apps/pnmgl/data/projets/projects.json";
     fetch(file_liste_projets)        
     .then(response => response.json())
     .then(data => {
@@ -217,18 +238,21 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
     fillProjectsSelect();
 });
 
+// Soumission du formulaire d'ajout de couche
 $("#uploadLayerForm").submit(function(e){
 
     e.preventDefault();
 
     var formData = new FormData();
 
+    // Récupérer les valeurs des champs de saisie, y compris les nouveaux thèmes et groupes, l'icône sélectionnée, le style et le projet
     const newThemeInput = document.getElementById("newThemeInput");
     const newGroupInput = document.getElementById("newGroupInput");
     const selectedIcon = document.querySelector(".logo-item.selected i");
     const selectedStyle = document.getElementById("dynamicStyle").value;
     const selectedProjet = document.getElementById("liste_projets").value;
     
+    // Si un nouveau thème ou groupe est saisi, l'ajouter au formData, sinon utiliser les valeurs sélectionnées dans les listes déroulantes
     if (newThemeInput && newThemeInput.value.trim() !== "") {
       formData.append("theme", newThemeInput.value.trim());
     } else {
@@ -240,17 +264,20 @@ $("#uploadLayerForm").submit(function(e){
     else {
     formData.append("group", $("#groupSelect").val());
     }
+    // Ajouter l'icône sélectionnée ou une icône par défaut si aucune n'est sélectionnée
     if (selectedIcon) {
       formData.append("icon", selectedIcon.className);
     }
     else {
       formData.append("icon", "fas fa-ship");
     }
+    // Ajouter les autres champs du formulaire
     formData.append("layer_name", $("#layerName").val());
     formData.append("file", $("#layerFile")[0].files[0]);
     formData.append("style", selectedStyle);
     formData.append("projet", selectedProjet);
 
+    // Envoyer les données au serveur via AJAX
     $.ajax({
 
         url: "http://localhost:5000/upload",

@@ -999,6 +999,7 @@ var info = (function () {
       if (activeAttributeValue) {
         feature.set(activeAttributeValue, true);
       }
+      // exclude some properties from feature to avoid to have too much properties in Mustache template
       var geometryName = feature.getGeometryName ? feature.getGeometryName() : "";
       var excludedPropNames = [
         "fields_kv",
@@ -1036,9 +1037,7 @@ var info = (function () {
         "regl"
       ];
 
-
-
-
+      // function to extract feature properties excluding object and specific properties
       var extractFeaturePropertiesFn = function (properties) {
         return Object.keys(properties).reduce((filteredProps, propertyName) => {
           var value = properties[propertyName];
@@ -1057,6 +1056,7 @@ var info = (function () {
         });
       };
 
+      // add a key_value array with all the fields that are not in knownTemplateFields, allowing to iterate through all "extra" fields in a mustache template
       var fields_kv_extras = function () {
       var properties = extractFeaturePropertiesFn(this);
       return Object.entries(properties)
