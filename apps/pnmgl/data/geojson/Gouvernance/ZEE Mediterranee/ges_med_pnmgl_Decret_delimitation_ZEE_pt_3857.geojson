@@ -1,31 +1,516 @@
 {
-"type": "FeatureCollection",
-"name": "ges_med_pnmgl_Decret_delimitation_ZEE_pt_3857",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:ESRI::54004" } },
-"features": [
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 0, "Comment": "Point situé à la latituide de la frontière terrestre avec l'Espagne, sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 383828.586419903091155, 5197596.255988168530166 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 1, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 396092.813093631179072, 5197587.930994760245085 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 2, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 596486.938167291111313, 4850554.212161281146109 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 3, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 698824.752019145642407, 4850527.578642099164426 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 4, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 654929.670833759591915, 5022349.752507317811251 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 5, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 760662.729154808912426, 5107526.293484882451594 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 6, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 779236.435552915208973, 5107581.003000480122864 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 7, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 927662.423277280060574, 5070414.610885334201157 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 8, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 964768.92020837101154, 5028498.397324739024043 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 9, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales à l'ouest de la Corse" }, "geometry": { "type": "Point", "coordinates": [ 981042.023796749534085, 5022278.516835181042552 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 10, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 1047016.158317733323202, 5317317.615497278980911 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 11, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 1001875.417139462311752, 5358968.415805956348777 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 12, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 890555.926346188760363, 5282826.040158945135772 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 13, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 872002.677880643168464, 5282826.040158945135772 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 14, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales." }, "geometry": { "type": "Point", "coordinates": [ 844172.805182324722409, 5368326.959484902210534 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 15, "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 838586.21440939954482, 5364580.130095725879073 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 30, "Comment": "Point de la délimitation maritime entre la France et Monaco" }, "geometry": { "type": "Point", "coordinates": [ 863373.354359368328005, 5277569.863506895489991 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 40, "Comment": "Point de la délimitation maritime entre la France et Monaco" }, "geometry": { "type": "Point", "coordinates": [ 859701.874147986294702, 5274541.619045930914581 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 0, "Comment": "Point situé à la latitude de la frontière terrestre avec l'Espagne, à la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 383827.54127041134052, 5197587.610519525595009 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 16, "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises." }, "geometry": { "type": "Point", "coordinates": [ 834931.224461687030271, 5361466.492321387864649 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 17, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1093713.997043912997469, 5157288.103119609877467 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 19, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1072115.952845221851021, 5048237.793550103902817 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 18, "Comment": null }, "geometry": { "type": "Point", "coordinates": [ 1141024.780631054192781, 5070402.360833786427975 ] } },
-{ "type": "Feature", "properties": { "Id": 0, "Numéro": 17, "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises" }, "geometry": { "type": "Point", "coordinates": [ 1093713.997043912997469, 5157290.87617486808449 ] } }
-]
+  "type": "FeatureCollection",
+  "name": "ges_med_pnmgl_Decret_delimitation_ZEE_pt_3857",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:ESRI::54004"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 0,
+        "Comment": "Point situé à la latituide de la frontière terrestre avec l'Espagne, sur la limite extérieure des eaux territoriales françaises"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          383828.5864199031,
+          5197596.2559881685
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 1,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          396092.8130936312,
+          5197587.93099476
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 2,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          596486.9381672911,
+          4850554.212161281
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 3,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          698824.7520191456,
+          4850527.578642099
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 4,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          654929.6708337596,
+          5022349.752507318
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 5,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          760662.7291548089,
+          5107526.293484882
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 6,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          779236.4355529152,
+          5107581.00300048
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 7,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          927662.4232772801,
+          5070414.610885334
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 8,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          964768.920208371,
+          5028498.397324739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 9,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales à l'ouest de la Corse"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          981042.0237967495,
+          5022278.516835181
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 10,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1047016.1583177333,
+          5317317.615497279
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 11,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1001875.4171394623,
+          5358968.415805956
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 12,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          890555.9263461888,
+          5282826.040158945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 13,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          872002.6778806432,
+          5282826.040158945
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 14,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises. Limite extérieure des eaux territoriales."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          844172.8051823247,
+          5368326.959484902
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 15,
+        "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          838586.2144093995,
+          5364580.130095726
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 30,
+        "Comment": "Point de la délimitation maritime entre la France et Monaco"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          863373.3543593683,
+          5277569.8635068955
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 40,
+        "Comment": "Point de la délimitation maritime entre la France et Monaco"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          859701.8741479863,
+          5274541.619045931
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 0,
+        "Comment": "Point situé à la latitude de la frontière terrestre avec l'Espagne, à la limite extérieure des eaux territoriales françaises."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          383827.54127041134,
+          5197587.610519526
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 16,
+        "Comment": "Point situé sur la délimitation maritime entre la France et Monaco et sur la limite extérieure des eaux territoriales françaises."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          834931.224461687,
+          5361466.492321388
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 17,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1093713.997043913,
+          5157288.10311961
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 19,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1072115.9528452219,
+          5048237.793550104
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 18,
+        "Comment": null
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1141024.7806310542,
+          5070402.360833786
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "info": false,
+        "cara": false,
+        "regl": false,
+        "id": 0,
+        "tech": true,
+        "projet": "Eutrophisation du Golfe du Lion",
+        "Id": 0,
+        "Numéro": 17,
+        "Comment": "Point situé sur la limite extérieure des eaux territoriales françaises"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          1093713.997043913,
+          5157290.876174868
+        ]
+      }
+    }
+  ]
 }

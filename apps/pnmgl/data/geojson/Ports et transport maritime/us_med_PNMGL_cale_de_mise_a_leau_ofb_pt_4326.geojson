@@ -1,13 +1,147 @@
 {
-"type": "FeatureCollection",
-"name": "us_med_pnmgl_Cale-de-mise-a-leau_pt_4326",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
-"features": [
-
-{ "type": "Feature", "properties": { "Port": "Le Barcar�s", "NB_Payante": 1, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.038498043334216, 42.797038158185806 ] } },
-{ "type": "Feature", "properties": { "Port": "Canet-en-Roussillon", "NB_Payante": 0, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.037008232785748, 42.702435188358045 ] } },
-{ "type": "Feature", "properties": { "Port": "Saint-Cyprien", "NB_Payante": 1, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.038498043334217, 42.619564476599471 ] } },
-{ "type": "Feature", "properties": { "Port": "Argel�s-sur-Mer", "NB_Payante": 0, "Nb_Gratuit": 1, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.052651243544669, 42.542373667556944 ] } },
-{ "type": "Feature", "properties": { "Port": "Banyuls-sur-mer", "NB_Payante": 1, "Nb_Gratuit": 0, "Source": "UVPLR_Etude_Port_LR_2014", "Num": "PNMGL_GOIMARD 2014" }, "geometry": { "type": "Point", "coordinates": [ 3.133493577588462, 42.481320796317313 ] } }
-
-]}
+  "type": "FeatureCollection",
+  "name": "us_med_pnmgl_Cale-de-mise-a-leau_pt_4326",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "nom": "Le Barcar�s",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "info": true,
+        "nb_payante": 1,
+        "nb_gratuite": 1,
+        "cara": true,
+        "regl": false,
+        "num": "PNMGL_GOIMARD 2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "Port": "Le Barcar�s",
+        "NB_Payante": 1,
+        "Nb_Gratuit": 1,
+        "Source": "UVPLR_Etude_Port_LR_2014",
+        "Num": "PNMGL_GOIMARD 2014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.038498043334216,
+          42.797038158185806
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nom": "Canet-en-Roussillon",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "info": true,
+        "nb_payante": 0,
+        "nb_gratuite": 1,
+        "cara": true,
+        "regl": false,
+        "num": "PNMGL_GOIMARD 2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "Port": "Canet-en-Roussillon",
+        "NB_Payante": 0,
+        "Nb_Gratuit": 1,
+        "Source": "UVPLR_Etude_Port_LR_2014",
+        "Num": "PNMGL_GOIMARD 2014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.037008232785748,
+          42.702435188358045
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nom": "Saint-Cyprien",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "info": true,
+        "nb_payante": 1,
+        "nb_gratuite": 1,
+        "cara": true,
+        "regl": false,
+        "num": "PNMGL_GOIMARD 2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "Port": "Saint-Cyprien",
+        "NB_Payante": 1,
+        "Nb_Gratuit": 1,
+        "Source": "UVPLR_Etude_Port_LR_2014",
+        "Num": "PNMGL_GOIMARD 2014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.038498043334217,
+          42.61956447659947
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nom": "Argel�s-sur-Mer",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "info": true,
+        "nb_payante": 0,
+        "nb_gratuite": 1,
+        "cara": true,
+        "regl": false,
+        "num": "PNMGL_GOIMARD 2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "Port": "Argel�s-sur-Mer",
+        "NB_Payante": 0,
+        "Nb_Gratuit": 1,
+        "Source": "UVPLR_Etude_Port_LR_2014",
+        "Num": "PNMGL_GOIMARD 2014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.052651243544669,
+          42.542373667556944
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "nom": "Banyuls-sur-mer",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "info": true,
+        "nb_payante": 1,
+        "nb_gratuite": 0,
+        "cara": true,
+        "regl": false,
+        "num": "PNMGL_GOIMARD 2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "Port": "Banyuls-sur-mer",
+        "NB_Payante": 1,
+        "Nb_Gratuit": 0,
+        "Source": "UVPLR_Etude_Port_LR_2014",
+        "Num": "PNMGL_GOIMARD 2014"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.133493577588462,
+          42.48132079631731
+        ]
+      }
+    }
+  ]
+}
