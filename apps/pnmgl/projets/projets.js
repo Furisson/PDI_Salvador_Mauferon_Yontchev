@@ -1,18 +1,18 @@
 const URL_DONNEES_PROJETS = "apps/pnmgl/data/projets/projects.json";
 
-let indexCouchesParProjet = {};
+let indexCouchesGlobal = {};
 let indexProjets = {};
 
 /**
  * Retourne une classe CSS (font awesome) en fonction du nom de la thématique.
  * Sert uniquement si aucune icône n'est fournie dans le JSON.
  */
-function classeIconeParDefaut(nomThematique) 
+function classeIconeParDefaut(nomThematique)
 {
     const nom = (nomThematique || "").toLowerCase();
     if (nom.includes("hydro")) return "glyphicon glyphicon-tint";
     if (nom.includes("urban")) return "glyphicon glyphicon-home";
-    
+   
     return "glyphicon glyphicon-folder-open";
 }
 
@@ -20,7 +20,7 @@ function classeIconeParDefaut(nomThematique)
 /**
  * Échappe les caractères spéciaux HTML pour éviter les problèmes d'affichage et de sécurité.
  */
-function echapperHtml(texte) 
+function echapperHtml(texte)
 {
     return String(texte)
         .replaceAll("&", "&amp;")
@@ -39,6 +39,19 @@ function normaliserIdCouche(texte) {
         .replace(/\s+/g, "_");
 }
 
+function ajouterCoucheDansIndex(projet, couche) {
+    if (!projet || !couche?.name) return;
+
+    if (!indexCouchesGlobal[projet]) {
+        indexCouchesGlobal[projet] = [];
+    }
+
+    indexCouchesGlobal[projet].push(couche);
+}
+
+
+
+
 /**
  * Charge le fichier layers.json et construit un index permettant
  * d’associer un projet à ses couches associées.
@@ -52,25 +65,35 @@ function normaliserIdCouche(texte) {
  * Cet index est ensuite utilisé pour activer, ouvrir, afficher, automatiquement
  * les couches liées à un projet dans l’interface.
  */
-
 async function chargerCouchesParProjet() {
-    const reponse = await fetch("../../../layers.json", { cache: "no-store" });
-    if (!reponse.ok) {
-        throw new Error("Impossible de charger layer.json");
-    }
+    const reponse = await fetch("../../../layer.json", { cache: "no-store" });
+    if (!reponse.ok) throw new Error("Erreur layer.json");
 
     const couches = await reponse.json();
-
-    indexCouchesParProjet = {};
 
     couches.forEach((couche) => {
         if (!couche.projet) return;
 
-        if (!indexCouchesParProjet[couche.projet]) {
-            indexCouchesParProjet[couche.projet] = [];
-        }
+        ajouterCoucheDansIndex(couche.projet, {
+            name: couche.name,
+            source: "layer.json"
+        });
+    });
+}
 
-        indexCouchesParProjet[couche.projet].push(couche);
+async function chargerCouchesParProjetSimple() {
+    const reponse = await fetch("../../../layers.json", { cache: "no-store" });
+    if (!reponse.ok) throw new Error("Erreur layers.json");
+
+    const couches = await reponse.json();
+
+    couches.forEach((couche) => {
+        if (!couche.projet) return;
+
+        ajouterCoucheDansIndex(couche.projet, {
+            name: couche.name,
+            source: "layers.json"
+        });
     });
 }
 
@@ -86,10 +109,10 @@ async function chargerCouchesParProjet() {
  *
  * @returns {Promise<Array>} Tableau de thématiques contenant leurs projets
  */
-async function chargerThematiques() 
+async function chargerThematiques()
 {
     const reponse = await fetch(URL_DONNEES_PROJETS, { cache: "no-store" });
-    if (!reponse.ok) 
+    if (!reponse.ok)
     {
         throw new Error("Impossible de charger " + URL_DONNEES_PROJETS);
     }
@@ -132,10 +155,10 @@ async function chargerThematiques()
  * @returns {string} HTML correspondant au bloc
  */
 
-function rendreBlocContenu(bloc) 
+function rendreBlocContenu(bloc)
 {
     if (!bloc || !bloc.type) return "";
-    switch (bloc.type) 
+    switch (bloc.type)
     {
         case "titre":
             return `<h4 class="panneau-projet__sous-titre">${echapperHtml(bloc.texte || "")}</h4>`;
@@ -182,7 +205,7 @@ function rendreBlocContenu(bloc)
  * @returns {string} HTML généré à partir des blocs
  */
 
-function rendreContenuProjet(contenu) 
+function rendreContenuProjet(contenu)
 {
     if (!Array.isArray(contenu)) return "";
     return contenu.map(rendreBlocContenu).join("");
@@ -199,7 +222,7 @@ function rendreContenuProjet(contenu)
  * @param {Object} projet - Objet projet issu du JSON
  */
 
-function ouvrirPanneauProjet(projet) 
+function ouvrirPanneauProjet(projet)
 {
     const panneau = document.getElementById("right-panel");
     const contenu = panneau ? panneau.querySelector(".popup-content") : null;
@@ -218,9 +241,9 @@ function ouvrirPanneauProjet(projet)
                     ${rendreContenuProjet(projet.contenu)}
 
                     <div class="panneau-projet__actions">
-                        ${indexCouchesParProjet[projet.titre] ? `<button class="btn btn-primary panneau-projet__bouton" onclick="afficherCouchesDuProjet('${echapperHtml(projet.titre)}')"> Afficher les couches associées </button>` : ""}
+                        ${indexCouchesGlobal[projet.titre] ? `<button class="btn btn-primary panneau-projet__bouton" onclick="afficherCouchesDuProjet('${echapperHtml(projet.titre)}')"> Afficher les couches associées </button>` : ""}    
                         ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
-                        
+                       
                     </div>
 
             </div>
@@ -269,7 +292,7 @@ function ouvrirWrapperSiFerme(callback) {
  * Ouvre automatiquement dans le menu des couches le thème et le groupe
  * auxquels appartient une couche donnée.
  *
- * Cette fonction est utilisée lorsqu’on clique sur afficher les couches associées à un projet. 
+ * Cette fonction est utilisée lorsqu’on clique sur afficher les couches associées à un projet.
  * Elle permet de dérouler l’arborescence du menu pour rendre la couche visible
  * dans l’interface avant de l’activer.
  *
@@ -339,14 +362,14 @@ function ouvrirThemeEtGroupeDepuisCouche(liCouche) {
  * @param {Array} thematiques - Tableau des thématiques contenant leurs projets
  */
 
-function afficherThematiques(thematiques) 
+function afficherThematiques(thematiques)
 {
     const conteneur = document.getElementById("themes-list");
     if (!conteneur) return;
 
     conteneur.innerHTML = "";
 
-    thematiques.forEach((t, index) => 
+    thematiques.forEach((t, index) =>
     {
         const idBlocProjets = `bloc-projets-${index}`;
 
@@ -371,14 +394,14 @@ function afficherThematiques(thematiques)
         blocProjets.className = "mv-projects";
         blocProjets.id = idBlocProjets;
 
-        (t.projets || []).forEach((p,indexProjet) => 
+        (t.projets || []).forEach((p,indexProjet) =>
         {
             const item = document.createElement("li");
             item.className = "mv-project-item";
             item.textContent = p.titre;
             item.indexProjet = indexProjet;
 
-            item.addEventListener("click", (e) => 
+            item.addEventListener("click", (e) =>
             {
                 e.stopPropagation(); // Ne pas replier thématique
                 ouvrirPanneauProjet(p);
@@ -387,16 +410,16 @@ function afficherThematiques(thematiques)
             blocProjets.appendChild(item);
         });
 
-        ligne.addEventListener("click", () => 
+        ligne.addEventListener("click", () =>
         {
             // Si le wrapper est fermé, on l’ouvre puis on ouvre directement cette thématique
-            if (wrapperEstFerme()) 
+            if (wrapperEstFerme())
             {
-                ouvrirWrapperSiFerme(() => 
+                ouvrirWrapperSiFerme(() =>
                 {
-                    document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
+                    document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) =>
                     {
-                        if (autre !== blocProjets) 
+                        if (autre !== blocProjets)
                         {
                             appliquerDelaisFermeture(autre);
                             autre.classList.remove("ouvert");
@@ -412,43 +435,43 @@ function afficherThematiques(thematiques)
 
             const etaitOuvert = blocProjets.classList.contains("ouvert");
 
-            document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) => 
+            document.querySelectorAll("#mv-project-section .mv-projects.ouvert").forEach((autre) =>
             {
-                if (autre !== blocProjets) 
+                if (autre !== blocProjets)
                     {
                     appliquerDelaisFermeture(autre);
                     autre.classList.remove("ouvert");
                     }
             });
 
-                if (etaitOuvert) 
+                if (etaitOuvert)
                 {
                     appliquerDelaisFermeture(blocProjets);
                     blocProjets.classList.remove("ouvert");
-                } 
-                else 
+                }
+                else
                 {
                     appliquerDelaisOuverture(blocProjets);
                     blocProjets.classList.add("ouvert");
                 }
         });
 
-        function appliquerDelaisOuverture(conteneur) 
+        function appliquerDelaisOuverture(conteneur)
         {
             const items = conteneur.querySelectorAll(".mv-project-item");
-            items.forEach((it, i) => 
+            items.forEach((it, i) =>
             {
                 it.style.transitionDelay = (i * 60) + "ms";
             });
         }
 
-        function appliquerDelaisFermeture(conteneur) 
+        function appliquerDelaisFermeture(conteneur)
         {
             const items = [...conteneur.querySelectorAll(".mv-project-item")];
             const n = items.length;
-            items.forEach((it, i) => 
+            items.forEach((it, i) =>
             {
-                // inversé : dernier disparaît en premier : effet défilement 
+                // inversé : dernier disparaît en premier : effet défilement
                 it.style.transitionDelay = ((n - 1 - i) * 60) + "ms";
             });
         }
@@ -463,12 +486,12 @@ function afficherThematiques(thematiques)
  * Retourne uniquement les thématiques qui ont au moins un projet matchant la requete.
  */
 
-function filtrerThematiques(thematiques, requete) 
+function filtrerThematiques(thematiques, requete)
 {
     const q = (requete || "").toLowerCase().trim();
     if (!q) return { thematiques, toutDeplier: false };
 
-    const thematiquesFiltrees = thematiques.map((t) => 
+    const thematiquesFiltrees = thematiques.map((t) =>
         {
             const projetsFiltres = (t.projets || []).filter((p) =>
                 (p.titre || "").toLowerCase().includes(q)
@@ -484,13 +507,13 @@ function filtrerThematiques(thematiques, requete)
  * Branche la barre de recherche pour filtrer les projets.
  */
 
-function initialiserRecherche(thematiques) 
+function initialiserRecherche(thematiques)
 {
     const champ = document.getElementById("projectfilter-field");
     const boutonEffacer = document.getElementById("projectfilter-clear");
     if (!champ) return;
 
-    function appliquer() 
+    function appliquer()
     {
         const texte = champ.value;
         if (boutonEffacer) boutonEffacer.style.display = texte.trim() ? "block" : "none";
@@ -499,9 +522,9 @@ function initialiserRecherche(thematiques)
         afficherThematiques(resultat.thematiques);
 
         // Si filtré : on déplie tout pour montrer les résultats
-        if (resultat.toutDeplier) 
+        if (resultat.toutDeplier)
             {
-                document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) => 
+                document.querySelectorAll("#mv-project-section .mv-projects").forEach((el) =>
                     {
                         el.classList.add("ouvert");
                     });
@@ -510,9 +533,9 @@ function initialiserRecherche(thematiques)
 
     champ.addEventListener("input", appliquer);
 
-    if (boutonEffacer) 
+    if (boutonEffacer)
     {
-        boutonEffacer.addEventListener("click", () => 
+        boutonEffacer.addEventListener("click", () =>
         {
             champ.value = "";
             appliquer();
@@ -525,11 +548,11 @@ function initialiserRecherche(thematiques)
  * Permet de refermer toutes les thématiques si celles-ci étaient ouvertes : utile si clique sur une autre thématique
  */
 
-function refermerToutesLesThematiques() 
+function refermerToutesLesThematiques()
 {
     document
         .querySelectorAll("#mv-project-section .mv-projects.ouvert")
-        .forEach((element) => 
+        .forEach((element) =>
         {
             element.classList.remove("ouvert");
         });
@@ -539,18 +562,18 @@ function refermerToutesLesThematiques()
  * Ferme toutes les thématiques
  */
 
-function initialiserFermetureMenuProjets() 
+function initialiserFermetureMenuProjets()
 {
     const boutonMenu = document.querySelector(".menu-toggle");
     const wrapper = document.getElementById("wrapper");
 
     if (!boutonMenu || !wrapper) return;
 
-    boutonMenu.addEventListener("click", () => 
+    boutonMenu.addEventListener("click", () =>
     {
-        setTimeout(() => 
+        setTimeout(() =>
         {
-            if (wrapper.classList.contains("toggled-2")) 
+            if (wrapper.classList.contains("toggled-2"))
                 {
                     refermerToutesLesThematiques();
                 }
@@ -562,27 +585,28 @@ function initialiserFermetureMenuProjets()
  * Init : attend que le composant soit injecté dans le DOM, puis charge et affiche les données.
  */
 
-(function initialiserQuandPret() 
+(function initialiserQuandPret()
 {
     const pret =
         document.getElementById("projectfilter-field") &&
         document.getElementById("themes-list");
 
     if (!pret) return setTimeout(initialiserQuandPret, 200);
-    chargerCouchesParProjet()
+    chargerCouchesParProjet(),
+    chargerCouchesParProjetSimple(),
     chargerThematiques()
 
-        .then((thematiques) => 
+        .then((thematiques) =>
         {
             afficherThematiques(thematiques);
             initialiserRecherche(thematiques);
             initialiserFermetureMenuProjets();
         })
-        .catch((erreur) => 
+        .catch((erreur) =>
         {
             console.error(erreur);
             const conteneur = document.getElementById("themes-list");
-            if (conteneur) 
+            if (conteneur)
             {
                 conteneur.innerHTML =
                 `<div style="color:#a00;">Erreur chargement projets : ${echapperHtml(erreur.message)}</div>`;
@@ -591,13 +615,13 @@ function initialiserFermetureMenuProjets()
 })();
 
 /**
- * Gère les liens entre les différentes fenêtres notamment entre les projets et les couches popur afficher un projet depuis une couche et des données depuis un projet. 
+ * Gère les liens entre les différentes fenêtres notamment entre les projets et les couches popur afficher un projet depuis une couche et des données depuis un projet.
  */
 
 window.getRapportUrl = function(nomProjet){
 
     if(indexProjets[nomProjet]){
-        return indexProjets[nomProjet];
+        return indexProjets[nomProjet].pdf;
     }
     return null;
 }
@@ -620,34 +644,32 @@ window.ouvrirProjetDepuisNom = function(nomProjet) {
  */
 
 window.afficherCouchesDuProjet = function(nomProjet) {
-    const couches = indexCouchesParProjet[nomProjet];
+    const couches = indexCouchesGlobal[nomProjet];
 
     if (!couches || couches.length === 0) {
-        console.warn("Aucune couche trouvée pour le projet :", nomProjet);
+        console.warn("Aucune couche trouvée pour :", nomProjet);
         return;
     }
 
-    // Ouvrir le menu gauche si besoin
     ouvrirWrapperSiFerme(() => {
-
         couches.forEach((couche) => {
-            const idCouche = normaliserIdCouche(couche.theme) +"_"+ normaliserIdCouche(couche.name);
-            const liCouche = document.querySelector(`[data-layerid = "${idCouche}"]`);
+
+            const liCouche = document.querySelector(
+                `[data-layerid="${couche.name}"]`
+            );
 
             if (!liCouche) {
-                console.warn("Couche introuvable dans le DOM :", idCouche);
+                console.warn("Couche introuvable :", couche.name);
                 return;
             }
 
-            // ouvrir le thème / groupe avant d'activer la couche
+            // ouvre menu
             ouvrirThemeEtGroupeDepuisCouche(liCouche);
 
+            // checkbox
             const checkbox = liCouche.querySelector('input[type="checkbox"]');
 
-            if (!checkbox) {
-                console.warn("Checkbox introuvable pour la couche :", idCouche);
-                return;
-            }
+            if (!checkbox) return;
 
             if (checkbox.value !== "true") {
                 mviewer.toggleLayer(liCouche);
