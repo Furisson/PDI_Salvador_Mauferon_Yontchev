@@ -147,3 +147,35 @@ mviewer.featureStyles.sensorPoint = (f) =>
     }),
   });
     
+
+    mviewer.featureStyles.thematique_test_test_12_style = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: "#4dff4d"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#ff0000",
+                    width: 5
+                })
+            })
+        });
+    };
+    
+
+    mviewer.featureStyles.les_livres_test_9_style = function(feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 7,
+                fill: new ol.style.Fill({
+                    color: "#0055ff"
+                }),
+                stroke: new ol.style.Stroke({
+                    color: "#ff0000",
+                    width: 6
+                })
+            })
+        });
+    };
+    

@@ -52,20 +52,13 @@
     <extension type="component" id="projets" path="apps/pnmgl"/>
     </extensions>
 
-
-    <!-- Regroupement en thèmes  -->
-    <themes>
-
-        <theme name="Usages"  collapsed="true" id="environnement" icon="fas fa-ship">
+        <themes>
+    <theme name="Usages"  collapsed="true" id="environnement" icon="fas fa-ship">
 
             <!-- Regroupement en groupes -->
             <group name="Ports et transport maritime" id="ptm">
 
                 <!-- Définition des layers, voir la doc utilisateur ou le fichier pnmgl/aide_user/format_ajout_couche.xml  -->
-                
-                
-                
-                
                 <layer id="us_med_PNMGL_cale_de_mise_a_leau_ofb_pt_4326"
                     name="Cale de mise à l'eau"
                     visible="false"
@@ -89,7 +82,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/2.svg">
-                    <template url="apps/pnmgl/templates/chantier_naval.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>
 
 
@@ -103,7 +96,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/3.svg">
-                    <template url="apps/pnmgl/templates/port_commerce.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>
             
                 <layer id="us_med_PNMGL_route_transport_commerce_ofb_ln_4326"
@@ -179,7 +172,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/surf1.svg">
-                    <template url="apps/pnmgl/templates/ZMO.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer> 
                 <layer id="us_med_pnmgl_ZMEL_Plage_sanatorium_mouillage_reglemente_pol_4326"
                     name="Zone interdite au mouillage - Elmes, Plage sanatorium mouillage reglemente"
@@ -191,7 +184,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/surf_rouge.svg">
-                    <template url="apps/pnmgl/templates/zones_interdites.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer> 
             </group>
 
@@ -218,7 +211,7 @@
                     url="http://localhost:8080/geoserver/wms"
                     attribution="Différentes dates de survol au cours de 2023-OFB" queryable="true" searchable="false" infoformat = "application/vnd.ogc.gml"  aliases="nom" 
                     attributefilter = "true" attributefilterenabled = "true" attributefield="date_camp" attributevalues = "09/09/2023,08/09/2023,03/09/2023,31/08/2023,25/08/2023,22/08/2023,13/08/2023,28/07/2023">
-                    <template url="apps/pnmgl/templates/survol.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
 
                 </layer>  
             </group>
@@ -407,7 +400,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/epave2.png">
-                    <template url="apps/pnmgl/templates/epave.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>           
             </group>
 
@@ -962,6 +955,27 @@
             </group>
             
         </theme>
+        <theme name="Les Livres" collapsed="true" id="les_livres" icon="fas fa-book">
+
+            <group name="Livre de poche" id ="livre_de_poche">
+            
+                <layer id="les_livres_test_9"
+                name="Test 9"
+                type="geojson"
+                opacity="1"
+                visible="false"
+                searchable="true"   
+                queryable="true"
+                vectorlegend="true"
+                style="les_livres_test_9_style"
+                url="http://localhost:8080/geoserver/les_livres/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=les_livres:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
+                typeName="les_livres:test_9"
+                srs="EPSG:3857"
+                format="application/json">
+                <template url="apps/pnmgl/templates/defaut.mst" />
+            </layer>
+            </group>
+</theme>
 </themes>
     </config>
     

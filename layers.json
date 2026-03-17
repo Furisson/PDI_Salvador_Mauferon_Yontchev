@@ -1,2 +1,10 @@
 [
+    {
+        "name": "Test 9",
+        "theme": "les_livres",
+        "icon": "fas fa-book",
+        "group": "Livre de poche",
+        "style": "les_livres_test_9_style",
+        "projet": "Pratique de nettoyage des plages"
+    }
 ]

@@ -74,7 +74,7 @@ def normalize_name(name):
 
     return cleaned.lower()
 
-def save_layer_metadata(layer_name, theme, group, icon, style):
+def save_layer_metadata(layer_name, theme, group, icon, style, projet):
     """
     Sauvegarde les métadonnées de la couche dans un fichier JSON local pour pouvoir les réutiliser dans le config.xml de mViewer
 
@@ -84,6 +84,7 @@ def save_layer_metadata(layer_name, theme, group, icon, style):
         group (str): groupe de la couche
         icon (str): icône du thème
         style (str): nom du style de la couche
+        projet (str): projet associé à la couche
 
     Returns:
         None
@@ -101,7 +102,8 @@ def save_layer_metadata(layer_name, theme, group, icon, style):
         "theme": theme_clean,
         "icon": icon,
         "group" : group,
-        "style": style
+        "style": style,
+        "projet": projet
     })
 
     with open("layers.json", "w") as f:
@@ -215,7 +217,7 @@ def generate_config_xml():
             for layer in group:
                 layer_name = normalize_name(layer["name"])
                 xml_content += f'''
-                <layer id="{layer["theme"]}:{layer_name}"
+                <layer id="{layer["theme"]}_{layer_name}"
                 name="{layer["name"]}"
                 type="geojson"
                 opacity="1"
@@ -305,7 +307,7 @@ def generate_style(style, nom_style, type_geom):
         with open(js_file_path, "w", encoding="utf-8") as f:
             f.write(content)
 
-def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
+def publish_layer_to_geoserver(layer_name, shapefile_path, theme, projet):
     """
     Crée un datastore et publie la couche shapefile sur GeoServer
 
@@ -313,6 +315,7 @@ def publish_layer_to_geoserver(layer_name, shapefile_path, theme):
         layer_name (str): nom de la couche à publier
         shapefile_path (str): chemin vers le fichier shapefile à publier
         theme (str): thème dans lequel publier la couche
+        projet (str): projet associé à la couche
 
     Returns:
         None
@@ -400,6 +403,7 @@ def upload_file():
     group = request.form.get("group")
     icon = request.form.get("icon")
     style = json.loads(request.form.get("style"))
+    projet = request.form.get("projet")
     
     if "file" not in request.files:
         return jsonify({"error": "Aucun fichier envoyé"}), 400
@@ -445,17 +449,18 @@ def upload_file():
         gdf["tech"] = True
     else:
         gdf["tech"] = False
+    gdf["projet"] = projet
     gdf.to_file(shapefile_path, driver='ESRI Shapefile')
 
     # Publier sur GeoServer via REST 
     try:
-        publish_layer_to_geoserver(layer_name, shapefile_path, theme)
+        publish_layer_to_geoserver(layer_name, shapefile_path, theme, projet)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
     nom_style = f"{normalize_name(theme)}_{normalize_name(layer_name)}_style"
     generate_style(style, nom_style, type_geom)
-    save_layer_metadata(layer_name, theme, group, icon, nom_style)
+    save_layer_metadata(layer_name, theme, group, icon, nom_style, projet)
     generate_config_xml()
 
     return jsonify({"success": "true", "layer": layer_name, "id": f"{normalize_name(theme)}:{normalize_name(layer_name)}", "url": f"{GEOSERVER_URL}/{normalize_name(theme)}/ows?service=WFS&version=1.0.0&request=GetFeature&typeName={normalize_name(theme)}:{normalize_name(layer_name)}&outputFormat=application/json&srsname=EPSG:3857"})

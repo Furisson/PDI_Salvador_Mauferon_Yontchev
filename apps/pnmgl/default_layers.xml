@@ -27,7 +27,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/2.svg">
-                    <template url="apps/pnmgl/templates/chantier_naval.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>
 
 
@@ -41,7 +41,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/3.svg">
-                    <template url="apps/pnmgl/templates/port_commerce.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>
             
                 <layer id="us_med_PNMGL_route_transport_commerce_ofb_ln_4326"
@@ -117,7 +117,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/surf1.svg">
-                    <template url="apps/pnmgl/templates/ZMO.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer> 
                 <layer id="us_med_pnmgl_ZMEL_Plage_sanatorium_mouillage_reglemente_pol_4326"
                     name="Zone interdite au mouillage - Elmes, Plage sanatorium mouillage reglemente"
@@ -129,7 +129,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/surf_rouge.svg">
-                    <template url="apps/pnmgl/templates/zones_interdites.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer> 
             </group>
 
@@ -156,7 +156,7 @@
                     url="http://localhost:8080/geoserver/wms"
                     attribution="Différentes dates de survol au cours de 2023-OFB" queryable="true" searchable="false" infoformat = "application/vnd.ogc.gml"  aliases="nom" 
                     attributefilter = "true" attributefilterenabled = "true" attributefield="date_camp" attributevalues = "09/09/2023,08/09/2023,03/09/2023,31/08/2023,25/08/2023,22/08/2023,13/08/2023,28/07/2023">
-                    <template url="apps/pnmgl/templates/survol.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
 
                 </layer>  
             </group>
@@ -345,7 +345,7 @@
                     queryable="true"
                     attribution="OFB"
                     legendurl="apps/pnmgl/img/epave2.png">
-                    <template url="apps/pnmgl/templates/epave.mst"></template>
+                    <template url="apps/pnmgl/templates/defaut.mst"></template>
                 </layer>           
             </group>
 

@@ -133,6 +133,30 @@ function fillGroupsSelect(themeSelect) {
     }
   }
 
+function fillProjectsSelect() {
+    //Remplir les projets
+    const projetsSelect = document.getElementById("liste_projets");
+    projetsSelect.innerHTML = ""; // vide le select
+    file_liste_projets = "../apps/pnmgl/data/projets/projects.json";
+    fetch(file_liste_projets)        
+    .then(response => response.json())
+    .then(data => {
+      thematiques = data.thematiques;
+      thematiques.forEach(thematique => {
+          const optgroup = document.createElement("optgroup");
+          optgroup.label = thematique.nom;
+          projets = thematique.projets;
+          projets.forEach(projet => {
+              const option = document.createElement("option");
+              option.value = projet.titre;
+              option.textContent = projet.titre;
+              optgroup.appendChild(option);
+          })
+          projetsSelect.appendChild(optgroup);
+      });
+    });
+}
+
 $('#addLayerpanel').on('shown.bs.modal', function () {
     const themeSelect = document.getElementById("themeSelect");
     const groupSelect = document.getElementById("groupSelect");
@@ -185,8 +209,13 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
     addNewThemeInput();
     addNewGroupInput(); 
     fillGroupsSelect(themeSelect);
-});
 
+    const projetsSelect = document.getElementById("liste_projets");
+    projetsSelect.addEventListener("change", function () {
+      fillProjectsSelect();
+    });
+    fillProjectsSelect();
+});
 
 $("#uploadLayerForm").submit(function(e){
 
@@ -198,6 +227,7 @@ $("#uploadLayerForm").submit(function(e){
     const newGroupInput = document.getElementById("newGroupInput");
     const selectedIcon = document.querySelector(".logo-item.selected i");
     const selectedStyle = document.getElementById("dynamicStyle").value;
+    const selectedProjet = document.getElementById("liste_projets").value;
     
     if (newThemeInput && newThemeInput.value.trim() !== "") {
       formData.append("theme", newThemeInput.value.trim());
@@ -219,6 +249,7 @@ $("#uploadLayerForm").submit(function(e){
     formData.append("layer_name", $("#layerName").val());
     formData.append("file", $("#layerFile")[0].files[0]);
     formData.append("style", selectedStyle);
+    formData.append("projet", selectedProjet);
 
     $.ajax({
 
