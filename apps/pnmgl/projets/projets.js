@@ -92,6 +92,7 @@ async function chargerCouchesParProjetSimple() {
 
         ajouterCoucheDansIndex(couche.projet, {
             name: couche.name,
+            theme: couche.theme,
             source: "layers.json"
         });
     });
@@ -654,11 +655,17 @@ window.afficherCouchesDuProjet = function(nomProjet) {
     ouvrirWrapperSiFerme(() => {
         couches.forEach((couche) => {
 
-            const liCouche = document.querySelector(
+            var liCouche = document.querySelector(
                 `[data-layerid="${couche.name}"]`
             );
 
             if (!liCouche) {
+                console.log(couche)
+                liCouche = document.querySelector(
+                    `[data-layerid="${normaliserIdCouche(couche.theme)+"_"+normaliserIdCouche(couche.name)}"]`)
+            };
+
+            if(!liCouche){
                 console.warn("Couche introuvable :", couche.name);
                 return;
             }
