@@ -18,13 +18,28 @@ PROJET_PAR_FICHIER = {
 # =========================================
 
 def lire_geojson(fichier: Path):
+    """
+    Lecture d'un fichier GeoJSON et retour de son contenu sous forme de dictionnaire.
+
+    Attributes:
+        fichier (Path): Le chemin vers le fichier GeoJSON à lire.
+
+    Returns:
+        dict: Un dictionnaire représentant le contenu du fichier GeoJSON.
+    """
     with fichier.open("r", encoding="utf-8") as f:
         return json.load(f)
 
 def extraire_projet(data: dict, nom_fichier: str) -> str:
     """
-    Cherche d'abord 'projet' dans les propriétés d'une feature,
-    sinon utilise le mapping manuel.
+    Cherche d'abord 'projet' dans les propriétés d'une feature, sinon utilise le mapping manuel.
+
+    Attributes:
+        data (dict): Le contenu du fichier GeoJSON sous forme de dictionnaire.
+        nom_fichier (str): Le nom du fichier (sans extension) pour le mapping manuel.
+
+    Returns:
+        str: Le projet associé à ce fichier, ou une chaîne vide si aucun projet trouvé.
     """
     features = data.get("features", [])
 
@@ -37,6 +52,14 @@ def extraire_projet(data: dict, nom_fichier: str) -> str:
     return PROJET_PAR_FICHIER.get(nom_fichier, "")
 
 def construire_layer_json(dossier: Path):
+    """
+    Parse tous les fichiers GeoJSON d'un dossier, extrait le projet associé à chacun, et construit une liste de couches pour le layer.json.
+
+    Attributes:
+        dossier (Path): Le chemin vers le dossier contenant les fichiers GeoJSON.
+    Returns:
+        list: Une liste de dictionnaires représentant les couches à inclure dans le layer.json.
+    """
     couches = []
 
     for fichier in sorted(dossier.rglob("*.geojson")):
