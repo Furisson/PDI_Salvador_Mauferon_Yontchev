@@ -184,6 +184,7 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
 
     themeSelect.innerHTML = ""; // vide le select
     groupSelect.innerHTML = ""; // vide le select
+    document.querySelectorAll(".div-icons").forEach(el => el.remove());
 
     const optionsDefault = document.createElement("option");
     optionsDefault.value = "";
