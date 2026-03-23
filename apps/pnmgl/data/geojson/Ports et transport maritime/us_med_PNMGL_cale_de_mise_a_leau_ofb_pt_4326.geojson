@@ -11,6 +11,43 @@
     {
       "type": "Feature",
       "properties": {
+        "nom": "Port de Leucate",
+        "source": "UVPLR_Etude_Port_LR_2014",
+        "auteur": "UVPLR",
+        "maj": "2014-01-01",
+        "info": true,
+        "nb_payante": 1,
+        "nb_gratuite": 2,
+        "import_t": "5000 tonnes",
+        "export_t": "3200 tonnes",
+        "etiquette": "Zone portuaire principale",
+        "cara": true,
+        "regl_type": "Arrêté préfectoral",
+        "regl_medtx": "Arrêté réglementant les activités nautiques et la navigation.",
+        "cat_regl": "Navigation",
+        "info_regl": "Interdiction de mouillage dans certaines zones.",
+        "arrete_nom": "Arrêté n°2014-45",
+        "actv_inter": "Mouillage permanent",
+        "regl": true,
+        "id": "PNMGL_001",
+        "id_bdd": "BD_PORTS_001",
+        "fid": "feature_001",
+        "num": "PNMGL_GOIMARD_2014",
+        "tech": true,
+        "projet": "La pêche de loisir",
+        "test": "test"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          3.046911048851273,
+          42.872688136874444
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
         "nom": "Le Barcar�s",
         "source": "UVPLR_Etude_Port_LR_2014",
         "info": true,

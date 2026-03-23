@@ -955,27 +955,6 @@
             </group>
             
         </theme>
-        <theme name="Les Livres" collapsed="true" id="les_livres" icon="fas fa-book">
-
-            <group name="Livre de poche" id ="livre_de_poche">
-            
-                <layer id="les_livres_test_9"
-                name="Test 9"
-                type="geojson"
-                opacity="1"
-                visible="false"
-                searchable="true"   
-                queryable="true"
-                vectorlegend="true"
-                style="les_livres_test_9_style"
-                url="http://localhost:8080/geoserver/les_livres/ows?service=WFS&amp;version=1.0.0&amp;request=GetFeature&amp;typeName=les_livres:test_9&amp;outputFormat=application/json&amp;srsname=EPSG:3857"
-                typeName="les_livres:test_9"
-                srs="EPSG:3857"
-                format="application/json">
-                <template url="apps/pnmgl/templates/defaut.mst" />
-            </layer>
-            </group>
-</theme>
 </themes>
     </config>
     

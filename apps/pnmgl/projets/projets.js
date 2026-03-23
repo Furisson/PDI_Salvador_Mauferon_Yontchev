@@ -660,7 +660,6 @@ window.afficherCouchesDuProjet = function(nomProjet) {
             );
 
             if (!liCouche) {
-                console.log(couche)
                 liCouche = document.querySelector(
                     `[data-layerid="${normaliserIdCouche(couche.theme)+"_"+normaliserIdCouche(couche.name)}"]`)
             };
