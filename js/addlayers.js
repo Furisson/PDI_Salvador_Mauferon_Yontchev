@@ -232,10 +232,6 @@ $('#addLayerpanel').on('shown.bs.modal', function () {
     addNewGroupInput(); 
     fillGroupsSelect(themeSelect);
 
-    const projetsSelect = document.getElementById("liste_projets");
-    projetsSelect.addEventListener("change", function () {
-      fillProjectsSelect();
-    });
     fillProjectsSelect();
 });
 
