@@ -22,12 +22,13 @@ function classeIconeParDefaut(nomThematique)
  */
 function echapperHtml(texte)
 {
-    return String(texte)
+    let result = String(texte)
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+    return result;
 }
 
 /**
@@ -73,7 +74,6 @@ async function chargerCouchesParProjet() {
 
     couches.forEach((couche) => {
         if (!couche.projet) return;
-
         ajouterCoucheDansIndex(couche.projet, {
             name: couche.name,
             source: "layer.json"
@@ -242,7 +242,7 @@ function ouvrirPanneauProjet(projet)
                     ${rendreContenuProjet(projet.contenu)}
 
                     <div class="panneau-projet__actions">
-                        ${indexCouchesGlobal[projet.titre] ? `<button class="btn btn-primary panneau-projet__bouton" onclick="afficherCouchesDuProjet('${echapperHtml(projet.titre)}')"> Afficher les couches associées </button>` : ""}    
+                        ${indexCouchesGlobal[projet.titre] ? `<button class="btn btn-primary panneau-projet__bouton" onclick="afficherCouchesDuProjet(\'${echapperHtml(projet.titre)}\')"> Afficher les couches associées </button>` : ""}    
                         ${projet.pdf ? `<a href="${projet.pdf}" target="_blank" class="btn btn-primary panneau-projet__bouton">Ouvrir le rapport</a>` : ""}
                        
                     </div>
@@ -646,7 +646,6 @@ window.ouvrirProjetDepuisNom = function(nomProjet) {
 
 window.afficherCouchesDuProjet = function(nomProjet) {
     const couches = indexCouchesGlobal[nomProjet];
-
     if (!couches || couches.length === 0) {
         console.warn("Aucune couche trouvée pour :", nomProjet);
         return;
